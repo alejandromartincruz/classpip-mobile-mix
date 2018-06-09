@@ -4,6 +4,7 @@ import { NavController, NavParams, ViewController } from 'ionic-angular';
 import { LoginService } from '../../../providers/login.service';
 import { RoleSelectPage } from '../../../pages/role-select/role-select';
 import { ProfilePage } from '../../../pages/profile/profile';
+import { GetQuestionnairePage } from '../../../pages/getQuestionnaire/getQuestionnaire';
 
 @Component({
   selector: 'page-popover',
@@ -44,5 +45,13 @@ export class PopoverPage {
   public showProfile(): void {
     this.viewController.dismiss()
       .then(value => this.navController.push(ProfilePage));
+  }
+
+    /**
+   * Method for displaying the loginQuestionnaire page
+   */
+  public goToGetQuestionnaire(): void {
+    this.viewController.dismiss()
+      .then(value => this.navController.push(GetQuestionnairePage));
   }
 }

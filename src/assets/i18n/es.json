@@ -5,13 +5,15 @@
     "OK": "OK"
   },
   "MENU": {
-    "TITLE": "Menu",
+    "TITLE": "Menú",
     "PROFILE": "Mi Perfil",
-    "LOGOUT": "Logout"
+    "QUESTIONNAIRE": "Mis Cuestionarios",
+    "LOGOUT": "Cerrar sessión"
   },
   "POPOVER": {
     "PROFILE": "Mi Perfil",
-    "LOGOUT": "Logout"
+    "QUESTIONNAIRE": "Mis Cuestionarios",
+    "LOGOUT": "Cerrar sessión"
   },
   "ROLE-SELECT": {
     "TEACHER": "Docente",
@@ -26,13 +28,44 @@
     "FORGOT": "Olvidé mi contraseña",
     "REGISTER": "Necesito crear una nueva cuenta"
   },
+    "GETQUESTIONNAIRE": {
+    "TITLE": "Mis Cuestionarios",
+    "USERNAME": "Nombre de Usuario",
+    "CODE": "Código del Cuestionario",
+    "LOGIN": "ACCEDER"
+  },
+    "QUESTIONNAIRES": {
+    "TITLE": "Mis Cuestionarios",
+    "RESULTS": "Mis Resultados"
+  },
+    "QUESTIONNAIRE": {
+    "TITLE": "Mi Cuestionario",
+    "USERNAME": "Creado por",
+    "CODE": "Código del Cuestionario",
+    "SUBMIT": "Guardar y continuar",
+    "RESULT": "Consultar resultados",
+    "FINISH": "Has terminado de realizar el cuestionario. Consulta la solución y tus resultados.",
+    "FINISH1": "Has terminado de realizar el cuestionario. Tus resultados se publicarán en breve.",
+    "LOGIN": "ACCEDER",
+    "LOGOUT": "Cerrar Cuestionario",
+    "TEXT1": "Solución del",
+    "TEXT2": "Respuesta correcta:",
+    "TEXT3": "Resultados obtenidos por",
+    "TEXT4": "Tus respuestas:",
+    "TEXT5": "Resultados:",
+    "TEXT6": "Total preguntas:",
+    "TEXT7": "Total respuestas acertadas:",
+    "TEXT8": "Total respuestas no acertadas:",
+    "TEXT9": "Resultado:"
+  },
   "HOME": {
-    "TITLE": "Home",
+    "TITLE": "Inicio",
     "TEACHERS": "Profesores",
     "STUDENTS": "Estudiantes",
     "FACEBOOK": "Facebook",
     "TWITTER": "Twitter",
-    "WEBSITE": "Web"
+    "WEBSITE": "Web",
+    "LANGUAGE": "Escoge el idioma"
   },
   "SCHOOL": {
     "TITLE": "Mi Escuela"

@@ -1,6 +1,7 @@
 import { ComponentFixture, async } from '@angular/core/testing';
 import { TestUtils } from '../../test';
 import { GroupPage } from './group';
+import {} from 'jasmine';
 
 let fixture: ComponentFixture<GroupPage> = null;
 /* tslint:disable */

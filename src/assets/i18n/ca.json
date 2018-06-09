@@ -1,0 +1,112 @@
+{
+  "APP": {
+    "ERROR": "ERROR",
+    "WAIT": "Si us plau, espera...",
+    "OK": "OK"
+  },
+  "MENU": {
+    "TITLE": "Menú",
+    "PROFILE": "El meu perfil",
+    "QUESTIONNAIRE": "Els meus Qüestionaris",
+    "LOGOUT": "Tancar sessió"
+  },
+  "POPOVER": {
+    "PROFILE": "El meu perfil",
+    "QUESTIONNAIRE": "Els meus Qüestionaris",
+    "LOGOUT": "Tancar sessió"
+  },
+  "ROLE-SELECT": {
+    "TEACHER": "Docent",
+    "STUDENT": "Estudiant",
+    "SCHOOL-LEADER": "Director de l'Escola"
+  },
+  "LOGIN": {
+    "TITLE": "Classpip",
+    "USERNAME": "Nom d'Usuari",
+    "PASSWORD": "Contrasenya",
+    "LOGIN": "ENTRAR",
+    "FORGOT": "He oblidat la contrasenya",
+    "REGISTER": "Necessito crear un nou compte"
+  },
+    "GETQUESTIONNAIRE": {
+    "TITLE": "Els meus Qüestionaris",
+    "USERNAME": "Nom d'Usuari",
+    "CODE": "Codi del Qüestionari",
+    "LOGIN": "ACCEDIR"
+  },
+    "QUESTIONNAIRES": {
+    "TITLE": "Els meus Qüestionaris",
+    "RESULTS": "Els meus Resultats"
+  },
+    "QUESTIONNAIRE": {
+    "TITLE": "El meu Qüestionari",
+    "USERNAME": "Creat per",
+    "CODE": "Codi del Qüestionari",
+    "SUBMIT": "Guardar i continuar",
+    "RESULT": "Consultar els resultats",
+    "FINISH": "Has acabat de realitzar el qüestionari. Consulta la solució i els teus resultats.",
+    "FINISH1": "Has acabat de realitzar el qüestionari. Els teus resultats es publicaran en breu.",
+    "LOGIN": "ACCEDIR",
+    "LOGOUT": "Tancar Qüestionari",
+    "TEXT1": "Solució del",
+    "TEXT2": "Resposta correcta:",
+    "TEXT3": "Resultats obtinguts per",
+    "TEXT4": "Les teves respostes:",
+    "TEXT5": "Resultats:",
+    "TEXT6": "Total preguntes:",
+    "TEXT7": "Total respostes correctes:",
+    "TEXT8": "Total respostes incorrectes:",
+    "TEXT9": "Resultat:"
+  },
+  "HOME": {
+    "TITLE": "Inici",
+    "TEACHERS": "Professors",
+    "STUDENTS": "Estudiants",
+    "FACEBOOK": "Facebook",
+    "TWITTER": "Twitter",
+    "WEBSITE": "Web",
+    "LANGUAGE": "Escull l'idioma"
+  },
+  "SCHOOL": {
+    "TITLE": "La meva Escola"
+  },
+  "PROFILE": {
+    "TITLE": "El meu perfil",
+    "ACCOUNT": "Compte",
+    "NAME": "Nom",
+    "USERNAME": "Nom d'Usuari",
+    "EMAIL": "Correu Electrónic",
+    "CHANGEPASS": "Cambiar Contrasenya",
+    "RESOURCES": "Recursos",
+    "HELP": "Ajuda",
+    "TERMS": "Privacitat i Termes",
+    "VERSION": "Versió de la app"
+  },
+  "TERMS": {
+    "TITLE": "Privacitat i Termes"
+  },
+  "HELP": {
+    "TITLE": "Ajuda"
+  },
+  "TEACHERS": {
+    "TITLE": "Professors"
+  },
+  "TEACHER": {
+    "NAME": "Nom",
+    "USERNAME": "Nom d'Usuari",
+    "EMAIL": "Correu Electrónic"
+  },
+  "STUDENTS": {
+    "TITLE": "Estudiants"
+  },
+  "STUDENT": {
+    "NAME": "Nom",
+    "USERNAME": "Nom d'Usuari",
+    "EMAIL": "Correo Electrónic"
+  },
+  "ERROR": {
+    "LOGIN_FAILED": "El nom d'usuari i / o contrasenya invàlides.",
+    "LOGIN_FAILED_EMAIL_NOT_VERIFIED": "El teu correu no ha estat verificat encara, si us plau, revisa el teu correu.",
+    "INTERNAL_ERROR": "Hi ha hagut un error intern al servidor. Si us plau contacta amb el teu administrador."
+  }
+}

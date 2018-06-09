@@ -8,6 +8,8 @@ import { Error } from '../model/error';
 import { Login } from '../model/login';
 import { Role } from '../model/role';
 import { School } from '../model/school';
+import { Questionnaire } from '../model/questionnaire';
+import { Student } from '../model/student';
 
 @Injectable()
 export class UtilsService {
@@ -15,6 +17,8 @@ export class UtilsService {
   private _role: Role;
   private _currentUser: Login;
   private _currentSchool: School;
+  private _currentQuestionnaire: Questionnaire;
+  private _currentStudent: Student;
 
   constructor(public translateService: TranslateService) { }
 
@@ -126,6 +130,22 @@ export class UtilsService {
 
   public set currentSchool(value: School) {
     this._currentSchool = value;
+  }
+
+  public get currentQuestionnaire(): Questionnaire {
+    return this._currentQuestionnaire;
+  }
+
+  public set currentQuestionnaire(value: Questionnaire) {
+    this._currentQuestionnaire = value;
+  }
+
+  public get currentStudent(): Student {
+    return this._currentStudent;
+  }
+
+  public set currentStudent(value: Student) {
+    this._currentStudent = value;
   }
 
 }

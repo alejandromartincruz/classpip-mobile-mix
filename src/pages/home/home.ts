@@ -32,6 +32,8 @@ export class HomePage {
   public myRole: Role;
   public role = Role;
 
+  idioms: any[] = [];
+
   constructor(
     public ionicService: IonicService,
     public utilsService: UtilsService,
@@ -42,6 +44,26 @@ export class HomePage {
     public popoverController: PopoverController,
     public menuController: MenuController,
     public navController: NavController) {
+
+      this.idioms = [
+      {
+        value: 'ca',
+        label: 'Català'
+      },
+      {
+        value: 'es',
+        label: 'Español'
+      },
+      {
+        value: 'en',
+        label: 'English'
+      }
+    ];
+  }
+
+  choose(lang) {
+    this.translateService.use(lang);
+
   }
 
   /**

@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{ myQuestionnaire.name }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-refresher (ionRefresh)="getQuestions($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div>
+  <ion-item class="no-bottom-border item">
+    <h1 text-center color="primary" class="timer-button timer-text">{{timer.displayTime}}</h1>
+  </ion-item>
+  </div>
+
+  <form (submit)="doSubmitAnswer($event)" [formGroup]="questionForm">
+    <ion-list text-wrap formControlName="questionsSend">
+      <ion-list-header>
+        {{ questionsSend.name }}
+      </ion-list-header>
+      <ion-card text-wrap>
+        <ion-textarea text-wrap value=""></ion-textarea >
+      </ion-card>
+      <button ion-button full type="submit"  [disabled]="!questionForm.value.questionsSend">{{ 'QUESTIONNAIRE.SUBMIT' | translate }}</button>
+    </ion-list>
+  </form>
+
+</ion-content>
+

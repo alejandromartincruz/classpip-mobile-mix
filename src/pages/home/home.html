@@ -12,6 +12,17 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
+  <!-- LANGUAGE SELECTOR -->
+  <ion-list>
+    <ion-item>
+      <ion-label>{{ 'HOME.LANGUAGE' | translate }}</ion-label>
+      <ion-select (ionChange)="choose($event)">
+        <ion-option *ngFor="let item of idioms" [value]="item.value">
+          {{ item.label }}
+        </ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
   <ion-refresher (ionRefresh)="getHomeInfo($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>

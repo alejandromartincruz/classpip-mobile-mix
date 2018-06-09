@@ -6,12 +6,15 @@ import { IonicService } from '../../providers/ionic.service';
 import { UtilsService } from '../../providers/utils.service';
 import { LoginService } from '../../providers/login.service';
 import { SchoolService } from '../../providers/school.service';
+import { GetQuestionnaireService } from '../../providers/getQuestionnaire.service';
 import { RoleSelectPage } from '../../pages/role-select/role-select';
 import { HomePage } from '../../pages/home/home';
 import { SchoolPage } from '../../pages/school/school';
 import { ProfilePage } from '../../pages/profile/profile';
 import { Page } from '../../model/page';
 import { School } from '../../model/school';
+import { GetQuestionnairePage } from '../../pages/getQuestionnaire/getQuestionnaire';
+import { LoginPage } from '../../pages/login/login';
 
 @Component({
   selector: 'page-menu',
@@ -24,6 +27,7 @@ export class MenuPage {
   public rootPage: Component;
   public homePage: Page;
   public schoolPage: Page;
+  public loginPage: Page = new Page(LoginPage);
 
   constructor(
     public navController: NavController,
@@ -37,6 +41,7 @@ export class MenuPage {
     this.homePage = new Page(HomePage, this.translateService.instant('HOME.TITLE'));
     this.schoolPage = new Page(SchoolPage, this.translateService.instant('SCHOOL.TITLE'));
   }
+
   /**
    * Method for opening a page
    * @param {Page} page Page to open
@@ -76,6 +81,13 @@ export class MenuPage {
         this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
         this.ionicService.removeLoading();
       });
+  }
+
+  /**
+   * Method for displaying the GetQuestionnairePage page
+   */
+  public goToGetQuestionnaire(): void {
+    this.navController.push(GetQuestionnairePage);
   }
 
 }

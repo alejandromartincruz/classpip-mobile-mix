@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{ 'QUESTIONNAIRES.RESULTS' | translate }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content text-wrap class="cards-bg">
+
+<ion-card text-wrapped>
+  <ion-card-header style="font-weight: bold">
+    {{ 'QUESTIONNAIRE.TEXT1' | translate }} {{ myQuestionnaire.name }}
+  </ion-card-header>
+</ion-card>
+
+<ion-list text-wrap radio *ngFor="let myQuestionsCorrectAnswer of myQuestionsCorrectAnswers">
+  <ion-list-header>
+    {{ myQuestionsCorrectAnswer.name }}
+  </ion-list-header>
+
+  <ion-item>
+    <ion-label>{{ 'QUESTIONNAIRE.TEXT2' | translate }} {{ myQuestionsCorrectAnswer.correctAnswer[0].name }}</ion-label>
+    <ion-radio  value="{{ myQuestionsCorrectAnswer.correctAnswer[0].name }}"  color="secondary" checked="true"></ion-radio>
+  </ion-item>
+</ion-list>
+
+<ion-card text-wrapped>
+  <ion-card-header style="font-weight: bold">
+    {{ 'QUESTIONNAIRE.TEXT3' | translate }} {{ student.name }} {{ student.surname }}
+  </ion-card-header>
+</ion-card>
+
+<ion-card-header style="font-weight: bold">
+   {{ 'QUESTIONNAIRE.TEXT4' | translate }}
+</ion-card-header>
+
+<ion-item *ngFor="let dataAnswer of dataAnswers">
+    <ion-label> {{ dataAnswer }}</ion-label>
+</ion-item>
+
+<ion-card-header style="font-weight: bold">
+   {{ 'QUESTIONNAIRE.TEXT5' | translate }}
+</ion-card-header>
+
+<ion-card-content>
+    {{ 'QUESTIONNAIRE.TEXT6' | translate }} {{ numTotalQuestions }} <br>
+    {{ 'QUESTIONNAIRE.TEXT7' | translate }} {{ numAnswerCorrect }} <br>
+    {{ 'QUESTIONNAIRE.TEXT8' | translate }} {{ numAnswerNoCorrect }} <br>
+    {{ 'QUESTIONNAIRE.TEXT9' | translate }} {{ finalNote }} <br>
+    Nota sobre 10: {{mark}}<br>
+    Puntos conseguidos: {{pointsWon}}<br>
+</ion-card-content>
+
+<button ion-button full type="button" on-click="outQuestionnaire()">{{ 'QUESTIONNAIRE.LOGOUT' | translate }}</button>
+
+</ion-content>

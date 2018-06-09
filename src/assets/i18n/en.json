@@ -1,0 +1,112 @@
+{
+  "APP": {
+    "ERROR": "ERROR",
+    "WAIT": "Please wait ...",
+    "OK": "OK"
+  },
+  "MENU": {
+    "TITLE": "Menu",
+    "PROFILE": "My profile",
+    "QUESTIONNAIRE": "My Questionnaires",
+    "LOGOUT": "Logout"
+  },
+  "POPOVER": {
+    "PROFILE": "My profile",
+    "QUESTIONNAIRE": "My Questionnaires",
+    "LOGOUT": "Logout"
+  },
+  "ROLE-SELECT": {
+    "TEACHER": "Teacher",
+    "STUDENT": "Student",
+    "SCHOOL-LEADER": "School Principal"
+  },
+  "LOGIN": {
+    "TITLE": "Classpip",
+    "USERNAME": "Username",
+    "PASSWORD": "Password",
+    "LOGIN": "GET IN",
+    "FORGOT": "I forgot my password",
+    "REGISTER": "I need to create a new account"
+  },
+    "GETQUESTIONNAIRE": {
+    "TITLE": "My Questionnaires",
+    "USERNAME": "Username",
+    "CODE": "Code of the Questionnaire",
+    "LOGIN": "GET IN"
+  },
+    "QUESTIONNAIRES": {
+    "TITLE": "My Questionnaires",
+    "RESULTS": "My Results"
+  },
+    "QUESTIONNAIRE": {
+    "TITLE": "My Questionnaire",
+    "USERNAME": "Created by",
+    "CODE": "Code of Questionnaire",
+    "SUBMIT": "Save and continue",
+    "RESULT": "Consult results",
+    "FINISH": "You have completed the questionnaire. Check the solution and your results.",
+    "FINISH1": "You have completed the questionnaire. Your results will be posted shortly.",
+    "LOGIN": "GET IN",
+    "LOGOUT": "Close questionnaire",
+    "TEXT1": "Solution of",
+    "TEXT2": "Correct answer:",
+    "TEXT3": "Results obtained by",
+    "TEXT4": "Your answers:",
+    "TEXT5": "Results:",
+    "TEXT6": "Total questions:",
+    "TEXT7": "Total answers right:",
+    "TEXT8": "Total unanswered answers:",
+    "TEXT9": "Result:"
+  },
+  "HOME": {
+    "TITLE": "Home",
+    "TEACHERS": "Teachers",
+    "STUDENTS": "Students",
+    "FACEBOOK": "Facebook",
+    "TWITTER": "Twitter",
+    "WEBSITE": "Web",
+    "LANGUAGE": "Choose the language"
+  },
+  "SCHOOL": {
+    "TITLE": "My school"
+  },
+  "PROFILE": {
+    "TITLE": "My profile",
+    "ACCOUNT": "Account",
+    "NAME": "Name",
+    "USERNAME": "Username",
+    "EMAIL": "Email",
+    "CHANGEPASS": "Change Password",
+    "RESOURCES": "Means",
+    "HELP": "Help",
+    "TERMS": "Privacy and Terms",
+    "VERSION": "Version of the app"
+  },
+  "TERMS": {
+    "TITLE": "Privacy and Terms"
+  },
+  "HELP": {
+    "TITLE": "Help"
+  },
+  "TEACHERS": {
+    "TITLE": "Teachers"
+  },
+  "TEACHER": {
+    "NAME": "Name",
+    "USERNAME": "Username",
+    "EMAIL": "Email"
+  },
+  "STUDENTS": {
+    "TITLE": "Students"
+  },
+  "STUDENT": {
+    "NAME": "Name",
+    "USERNAME": "Username",
+    "EMAIL": "Email"
+  },
+  "ERROR": {
+    "LOGIN_FAILED": "The username and / or password are invalid.",
+    "LOGIN_FAILED_EMAIL_NOT_VERIFIED": "Your email has not been verified yet, please check your email.",
+    "INTERNAL_ERROR": "An internal error has occurred on the server. Please contact your administrator. "
+  }
+}

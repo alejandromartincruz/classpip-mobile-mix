@@ -11,8 +11,9 @@ export class Student {
   private _avatarId: number;
   private _avatar: Avatar;
 
-  constructor(name?: string, surname?: string, username?: string,
+  constructor(id?: string, name?: string, surname?: string, username?: string,
     email?: string, schoolId?: number, avatarId?: number) {
+    this._id = id;
     this._name = name;
     this._surname = surname;
     this._username = username;

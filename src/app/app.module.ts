@@ -6,6 +6,7 @@ import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-tra
 // application
 import { MyApp } from './app.component';
 import { AppConfig } from './app.config';
+import { TimerComponent } from '../components/timer/timer';
 
 // pages
 import { LoginPage } from '../pages/login/login';
@@ -22,6 +23,16 @@ import { TeacherPage } from '../pages/teachers/teacher/teacher';
 import { StudentsPage } from '../pages/students/students';
 import { StudentPage } from '../pages/students/student/student';
 import { GroupPage } from '../pages/group/group';
+import { GetQuestionnairePage } from '../pages/getQuestionnaire/getQuestionnaire';
+import { QuestionnairePage } from '../pages/questionnaire/questionnaire';
+import { Questionnaire1Page } from '../pages/questionnaire1/questionnaire1';
+import { QuestionnaireTextAreaPage } from '../pages/questionnaireTextArea/questionnaireTextArea';
+import { QuestionnaireTextArea1Page } from '../pages/questionnaireTextArea1/questionnaireTextArea1';
+import { QuestionnaireImagePage } from '../pages/questionnaireImage/questionnaireImage';
+import { QuestionnaireImage1Page } from '../pages/questionnaireImage1/questionnaireImage1';
+import { ResultQuestionnairePage } from '../pages/resultQuestionnaire/resultQuestionnaire';
+import { CompletedQuestionnairePage } from '../pages/completedQuestionnaire/completedQuestionnaire';
+import { CompletedQuestionnaire1Page } from '../pages/completedQuestionnaire1/completedQuestionnaire1';
 
 // pipes
 import { OrderByIdPipe } from '../pipes/order-by-id.pipe';
@@ -39,6 +50,11 @@ import { MatterService } from '../providers/matter.service';
 import { SchoolService } from '../providers/school.service';
 import { UserService } from '../providers/user.service';
 import { UtilsService } from '../providers/utils.service';
+import { QuestionnaireService } from '../providers/questionnaire.service';
+import { PointService } from '../providers/point.service';
+import { PointRelationService } from '../providers/pointRelation.service';
+import { BadgeService } from '../providers/badge.service';
+import { BadgeRelationService } from '../providers/badgeRelation.service';
 
 // rxjs
 import 'rxjs/add/operator/map';
@@ -70,6 +86,17 @@ export function exportTranslateStaticLoader(http: Http) {
     StudentsPage,
     StudentPage,
     GroupPage,
+    GetQuestionnairePage,
+    QuestionnairePage,
+    Questionnaire1Page,
+    QuestionnaireTextAreaPage,
+    QuestionnaireTextArea1Page,
+    QuestionnaireImagePage,
+    QuestionnaireImage1Page,
+    ResultQuestionnairePage,
+    CompletedQuestionnairePage,
+    CompletedQuestionnaire1Page,
+    TimerComponent,
     // pipes
     OrderByIdPipe,
     OrderByNamePipe,
@@ -99,7 +126,17 @@ export function exportTranslateStaticLoader(http: Http) {
     TeacherPage,
     StudentsPage,
     StudentPage,
-    GroupPage
+    GetQuestionnairePage,
+    QuestionnairePage,
+    Questionnaire1Page,
+    QuestionnaireTextAreaPage,
+    QuestionnaireTextArea1Page,
+    QuestionnaireImagePage,
+    QuestionnaireImage1Page,
+    ResultQuestionnairePage,
+    CompletedQuestionnairePage,
+    CompletedQuestionnaire1Page,
+    GroupPage,
   ],
   providers: [
     IonicService,
@@ -112,6 +149,12 @@ export function exportTranslateStaticLoader(http: Http) {
     SchoolService,
     UserService,
     UtilsService,
+    QuestionnaireService,
+    PointService,
+    PointRelationService,
+    BadgeService,
+    BadgeRelationService,
+    TimerComponent
   ]
 })
 export class AppModule { }

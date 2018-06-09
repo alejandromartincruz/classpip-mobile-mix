@@ -1,5 +1,6 @@
 import { Grade } from './grade';
 import { Matter } from './matter';
+import { Student } from './student';
 
 export class Group {
 
@@ -9,15 +10,17 @@ export class Group {
   private _matterId: number;
   private _matter: Matter;
   private _grade: Grade;
+  private _students: Array<Student>;
 
   constructor(id?: string, name?: string, gradeId?: number, matterId?: number,
-    matter?: Matter, grade?: Grade) {
+    matter?: Matter, grade?: Grade, students?: Array<Student>) {
     this._id = id;
     this._name = name;
     this._gradeId = gradeId;
     this._matterId = matterId;
     this._matter = matter;
     this._grade = grade;
+    this._students = students;
   }
 
   /* tslint:disable */
@@ -29,6 +32,7 @@ export class Group {
       result.name = object.name;
       result.gradeId = object.gradeId;
       result.matterId = object.matterId;
+      result.students = object.students;
     }
     return result;
   }
@@ -92,5 +96,14 @@ export class Group {
   public set grade(value: Grade) {
     this._grade = value;
   }
+
+  public get students(): Array<Student> {
+    return this._students;
+  }
+
+  public set students(value: Array<Student>) {
+    this._students = value;
+  }
+
 
 }

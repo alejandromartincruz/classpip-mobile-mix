@@ -1,8 +1,8 @@
 export class AppConfig {
 
   // Server connection
-  public static get SERVER_URL(): string { return 'https://api.classpip.com'; } // PRO
-  // public static get SERVER_URL(): string { return 'http://localhost:3000'; } // DEV
+ // public static get SERVER_URL(): string { return 'https://api.classpip.com'; } // PRO
+  public static get SERVER_URL(): string { return 'http://localhost:3000'; } // DEV
 
   public static get TEACHER_URL(): string { return this.SERVER_URL + '/api/teachers'; }
   public static get STUDENT_URL(): string { return this.SERVER_URL + '/api/students'; }
@@ -12,6 +12,14 @@ export class AppConfig {
   public static get MATTERS_URL(): string { return this.SERVER_URL + '/api/matters'; }
   public static get GRADES_URL(): string { return this.SERVER_URL + '/api/grades'; }
   public static get GROUP_URL(): string { return this.SERVER_URL + '/api/groups'; }
+  public static get QUESTIONNAIRE_URL(): string { return this.SERVER_URL + '/api/questionnaires'; }
+  public static get QUESTION_URL(): string { return this.SERVER_URL + '/api/questions'; }
+  public static get ANSWER(): string { return this.SERVER_URL + '/api/answers'; }
+  public static get RESULTQUESTIONNAIRE_URL(): string { return this.SERVER_URL + '/api/ResultQuestionnaires'; }
+  public static get POINT_URL(): string { return this.SERVER_URL + '/api/points'; }
+  public static get BADGE_URL(): string { return this.SERVER_URL + '/api/badges'; }
+  public static get POINTRELATION_URL(): string { return this.SERVER_URL + '/api/pointRelations'; }
+  public static get BADGERELATION_URL(): string { return this.SERVER_URL + '/api/badgeRelations'; }
 
   public static get LOGIN_URL(): string { return '/login'; }
   public static get LOGOUT_URL(): string { return '/logout'; }
@@ -21,6 +29,12 @@ export class AppConfig {
   public static get STUDENTS_URL(): string { return '/students'; }
   public static get COUNT_URL(): string { return '/count'; }
   public static get GROUPS_URL(): string { return '/groups'; }
+  public static get GETQUESTIONNAIRE_URL(): string { return '/getQuestionnaire'; }
+  public static get QUESTIONNAIRES_URL(): string { return '/questionnaires'; }
+  public static get QUESTIONS_URL(): string { return '/questions'; }
+  public static get ANSWERS_URL(): string { return '/answers'; }
+  public static get CORRECTANSWER_URL(): string { return '/correctAnswers'; }
+  public static get RESULTSQUESTIONNAIRE_URL(): string { return '/ResultQuestionnaires'; }
 
   public static get AUTH_HEADER(): string { return 'Authorization'; }
 
@@ -29,7 +43,7 @@ export class AppConfig {
   public static get LOGIN_FAILED_EMAIL_NOT_VERIFIED(): string { return 'LOGIN_FAILED_EMAIL_NOT_VERIFIED'; }
 
   // i18n configuration
-  public static get LANG(): string { return 'es'; }
+  public static get LANG(): string { return 'ca'; }
   public static get LANG_PATH(): string { return 'assets/i18n'; }
   public static get LANG_EXT(): string { return '.json'; }
 

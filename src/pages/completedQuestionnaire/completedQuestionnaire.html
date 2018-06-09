@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{ 'QUESTIONNAIRES.RESULTS' | translate }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content text-wrap class="cards-bg">
+<ion-card text-wrapped>
+  <ion-item>
+    <ion-label style="font-weight: bold">{{ 'QUESTIONNAIRE.FINISH' | translate }}</ion-label>
+  </ion-item>
+</ion-card>
+
+<button ion-button full type="button" on-click="getResults()">{{ 'QUESTIONNAIRE.RESULT' | translate }}</button>
+<br>
+<!--<button ion-button full type="button" on-click="outQuestionnaire()">{{ 'QUESTIONNAIRE.LOGOUT' | translate }}</button>-->
+</ion-content>

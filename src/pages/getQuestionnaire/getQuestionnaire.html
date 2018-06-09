@@ -1,0 +1,20 @@
+<ion-header no-border>
+  <ion-navbar color="primary">
+    <ion-title>{{ 'GETQUESTIONNAIRE.TITLE' | translate }}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <form (ngSubmit)="getQuestionnaire()" #loginForm="ngForm">
+    <ion-list no-lines>
+      <ion-item>
+        <ion-label stacked>{{ 'GETQUESTIONNAIRE.USERNAME' | translate }}</ion-label>
+        <ion-input type="text" name="username" [(ngModel)]="credentials.username" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>{{ 'GETQUESTIONNAIRE.CODE' | translate }}</ion-label>
+        <ion-input type="id" name="id" [(ngModel)]="credentials.id" required></ion-input>
+      </ion-item>
+    </ion-list>
+    <button ion-button full type="submit" [disabled]="!loginForm.form.valid">{{ 'GETQUESTIONNAIRE.LOGIN' | translate }}</button>
+  </form>
+</ion-content>

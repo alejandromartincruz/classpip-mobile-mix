@@ -116,4 +116,5 @@ export class GroupService {
       .map((response: Response, index: number) => Group.toObjectArray(response.json()))
   }
 
+
 }
