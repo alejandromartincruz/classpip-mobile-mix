@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, MenuController } from 'ionic-angular';
+import { NavController, MenuController,ToastController } from 'ionic-angular';
 import { TranslateService } from 'ng2-translate/ng2-translate';
 
 import { IonicService } from '../../providers/ionic.service';
@@ -39,6 +39,8 @@ export class GetQuestionnairePage {
     public ionicService: IonicService,
     public utilsService: UtilsService,
     public translateService: TranslateService,
+    public toastCtrl: ToastController,
+
     //private timer: TimerComponent,
     public menuController: MenuController) {
 
@@ -69,6 +71,14 @@ export class GetQuestionnairePage {
   public ionViewDidEnter(): void {
     this.menuController.enable(true);
   }
+  public pointsSend(text: string) {
+
+    let toast = this.toastCtrl.create({
+      message: text,
+      duration: 2000
+    });
+    toast.present();
+  }
 
   /**
    * This method manages the call to the service for performing a getQuestionnaire
@@ -77,12 +87,18 @@ export class GetQuestionnairePage {
   public getQuestionnaire(): void {
 
     this.questionnaireService.getMyQuestionnaire(this.credentials).subscribe(
-      ((value: Questionnaire) => this.myQuestionnaire = value),
+      ((value: Questionnaire) =>{ this.myQuestionnaire = value
+
+        this.pointsSend(this.myQuestionnaire.groupid);
+
+      }),
     error =>
         this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
 
+
     this.questionnaireService.getMyQuestionnaireQuestions(this.credentials).subscribe(
       ((value: Array<Question>) => {
+
 
         switch (value[0].type) {
           case 'test':

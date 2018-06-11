@@ -4,6 +4,7 @@ export class Questionnaire {
   private _name: string;
   private _date: string;
   private _points: number [];
+  private _groupid: string;
 
   constructor(id?: string, name?: string, date?: string, points?: number[]) {
       this._id = id;
@@ -22,6 +23,7 @@ export class Questionnaire {
       result.name = object.name;
       result.date = object.date;
       result.points = object.points;
+      result.groupid = object.groupid;
     }
     return result;
   }
@@ -54,11 +56,11 @@ export class Questionnaire {
     this._name = value;
   }
   public get date(): string {
-    return this._name;
+    return this._date;
   }
 
   public set date(value: string) {
-    this._name = value;
+    this._date = value;
   }
   public get points(): number[] {
     return this._points;
@@ -66,5 +68,12 @@ export class Questionnaire {
 
   public set points(value: number[]) {
     this._points = value;
+  }
+  public get groupid(): string {
+    return this._groupid;
+  }
+
+  public set groupid(value: string) {
+    this._groupid = value;
   }
 }
