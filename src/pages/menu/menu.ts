@@ -15,6 +15,8 @@ import { Page } from '../../model/page';
 import { School } from '../../model/school';
 import { GetQuestionnairePage } from '../../pages/getQuestionnaire/getQuestionnaire';
 import { LoginPage } from '../../pages/login/login';
+import {Group} from "../../model/group";
+import {GroupService} from "../../providers/group.service";
 
 @Component({
   selector: 'page-menu',
@@ -35,7 +37,8 @@ export class MenuPage {
     public utilsService: UtilsService,
     public ionicService: IonicService,
     public schoolService: SchoolService,
-    private loginService: LoginService) {
+    private loginService: LoginService,
+    public groupServices: GroupService){
 
     this.rootPage = HomePage;
     this.homePage = new Page(HomePage, this.translateService.instant('HOME.TITLE'));
@@ -87,7 +90,13 @@ export class MenuPage {
    * Method for displaying the GetQuestionnairePage page
    */
   public goToGetQuestionnaire(): void {
-    this.navController.push(GetQuestionnairePage);
+
+    this.groupServices.getGroups2().subscribe(
+      ((value: Array<Group>) => this.navController.push(GetQuestionnairePage, { groups: value})),
+      error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
+
+
+    //this.navController.push(GetQuestionnairePage);
   }
 
 }

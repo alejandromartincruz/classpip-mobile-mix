@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, MenuController,ToastController } from 'ionic-angular';
+import {NavController, MenuController, ToastController, NavParams} from 'ionic-angular';
 import { TranslateService } from 'ng2-translate/ng2-translate';
 
 import { IonicService } from '../../providers/ionic.service';
@@ -16,6 +16,7 @@ import { QuestionnaireService } from '../../providers/questionnaire.service';
 import { Questionnaire } from '../../model/questionnaire';
 import { Question } from '../../model/question';
 import { Answer } from '../../model/answer';
+import {Group} from "../../model/group";
 //import { TimerComponent } from '../../components/timer/timer';
 
 @Component({
@@ -32,6 +33,8 @@ export class GetQuestionnairePage {
   public numAnswerNoCorrect: number = 0;
   public indexNum: number = 0;
   public dataAnswers  = [];
+  public groups: Array<Group>;
+  public found: Boolean;
 
   constructor(
     public navController: NavController,
@@ -40,7 +43,7 @@ export class GetQuestionnairePage {
     public utilsService: UtilsService,
     public translateService: TranslateService,
     public toastCtrl: ToastController,
-
+    public navParms: NavParams,
     //private timer: TimerComponent,
     public menuController: MenuController) {
 
@@ -62,6 +65,8 @@ export class GetQuestionnairePage {
         break;
     }
 
+
+    this.groups = this.navParms.data.groups;
   }
 
     /**
@@ -85,38 +90,75 @@ export class GetQuestionnairePage {
    * against the public services
    */
   public getQuestionnaire(): void {
-
+    //var found: Boolean;
+    this.found = false;
     this.questionnaireService.getMyQuestionnaire(this.credentials).subscribe(
-      ((value: Questionnaire) =>{ this.myQuestionnaire = value
+      ((value: Questionnaire) => {
+        this.myQuestionnaire = value;
 
-        this.pointsSend(this.myQuestionnaire.groupid);
-
-      }),
-    error =>
-        this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
-
-
-    this.questionnaireService.getMyQuestionnaireQuestions(this.credentials).subscribe(
-      ((value: Array<Question>) => {
-
-
-        switch (value[0].type) {
-          case 'test':
-            this.navController.setRoot(QuestionnairePage, { questions: value, myCredentials: this.credentials, myQuestionnaire: this.myQuestionnaire, indexNum: this.indexNum, numAnswerCorrect: this.numAnswerCorrect, numAnswerNoCorrect: this.numAnswerNoCorrect, dataAnswers: this.dataAnswers });
-            //this.timer.setTimeQuestion(30);
-            break;
-          case 'textArea':
-            this.navController.setRoot(QuestionnaireTextAreaPage, { questions: value, myCredentials: this.credentials, myQuestionnaire: this.myQuestionnaire, indexNum: this.indexNum, numAnswerCorrect: this.numAnswerCorrect, numAnswerNoCorrect: this.numAnswerNoCorrect, dataAnswers: this.dataAnswers });
-            break;
-          case 'image':
-            this.navController.setRoot(QuestionnaireImagePage, { questions: value, myCredentials: this.credentials, myQuestionnaire: this.myQuestionnaire, indexNum: this.indexNum, numAnswerCorrect: this.numAnswerCorrect, numAnswerNoCorrect: this.numAnswerNoCorrect, dataAnswers: this.dataAnswers });
-            break;
-          default:
-            break;
+        for (let gro of this.groups) {
+          if (gro.id == this.myQuestionnaire.groupid) {
+            this.found = true;
+          }
         }
-      }),
-    error =>
-        this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
 
-  }
+        if (this.found) {
+          this.questionnaireService.getMyQuestionnaireQuestions(this.credentials).subscribe(
+            ((value: Array<Question>) => {
+              switch (value[0].type) {
+                case 'test':
+                  this.navController.setRoot(QuestionnairePage, {
+                    questions: value,
+                    myCredentials: this.credentials,
+                    myQuestionnaire: this.myQuestionnaire,
+                    indexNum: this.indexNum,
+                    numAnswerCorrect: this.numAnswerCorrect,
+                    numAnswerNoCorrect: this.numAnswerNoCorrect,
+                    dataAnswers: this.dataAnswers
+                  });
+                  //this.timer.setTimeQuestion(30);
+                  break;
+                case 'textArea':
+                  this.navController.setRoot(QuestionnaireTextAreaPage, {
+                    questions: value,
+                    myCredentials: this.credentials,
+                    myQuestionnaire: this.myQuestionnaire,
+                    indexNum: this.indexNum,
+                    numAnswerCorrect: this.numAnswerCorrect,
+                    numAnswerNoCorrect: this.numAnswerNoCorrect,
+                    dataAnswers: this.dataAnswers
+                  });
+                  break;
+                case 'image':
+                  this.navController.setRoot(QuestionnaireImagePage, {
+                    questions: value,
+                    myCredentials: this.credentials,
+                    myQuestionnaire: this.myQuestionnaire,
+                    indexNum: this.indexNum,
+                    numAnswerCorrect: this.numAnswerCorrect,
+                    numAnswerNoCorrect: this.numAnswerNoCorrect,
+                    dataAnswers: this.dataAnswers
+                  });
+                  break;
+                default:
+                  break;
+              }
+            }),
+            error =>
+              this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
+          //this.pointsSend(this.myQuestionnaire.groupid);
+        }
+        else{
+          this.pointsSend("No tens accés a aquest qüestionari");
+        }
+
+        }),
+        error =>
+          this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
+
+      //this.pointsSend("HOOOOLLLLAAA");
+
+    }
+
+
 }

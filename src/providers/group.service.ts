@@ -116,5 +116,17 @@ export class GroupService {
       .map((response: Response, index: number) => Group.toObjectArray(response.json()))
   }
 
+  public getGroups2(): Observable<Array<Group>> {
+
+    let options: RequestOptions = new RequestOptions({
+      headers: this.utilsService.setAuthorizationHeader(new Headers(), this.utilsService.currentUser.id)
+    });
+
+    var count: number = 0;
+    var url: string = this.utilsService.getMyUrl() + AppConfig.GROUPS_URL;
+
+    return this.http.get(url, options)
+      .map((response: Response, index: number) => Group.toObjectArray(response.json()))
+  }
 
 }
