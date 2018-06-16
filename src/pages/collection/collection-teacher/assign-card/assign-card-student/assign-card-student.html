@@ -1,0 +1,23 @@
+<ion-header no-border="">
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{"CARD-ASSIGN-STUDENT.TITLE" | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-list>
+    <ion-item *ngFor="let student of students | orderByIdPipe" (click)="assignCardToStudents(student.id)">
+      <ion-thumbnail item-left>
+        <img [src]="student.avatar.image">
+      </ion-thumbnail>
+      <h2>{{ student.name }} {{ student.surname }}</h2>
+      <h3>{{ student.email }}</h3>
+      <button ion-button clear item-right icon-only>
+        <ion-icon name="ios-arrow-forward"></ion-icon>
+      </button>
+    </ion-item>
+  </ion-list>
+  <button ion-button round class="assignButton" (click)="assignToRandomStudent()">A estudiante al azar</button>
+</ion-content>

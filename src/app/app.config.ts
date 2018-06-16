@@ -20,6 +20,8 @@ export class AppConfig {
   public static get BADGE_URL(): string { return this.SERVER_URL + '/api/badges'; }
   public static get POINTRELATION_URL(): string { return this.SERVER_URL + '/api/pointRelations'; }
   public static get BADGERELATION_URL(): string { return this.SERVER_URL + '/api/badgeRelations'; }
+  public static get COLLECTION_URL(): string { return this.SERVER_URL + '/api/collectionCards'; }
+  public static get CARD_URL(): string { return this.SERVER_URL + '/api/cards'; }
 
   public static get LOGIN_URL(): string { return '/login'; }
   public static get LOGOUT_URL(): string { return '/logout'; }
@@ -35,6 +37,8 @@ export class AppConfig {
   public static get ANSWERS_URL(): string { return '/answers'; }
   public static get CORRECTANSWER_URL(): string { return '/correctAnswers'; }
   public static get RESULTSQUESTIONNAIRE_URL(): string { return '/ResultQuestionnaires'; }
+  public static get COLLECTIONS_URL(): string { return '/collectionCards'; }
+  public static get CARDS_URL(): string { return '/cards'; }
 
   public static get AUTH_HEADER(): string { return 'Authorization'; }
 

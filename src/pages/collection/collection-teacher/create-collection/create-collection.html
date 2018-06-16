@@ -1,0 +1,29 @@
+<ion-header no-border="">
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{"CREATE-COLLECTION.TITLE" | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+
+  <form (ngSubmit)="createCollection()" #createCollectionCardForm="ngForm">
+
+    <ion-list no-lines>
+      <ion-item>
+        <ion-label stacked>{{ 'CREATE-COLLECTION.NAME' | translate }}</ion-label>
+        <ion-input type="text" name="name" [(ngModel)]="collectionCard.name" placeholder="{{ 'CREATE-COLLECTION.NAME' | translate }}" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>{{ 'CREATE-COLLECTION.NUM' | translate }}</ion-label>
+        <ion-input type="text" name="num" [(ngModel)]="collectionCard.num" placeholder="{{ 'CREATE-COLLECTION.NUM' | translate }}" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>{{ 'CREATE-COLLECTION.IMAGE' | translate }}</ion-label>
+        <ion-input type="text" name="image" (tap)="presentActionSheet()" [(ngModel)]="collectionCard.image" placeholder="{{ 'CREATE-COLLECTION.IMAGE' | translate }}" required ></ion-input>
+      </ion-item>
+    </ion-list>
+    <button ion-button full type="submit" [disabled]="!createCollectionCardForm.form.valid">{{ 'CREATE-COLLECTION.CREATE' | translate }}</button>
+  </form>
+</ion-content>

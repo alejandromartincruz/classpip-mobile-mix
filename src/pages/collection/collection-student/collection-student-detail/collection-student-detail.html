@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{collectionCard.name}}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-grid>
+    <ion-row *ngFor="let row of grid">
+      <ion-col width-50 *ngFor="let card of row">
+        <ion-card *ngIf="card" no-margin>
+          <img [src]="card.image" />
+          <ion-card-content>
+            <ion-card-title class="tittle">{{card.name}}</ion-card-title>
+            <p class="level">Nivel: {{card.rank}}</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

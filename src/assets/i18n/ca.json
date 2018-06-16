@@ -108,5 +108,50 @@
     "LOGIN_FAILED": "El nom d'usuari i / o contrasenya invàlides.",
     "LOGIN_FAILED_EMAIL_NOT_VERIFIED": "El teu correu no ha estat verificat encara, si us plau, revisa el teu correu.",
     "INTERNAL_ERROR": "Hi ha hagut un error intern al servidor. Si us plau contacta amb el teu administrador."
+  },
+  "COLLECTION": {
+    "TITLE": "Mis Colecciones"
+  },
+  "CREATE-COLLECTION": {
+    "TITLE": "Crear colección",
+    "NAME": "Nombre de la nueva colección",
+    "NUM": "Número de cartas de la nueva colección",
+    "IMAGE": "Imagen de portada para la colección",
+    "CREATE": "CREAR"
+  },
+  "COLLECTION-ASSIGN": {
+    "TITLE": "Asignar a grupo"
+  },
+  "EDIT-COLLECTION": {
+    "TITLE": "Editar colección",
+    "NAME": "Nombre de la colección",
+    "NUM": "Número de cartas de la colección",
+    "IMAGE": "Imagen de portada de la colección",
+    "EDIT": "EDITAR"
+  },
+  "COLLECTIONS-ASSIGNED": {
+    "TITLE": "Grupos asignados"
+  },
+  "CREATE-CARD": {
+    "TITLE": "Crear Carta",
+    "NAME": "Nombre de la nueva carta",
+    "RATIO": "Ratio de aparición de la carta",
+    "RANK": "Calidad de la carta (rareza)",
+    "IMAGE": "Imagen de la carta",
+    "CREATE": "CREAR"
+  },
+  "EDIT-CARD": {
+    "TITLE": "Editar carta",
+    "NAME": "Nombre de la carta",
+    "RATIO": "Ratio de aparición de la carta",
+    "RANK": "Calidad de la carta (rareza)",
+    "IMAGE": "Imagen de la carta",
+    "EDIT": "EDITAR"
+  },
+  "CARD-ASSIGN": {
+    "TITLE": "Selecciona un grupo"
+  },
+  "CARD-ASSIGN-STUDENT": {
+    "TITLE": "Asignar carta a estudiante"
   }
 }

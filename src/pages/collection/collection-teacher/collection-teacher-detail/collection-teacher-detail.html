@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{ collectionCard.name }}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="presentActions()">
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-refresher (ionRefresh)="getCollectionDetail($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list>
+    <ion-item *ngFor="let card of cards" (click)="press(card)">
+      <ion-thumbnail item-left>
+        <img [src]="card.image">
+      </ion-thumbnail>
+      <h2>{{ card.name }}</h2>
+      <h3>Nivel: {{ card.rank }}</h3>
+    </ion-item>
+  </ion-list>
+  <button ion-button round class="createButton" (click)="goToCreateCard()">Añadir carta</button>
+</ion-content>
+

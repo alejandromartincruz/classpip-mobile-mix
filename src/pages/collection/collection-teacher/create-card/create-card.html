@@ -1,0 +1,43 @@
+<ion-header no-border="">
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{"CREATE-CARD.TITLE" | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+
+  <form (ngSubmit)="createCard()" #createCardForm="ngForm">
+
+    <ion-list no-lines>
+      <ion-item>
+        <ion-label stacked>{{ 'CREATE-CARD.NAME' | translate }}</ion-label>
+        <ion-input type="text" name="name" [(ngModel)]="card.name" placeholder="{{ 'CREATE-CARD.NAME' | translate }}" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>{{ 'CREATE-CARD.RATIO' | translate }}</ion-label>
+        <ion-select [(ngModel)]="card.ratio" name="ratio" placeholder="{{ 'CREATE-CARD.RATIO' | translate }}" required>
+          <ion-option value="alto">Alto</ion-option>
+          <ion-option value="medio">Medio</ion-option>
+          <ion-option value="bajo">Bajo</ion-option>
+          <ion-option value="raro">Raro</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>{{ 'CREATE-CARD.RANK' | translate }}</ion-label>
+        <ion-select [(ngModel)]="card.rank" name="rank" placeholder="{{ 'CREATE-CARD.RANK' | translate }}" required>
+          <ion-option value="bronce">Bronce</ion-option>
+          <ion-option value="plata">Plata</ion-option>
+          <ion-option value="oro">Oro</ion-option>
+          <ion-option value="diamante">Diamante</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>{{ 'CREATE-CARD.IMAGE' | translate }}</ion-label>
+        <ion-input type="text" name="image" (tap)="presentActionSheet()" [(ngModel)]="card.image" placeholder="{{ 'CREATE-CARD.IMAGE' | translate }}" required ></ion-input>
+      </ion-item>
+    </ion-list>
+    <button ion-button full type="submit" [disabled]="!createCardForm.form.valid">{{ 'CREATE-CARD.CREATE' | translate }}</button>
+  </form>
+</ion-content>

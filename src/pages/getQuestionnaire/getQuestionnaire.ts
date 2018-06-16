@@ -150,6 +150,8 @@ export class GetQuestionnairePage {
         }
         else{
           this.pointsSend("No tens accés a aquest qüestionari");
+          this.pointsSend(this.utilsService.currentUser.id);
+
         }
 
         }),

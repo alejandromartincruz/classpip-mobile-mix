@@ -33,6 +33,19 @@ import { QuestionnaireImage1Page } from '../pages/questionnaireImage1/questionna
 import { ResultQuestionnairePage } from '../pages/resultQuestionnaire/resultQuestionnaire';
 import { CompletedQuestionnairePage } from '../pages/completedQuestionnaire/completedQuestionnaire';
 import { CompletedQuestionnaire1Page } from '../pages/completedQuestionnaire1/completedQuestionnaire1';
+import {CollectionTpage} from "../pages/collection/collection-teacher/collection-teacher";
+import {CollectionCreate} from "../pages/collection/collection-teacher/create-collection/create-collection";
+import {CollectionTeacherDetail} from "../pages/collection/collection-teacher/collection-teacher-detail/collection-teacher-detail";
+import {CollectionSpage} from "../pages/collection/collection-student/collection-student";
+import {CollectionStudentDetail} from "../pages/collection/collection-student/collection-student-detail/collection-student-detail";
+import {CollectionAssign} from "../pages/collection/collection-teacher/assign-collection/assign-collection";
+import {CollectionEdit} from "../pages/collection/collection-teacher/edit-collection/edit-collection";
+import {CollectionsAssigned} from "../pages/collection/collection-teacher/assigned-collections/assigned-collections";
+import {CardCreate} from "../pages/collection/collection-teacher/create-card/create-card";
+import {CardEdit} from "../pages/collection/collection-teacher/edit-card/edit-card";
+import {CardAssign} from "../pages/collection/collection-teacher/assign-card/assign-card";
+import {CardAssignStudent} from "../pages/collection/collection-teacher/assign-card/assign-card-student/assign-card-student";
+
 
 // pipes
 import { OrderByIdPipe } from '../pipes/order-by-id.pipe';
@@ -55,6 +68,10 @@ import { PointService } from '../providers/point.service';
 import { PointRelationService } from '../providers/pointRelation.service';
 import { BadgeService } from '../providers/badge.service';
 import { BadgeRelationService } from '../providers/badgeRelation.service';
+import {CollectionService} from "../providers/collection.service";
+import {UploadImageService} from "../providers/uploadImage.service";
+
+
 
 // rxjs
 import 'rxjs/add/operator/map';
@@ -63,6 +80,10 @@ import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/finally';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/observable/forkJoin';
+import { Camera } from "@ionic-native/camera";
+import { Transfer, TransferObject } from '@ionic-native/transfer';
+import { File } from "@ionic-native/file";
+import { FilePath } from "@ionic-native/file-path";
 
 export function exportTranslateStaticLoader(http: Http) {
   return new TranslateStaticLoader(http, AppConfig.LANG_PATH, AppConfig.LANG_EXT);
@@ -97,6 +118,18 @@ export function exportTranslateStaticLoader(http: Http) {
     CompletedQuestionnairePage,
     CompletedQuestionnaire1Page,
     TimerComponent,
+    CollectionTpage,
+    CollectionCreate,
+    CollectionTeacherDetail,
+    CollectionSpage,
+    CollectionStudentDetail,
+    CollectionAssign,
+    CollectionEdit,
+    CollectionsAssigned,
+    CardCreate,
+    CardEdit,
+    CardAssign,
+    CardAssignStudent,
     // pipes
     OrderByIdPipe,
     OrderByNamePipe,
@@ -137,6 +170,18 @@ export function exportTranslateStaticLoader(http: Http) {
     CompletedQuestionnairePage,
     CompletedQuestionnaire1Page,
     GroupPage,
+    CollectionTpage,
+    CollectionCreate,
+    CollectionTeacherDetail,
+    CollectionSpage,
+    CollectionStudentDetail,
+    CollectionAssign,
+    CollectionEdit,
+    CollectionsAssigned,
+    CardCreate,
+    CardEdit,
+    CardAssign,
+    CardAssignStudent
   ],
   providers: [
     IonicService,
@@ -154,7 +199,13 @@ export function exportTranslateStaticLoader(http: Http) {
     PointRelationService,
     BadgeService,
     BadgeRelationService,
-    TimerComponent
+    TimerComponent,
+    CollectionService,
+    UploadImageService,
+    File,
+    Transfer,
+    Camera,
+    FilePath
   ]
 })
 export class AppModule { }

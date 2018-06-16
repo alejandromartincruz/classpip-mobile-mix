@@ -1,0 +1,29 @@
+<ion-header no-border="">
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{"EDIT-COLLECTION.TITLE" | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+
+  <form (ngSubmit)="editCollection()" #editCollectionCardForm="ngForm">
+
+    <ion-list no-lines>
+      <ion-item>
+        <ion-label stacked>{{ 'EDIT-COLLECTION.NAME' | translate }}</ion-label>
+        <ion-input type="text" name="name" [(ngModel)]="collectionCard.name" placeholder="{{ 'EDIT-COLLECTION.NAME' | translate }}" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>{{ 'EDIT-COLLECTION.NUM' | translate }}</ion-label>
+        <ion-input type="text" name="num" [(ngModel)]="collectionCard.num" placeholder="{{ 'EDIT-COLLECTION.NUM' | translate }}" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>{{ 'EDIT-COLLECTION.IMAGE' | translate }}</ion-label>
+        <ion-input type="text" name="image" (tap)="presentActionSheet()" [(ngModel)]="collectionCard.image" placeholder="{{ 'EDIT-COLLECTION.IMAGE' | translate }}" required ></ion-input>
+      </ion-item>
+    </ion-list>
+    <button ion-button full type="submit" [disabled]="!editCollectionCardForm.form.valid">{{ 'EDIT-COLLECTION.EDIT' | translate }}</button>
+  </form>
+</ion-content>

@@ -17,6 +17,9 @@ import { GetQuestionnairePage } from '../../pages/getQuestionnaire/getQuestionna
 import { LoginPage } from '../../pages/login/login';
 import {Group} from "../../model/group";
 import {GroupService} from "../../providers/group.service";
+import {CollectionSpage} from "../collection/collection-student/collection-student";
+import {CollectionTpage} from "../collection/collection-teacher/collection-teacher";
+import {Role} from "../../model/role";
 
 @Component({
   selector: 'page-menu',
@@ -99,4 +102,24 @@ export class MenuPage {
     //this.navController.push(GetQuestionnairePage);
   }
 
+  /**
+   * Method for displaying the collection page
+   */
+  public showCollection(): void {
+    this.ionicService.showLoading(this.translateService.instant('APP.WAIT'));
+    //var regexp = /teachers/gi;
+    //if(this.utilsService.getMyUrl().search(regexp) >= 0) {
+    if(this.utilsService.role === Role.TEACHER) {
+      this.navController.push(CollectionTpage).catch(error => {
+        this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
+      });
+    } else {
+      this.navController.push(CollectionSpage).catch(error => {
+        this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
+      });
+
+    }
+
+    this.ionicService.removeLoading();
+  }
 }
