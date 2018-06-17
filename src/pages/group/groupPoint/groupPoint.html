@@ -1,0 +1,91 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{ group.name }}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>  
+  <button ion-button  class="buttonright" ion-button (click)="getPoints()">Puntos</button>
+  <button ion-button  class="buttonright" ion-button (click)="getStudents()">Alumnos</button>
+<h2></h2>
+<ion-row>
+  <ion-col  width-33>    
+    <ion-list *ngIf="isDisabledPoint == false">
+      <ion-item *ngFor="let point of points | orderByIdPipe; let i=index">
+        <ion-label>{{point.name}}</ion-label>
+        <ion-checkbox item-right [ngModel]="checkedIdx == i" (click)="getPointsPoint(point)" (ngModelChange)="$event ? checkedIdx = i : checkedIdx = -1"></ion-checkbox>
+      </ion-item>
+    </ion-list>
+    <ion-list *ngIf="isDisabledStudent == false">
+      <ion-item *ngFor="let student of students | orderByIdPipe; let i=index">
+        <ion-label>{{student.name}}</ion-label>
+        <ion-checkbox item-right [ngModel]="checkedIdx == i" (click)="getPointsStudent(student)" (ngModelChange)="$event ? checkedIdx = i : checkedIdx = -1"></ion-checkbox>
+      </ion-item>
+    </ion-list>
+  </ion-col>
+  <ion-col >
+    <ion-list *ngIf="Intro == true">      
+      <h3 text-center>Selecciona un estudiante o un punto</h3>
+    </ion-list>
+    <ion-list *ngIf="studentsPointIntro == true">      
+      <ion-item>
+        <ion-thumbnail item-left>
+          <img [src]="student.avatar.image">
+        </ion-thumbnail>
+        <h2>{{student.name}}</h2>
+        <h3>{{student.surname}}</h3>
+        <p>{{student.email}} </p>        
+        <button ion-button clear item-right icon-only>
+          <ion-icon name="ios-arrow-forward"></ion-icon>
+        </button>
+      </ion-item>
+    </ion-list>
+    <ion-list *ngIf="pointsPointIntro == true">      
+      <ion-item>
+        <ion-thumbnail item-left>
+          <img [src]="point.image">
+        </ion-thumbnail>
+        <h2>{{point.name}}</h2>
+        <h3>{{point.value}}</h3>                
+        <button ion-button clear item-right icon-only>
+          <ion-icon name="ios-arrow-forward"></ion-icon>
+        </button>
+      </ion-item>
+    </ion-list>
+    <ion-list *ngIf="studentsPoint == true">
+      <h3 ngFor="let pointRelationTotal of pointRelationsTotal" text-center>Puntos totales: {{pointRelationTotal}}</h3>
+    </ion-list>
+    <ion-list *ngIf="studentsPoint == true">      
+      <ion-row>
+        <ion-col  width-25 ><h4 text-center>Puntos</h4></ion-col>
+        <ion-col  width-25 ><h4 text-center>Nombre</h4></ion-col>      
+        <ion-col  width-25 ><h4 text-center>Valor</h4></ion-col>      
+        <ion-col  width-25 ><h4 text-center>Total</h4></ion-col>
+      </ion-row>    
+      <ion-row *ngFor="let pointRelation of pointRelations">
+        <ion-col width-25 text-center>{{pointRelation.value }}</ion-col>
+        <ion-col width-25 text-center>
+          {{pointRelation.point.name}}</ion-col>
+        <ion-col width-25 text-center>{{pointRelation.point.value }}</ion-col>      
+        <ion-col width-25 text-center>{{pointRelation.point.value*pointRelation.value }}</ion-col>
+      </ion-row>    
+    </ion-list>
+    <ion-list *ngIf="pointsPoint == true">      
+      <ion-row>
+        <ion-col  width-25 ><h4 text-center>Puntos</h4></ion-col>
+        <ion-col  width-25 ><h4 text-center>Nombre</h4></ion-col>      
+        <ion-col  width-25 ><h4 text-center>Valor</h4></ion-col>      
+        <ion-col  width-25 ><h4 text-center>Total</h4></ion-col>
+      </ion-row>    
+      <ion-row *ngFor="let pointRelationPoint of pointRelationsPoint">
+        <ion-col width-25 text-center>{{pointRelationPoint.value }}</ion-col>
+        <ion-col width-25 text-center>{{pointRelationPoint.student.name }}</ion-col>
+        <ion-col width-25 text-center>{{point.value }}</ion-col>      
+        <ion-col width-25 text-center>{{point.value*pointRelationPoint.value }}</ion-col>
+      </ion-row>    
+    </ion-list>
+  </ion-col>
+</ion-row>
+</ion-content>

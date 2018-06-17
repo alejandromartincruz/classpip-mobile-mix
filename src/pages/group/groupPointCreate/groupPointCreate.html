@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{ group.name }}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <h3 text-center>Selecciona el alumno y el punto</h3>  
+<h2></h2>
+<ion-row>
+  <ion-col  width-33>
+    <h3 text-center>Puntos:</h3>   
+    <ion-list *ngIf="isDisabledPoint == false">      
+      <ion-item *ngFor="let point of points | orderByIdPipe; let i=index">
+        <ion-label>{{point.name}}</ion-label>
+        <ion-checkbox item-right [ngModel]="checkedIdx == i" (click)="getPoint(point)" (ngModelChange)="$event ? checkedIdx = i : checkedIdx = -1"></ion-checkbox>
+      </ion-item>
+    </ion-list>
+  </ion-col>
+  <ion-col  width-33>
+    <h3 text-center>Estudiantes:</h3>
+    <ion-list *ngIf="isDisabledStudent == false">      
+      <ion-item *ngFor="let student of students | orderByIdPipe; let i=index">
+        <ion-label>{{student.name}}</ion-label>
+        <ion-checkbox item-right [ngModel]="checkedIdx == i" (click)="getStudent(student)" (ngModelChange)="$event ? checkedIdx = i : checkedIdx = -1"></ion-checkbox>
+      </ion-item>
+    </ion-list>
+  </ion-col>
+  <ion-col >
+      <h3 text-center>Punto:</h3>      
+      <ion-item *ngIf="pointCreate == true">
+        <h2>{{point.name}}</h2>
+      </ion-item>
+      <ion-item *ngIf="studentCreate == true">        
+        <h2>{{student.name}} {{student.surname}}</h2>
+      </ion-item>
+    <button *ngIf="pointCompleted == true" ion-button class="buttonright" ion-button (click)="createPoint()">Asignar</button>
+    <ion-list *ngIf="pointCompleted == true">
+      <h2 *ngIf="pointCompleted == true"> Grupo: {{createGroupId}}</h2>
+      <h2 *ngIf="pointCompleted == true"> Estudiante: {{createStudentId}}</h2>
+      <h2 *ngIf="pointCompleted == true"> Escuela: {{createSchoolId}}</h2>
+      <h2 *ngIf="pointCompleted == true"> Punto: {{createPointId}}</h2>
+      <h2 *ngIf="pointCompleted == true"> Value: {{createValue}}</h2>
+    </ion-list>
+   </ion-col>   
+</ion-row>
+</ion-content>

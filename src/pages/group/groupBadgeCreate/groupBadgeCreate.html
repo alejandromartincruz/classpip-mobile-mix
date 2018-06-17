@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{ group.name }}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <h3 text-center>Selecciona el alumno y la insignia</h3>  
+<h2></h2>
+<ion-row>
+  <ion-col  width-33>
+    <h3 text-center>Insignias:</h3>   
+    <ion-list *ngIf="isDisabledBadge == false">      
+      <ion-item *ngFor="let badge of badges | orderByIdPipe; let i=index">
+        <ion-label>{{badge.name}}</ion-label>
+        <ion-checkbox item-right [ngModel]="checkedIdx == i" (click)="getBadge(badge)" (ngModelChange)="$event ? checkedIdx = i : checkedIdx = -1"></ion-checkbox>
+      </ion-item>
+    </ion-list>
+  </ion-col>
+  <ion-col  width-33>
+    <h3 text-center>Estudiantes:</h3>
+    <ion-list *ngIf="isDisabledStudent == false">      
+      <ion-item *ngFor="let student of students | orderByIdPipe; let i=index">
+        <ion-label>{{student.name}}</ion-label>
+        <ion-checkbox item-right [ngModel]="checkedIdx == i" (click)="getStudent(student)" (ngModelChange)="$event ? checkedIdx = i : checkedIdx = -1"></ion-checkbox>
+      </ion-item>
+    </ion-list>
+  </ion-col>
+  <ion-col >
+      <h3 text-center>Insignia:</h3>      
+      <ion-item *ngIf="badgeCreate == true">
+        <h2>{{badge.name}}</h2>
+      </ion-item>
+      <ion-item *ngIf="studentCreate == true">        
+        <h2>{{student.name}} {{student.surname}}</h2>
+      </ion-item>
+    <button *ngIf="badgeCompleted == true" ion-button class="buttonright" ion-button (click)="createBadge()">Asignar</button>
+    <ion-list *ngIf="badgeCompleted == true">
+      <h2 *ngIf="badgeCompleted == true"> Grupo: {{createGroupId}}</h2>
+      <h2 *ngIf="badgeCompleted == true"> Estudiante: {{createStudentId}}</h2>
+      <h2 *ngIf="badgeCompleted == true"> Escuela: {{createSchoolId}}</h2>
+      <h2 *ngIf="badgeCompleted == true"> Punto: {{createBadgeId}}</h2>
+      <h2 *ngIf="badgeCompleted == true"> Value: {{createValue}}</h2>
+    </ion-list>
+   </ion-col>   
+</ion-row>
+</ion-content>

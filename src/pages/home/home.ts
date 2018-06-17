@@ -17,6 +17,16 @@ import { PopoverPage } from '../../pages/home/popover/popover';
 import { TeachersPage } from '../../pages/teachers/teachers';
 import { StudentsPage } from '../../pages/students/students';
 import { GroupPage } from '../../pages/group/group';
+import {PointRelation} from "../../model/pointRelation";
+import {BadgeRelation} from "../../model/badgeRelation";
+import {PointService} from "../../providers/point.service";
+import {BadgeService} from "../../providers/badge.service";
+import {BadgeRelationService} from "../../providers/badgeRelation.service";
+import {PointRelationService} from "../../providers/pointRelation.service";
+import {PointsPage} from "../points/points";
+import {BadgesPage} from "../badges/badges";
+import {Point} from "../../model/point";
+import {Badge} from "../../model/badge";
 
 @Component({
   selector: 'page-home',
@@ -28,6 +38,19 @@ export class HomePage {
   public teachersCount: number;
   public studentsCount: number;
   public groups: Array<Group>;
+  public pointsCount: number;
+  public badgesCount: number;
+  public pointRelation: PointRelation = new PointRelation();
+  public pointRelations: Array<PointRelation>;
+  public pointRelationTotal: number;
+  public badgeRelation: BadgeRelation = new BadgeRelation();
+  public badgeRelations: Array<BadgeRelation>;
+  public badgeRelationTotal: number;
+
+  public studentsPoint = false;
+  public groupCheckbox = false;
+  public studentsBadge = false;
+  public groupCheckbox2 = false;
 
   public myRole: Role;
   public role = Role;
@@ -39,6 +62,10 @@ export class HomePage {
     public utilsService: UtilsService,
     public groupService: GroupService,
     public schoolService: SchoolService,
+    public pointService: PointService,
+    public badgeService: BadgeService,
+    public pointRelationService: PointRelationService,
+    public badgeRelationService: BadgeRelationService,
     public platform: Platform,
     public translateService: TranslateService,
     public popoverController: PopoverController,
@@ -81,6 +108,20 @@ export class HomePage {
   }
 
   /**
+   * GetPointsPage
+   */
+  public getPoints(): void {
+    this.navController.push(PointsPage)
+  }
+
+  /**
+   * GetPointsPage
+   */
+  public getBadges(): void {
+    this.navController.push(BadgesPage)
+  }
+
+  /**
    * This method returns the school information from the
    * backend. This call is called on the constructor or the
    * refresh event
@@ -92,7 +133,10 @@ export class HomePage {
     // and the members
     if (this.myRole === Role.SCHOOLADMIN) {
 
-      this.schoolService.getMySchool().subscribe(
+      this.schoolService.getMySchool().finally(() => {
+        refresher ? refresher.complete() : null;
+        this.ionicService.removeLoading();
+      }).subscribe(
         ((value: School) => {
           this.school = value;
 
@@ -100,11 +144,20 @@ export class HomePage {
             ((value: number) => {
               this.teachersCount = value;
 
-              this.schoolService.getMySchoolStudentsCount().finally(() => {
-                refresher ? refresher.complete() : null;
-                this.ionicService.removeLoading();
-              }).subscribe(
-                ((value: number) => this.studentsCount = value),
+              this.schoolService.getMySchoolPointsCount().subscribe(
+                ((value: number) => {
+                  this.pointsCount = value;
+
+                  this.schoolService.getMySchoolBadgesCount().subscribe(
+                    ((value: number) => {
+                      this.badgesCount = value;
+
+                      this.schoolService.getMySchoolStudentsCount().subscribe(
+                        ((value: number) => this.studentsCount = value),
+                        error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
+                    }),
+                    error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
+                }),
                 error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
             }),
             error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
@@ -112,6 +165,41 @@ export class HomePage {
         error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
 
     } else if (this.myRole === Role.TEACHER) {
+
+
+      this.schoolService.getMySchool().finally(() => {
+        refresher ? refresher.complete() : null;
+        this.ionicService.removeLoading();
+      }).subscribe(
+        ((value: School) => {
+          this.school = value;
+
+          this.schoolService.getMySchoolPointsCount().subscribe(
+            ((value: number) => {
+              this.pointsCount = value;
+
+              this.schoolService.getMySchoolBadgesCount().subscribe(
+                ((value: number) => {
+                  this.badgesCount = value;
+
+                  this.groupService.getMyGroups().subscribe(
+                    ((value: Array<Group>) => this.groups = value),
+                    error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
+                }),
+                error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
+            }),
+            error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
+        }),
+        error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
+
+    } else if (this.myRole === Role.STUDENT) {
+
+      /*this.schoolService.getMySchool().finally(() => {
+        refresher ? refresher.complete() : null;
+        this.ionicService.removeLoading();
+      }).subscribe(
+        ((value: School) => this.school = value),
+        error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));*/
 
       this.schoolService.getMySchool().finally(() => {
         refresher ? refresher.complete() : null;
@@ -126,14 +214,6 @@ export class HomePage {
         }),
         error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
 
-    } else if (this.myRole === Role.STUDENT) {
-
-      this.schoolService.getMySchool().finally(() => {
-        refresher ? refresher.complete() : null;
-        this.ionicService.removeLoading();
-      }).subscribe(
-        ((value: School) => this.school = value),
-        error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
     }
   }
 
@@ -163,6 +243,37 @@ export class HomePage {
 
     this.schoolService.getMySchoolStudents().subscribe(
       ((value: Array<Student>) => this.navController.push(StudentsPage, { students: value })),
+      error => {
+        this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
+        this.ionicService.removeLoading();
+      });
+  }
+  /**
+   * Method called from the home page to open the list of the
+   * points of the school of the current user
+   */
+  public goToPoints(): void {
+
+    this.ionicService.showLoading(this.translateService.instant('APP.WAIT'));
+
+    this.schoolService.getMySchoolPoints().subscribe(
+      ((value: Array<Point>) => this.navController.push(PointsPage, { points: value})),
+      error => {
+        this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
+        this.ionicService.removeLoading();
+      });
+  }
+
+  /**
+   * Method called from the home page to open the list of the
+   * points of the school of the current user
+   */
+  public goToBadges(): void {
+
+    this.ionicService.showLoading(this.translateService.instant('APP.WAIT'));
+
+    this.schoolService.getMySchoolBadges().subscribe(
+      ((value: Array<Badge>) => this.navController.push(BadgesPage, { badges: value})),
       error => {
         this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
         this.ionicService.removeLoading();
@@ -226,6 +337,52 @@ export class HomePage {
         this.ionicService.removeLoading();
       });
   }
+
+  private getPointsStudent(group: Group): void {
+    this.studentsPoint=true;
+    this.studentsBadge=false;
+    this.pointRelationService.getMyStudentPoints1(group.id).finally(() => { }).subscribe(
+      ((value: Array<PointRelation>) => {this.pointRelations = value;
+        this.pointRelationTotal = 0;
+        value.forEach(pointRelation=> {
+          this.pointRelationTotal = this.pointRelationTotal+(pointRelation.value*pointRelation.point.value)
+        });
+      }),
+      error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
+  }
+
+  private getBadgesStudent(group: Group): void {
+    this.studentsBadge=true;
+    this.studentsPoint=false;
+    this.badgeRelationService.getMyStudentBadges1(group.id).finally(() => { }).subscribe(
+      ((value: Array<BadgeRelation>) => {this.badgeRelations = value;
+        this.badgeRelationTotal = 0;
+        value.forEach(badgeRelation=> {
+          this.badgeRelationTotal = this.badgeRelationTotal+(badgeRelation.value*badgeRelation.badge.value)
+        });
+      }),
+      error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
+  }
+
+
+  private getGroupsCheckBox(): void {
+    this.groupCheckbox=true;
+    this.groupCheckbox2=false;
+    this.studentsBadge=false;
+  }
+  private getGroupsCheckBox2(): void {
+    this.groupCheckbox2=true;
+    this.groupCheckbox=false;
+    this.studentsPoint=false;
+  }
+  private ocultarCheckBox(): void {
+    this.groupCheckbox=false;
+    this.groupCheckbox2=false;
+    this.studentsPoint=false;
+    this.studentsBadge=false;
+  }
+
+
 
   /**
    * Thi method presents the more popover on the home

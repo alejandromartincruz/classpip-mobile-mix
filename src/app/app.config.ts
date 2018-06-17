@@ -39,6 +39,11 @@ export class AppConfig {
   public static get RESULTSQUESTIONNAIRE_URL(): string { return '/ResultQuestionnaires'; }
   public static get COLLECTIONS_URL(): string { return '/collectionCards'; }
   public static get CARDS_URL(): string { return '/cards'; }
+  public static get POINTS_URL(): string { return '/points'; }
+  public static get BADGES_URL(): string { return '/badges'; }
+  public static get POINTSRELATION_URL(): string { return '/pointRelations'; }
+  public static get BADGESRELATION_URL(): string { return '/badgeRelations'; }
+
 
   public static get AUTH_HEADER(): string { return 'Authorization'; }
 

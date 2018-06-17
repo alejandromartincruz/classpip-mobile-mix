@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>POINTS</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <button *ngIf="myRole == role.TEACHER" ion-button (click)="getPostPoint()">Crear Puntos</button>
+  <button *ngIf="myRole == role.SCHOOLADMIN" ion-button (click)="deletePoint()">Reset todos los puntos asignadas</button>
+  <!--<button ion-button *ngIf="isDisabled == true" (click)="getPointsRelation()">Ver puntos asignados</button>
+  <button ion-button *ngIf="isDisabled == false" (click)="getPointsRelation2()">Ocultar puntos asignados</button>-->
+  <form (ngSubmit)="postPoint()" #loginForm="ngForm" *ngIf="enablePostPoint == true">
+    <ion-list no-lines>
+      <ion-item>
+        <ion-label stacked>Nombre del punto:</ion-label>
+        <ion-input type="text" name="name" [(ngModel)]="createPoint.name" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Imagen:</ion-label>
+        <ion-input type="text" name="image" [(ngModel)]="createPoint.image" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Valor</ion-label>
+        <ion-input type="text" name="value" [(ngModel)]="createPoint.value" required></ion-input>
+      </ion-item>      
+    </ion-list>
+    <button ion-button full type="submit" [disabled]="!loginForm.form.valid">Crear</button>
+  </form>    
+  <!-- points -->
+    <ion-item *ngIf="pointsCount">
+      POINTS({{ pointsCount }})
+      <button ion-button clear item-right icon-only>
+        <ion-icon name="ios-arrow-forward"></ion-icon>
+      </button>
+    </ion-item>
+  <ion-refresher (ionRefresh)="getPoints($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list *ngIf="isDisabled == true">
+    <ion-item *ngFor="let point of points" (click)="goToPointDetail(point)">
+      <ion-thumbnail item-left>
+        <img [src]="point.image">
+      </ion-thumbnail>
+      <h2>{{ point.name }}</h2>
+      <h3>{{ point.value }}</h3>      
+      <button ion-button clear item-right icon-only>
+        <ion-icon name="ios-arrow-forward"></ion-icon>
+      </button>      
+    </ion-item>
+  </ion-list>
+  <ion-list *ngIf="isDisabled == false">
+    <ion-item *ngFor="let pointRelation of pointRelations">     
+      <h2>Id del Punto: {{ pointRelation.pointId }}</h2>
+      <h3>Id del Estudiante: {{ pointRelation.studentId }}</h3>
+      <h3>Id de la Relación: {{ pointRelation.id }}</h3>
+      <button ion-button clear item-right icon-only>
+        <ion-icon name="ios-arrow-forward"></ion-icon>
+      </button>
+    </ion-item>
+  </ion-list>
+</ion-content>

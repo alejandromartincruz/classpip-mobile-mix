@@ -1,0 +1,91 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{ group.name }}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>  
+  <button ion-button  class="buttonright" ion-button (click)="getBadges()">Insignias</button>
+  <button ion-button  class="buttonright" ion-button (click)="getStudents()">Alumnos</button>
+<h2></h2>
+<ion-row>
+  <ion-col  width-33>    
+    <ion-list *ngIf="isDisabledBadge == false">
+      <ion-item *ngFor="let badge of badges | orderByIdPipe; let i=index">
+        <ion-label>{{badge.name}}</ion-label>
+        <ion-checkbox item-right [ngModel]="checkedIdx == i" (click)="getBadgesBadge(badge)" (ngModelChange)="$event ? checkedIdx = i : checkedIdx = -1"></ion-checkbox>
+      </ion-item>
+    </ion-list>
+    <ion-list *ngIf="isDisabledStudent == false">
+      <ion-item *ngFor="let student of students | orderByIdPipe; let i=index">
+        <ion-label>{{student.name}}</ion-label>
+        <ion-checkbox item-right [ngModel]="checkedIdx == i" (click)="getBadgesStudent(student)" (ngModelChange)="$event ? checkedIdx = i : checkedIdx = -1"></ion-checkbox>
+      </ion-item>
+    </ion-list>
+  </ion-col>
+  <ion-col >
+    <ion-list *ngIf="Intro == true">      
+      <h3 text-center>Selecciona un estudiante o un punto</h3>
+    </ion-list>
+    <ion-list *ngIf="studentsBadgeIntro == true">      
+      <ion-item>
+        <ion-thumbnail item-left>
+          <img [src]="student.avatar.image">
+        </ion-thumbnail>
+        <h2>{{student.name}}</h2>
+        <h3>{{student.surname}}</h3>
+        <p>{{student.email}} </p>        
+        <button ion-button clear item-right icon-only>
+          <ion-icon name="ios-arrow-forward"></ion-icon>
+        </button>
+      </ion-item>
+    </ion-list>
+    <ion-list *ngIf="badgesBadgeIntro == true">      
+      <ion-item>
+        <ion-thumbnail item-left>
+          <img [src]="badge.image">
+        </ion-thumbnail>
+        <h2>{{badge.name}}</h2>
+        <h3>{{badge.value}}</h3>                
+        <button ion-button clear item-right icon-only>
+          <ion-icon name="ios-arrow-forward"></ion-icon>
+        </button>
+      </ion-item>
+    </ion-list>
+    <ion-list *ngIf="studentsBadge == true">
+      <h3 ngFor="let badgeRelationTotal of badgeRelationsTotal" text-center>Insignias totales: {{badgeRelationTotal}}</h3>
+    </ion-list>
+    <ion-list *ngIf="studentsBadge == true">      
+      <ion-row>
+        <ion-col  width-25 ><h4 text-center>Unidades</h4></ion-col>
+        <ion-col  width-25 ><h4 text-center>Nombre</h4></ion-col>      
+        <ion-col  width-25 ><h4 text-center>Valor</h4></ion-col>      
+        <ion-col  width-25 ><h4 text-center>Total</h4></ion-col>
+      </ion-row>    
+      <ion-row *ngFor="let badgeRelation of badgeRelations">
+        <ion-col width-25 text-center>{{badgeRelation.value }}</ion-col>
+        <ion-col width-25 text-center>
+          {{badgeRelation.badge.name}}</ion-col>
+        <ion-col width-25 text-center>{{badgeRelation.badge.value }}</ion-col>      
+        <ion-col width-25 text-center>{{badgeRelation.badge.value*badgeRelation.value }}</ion-col>
+      </ion-row>    
+    </ion-list>
+    <ion-list *ngIf="badgesBadge == true">      
+      <ion-row>
+        <ion-col  width-25 ><h4 text-center>Unidades</h4></ion-col>
+        <ion-col  width-25 ><h4 text-center>Nombre</h4></ion-col>      
+        <ion-col  width-25 ><h4 text-center>Valor</h4></ion-col>      
+        <ion-col  width-25 ><h4 text-center>Total</h4></ion-col>
+      </ion-row>    
+      <ion-row *ngFor="let badgeRelationBadge of badgeRelationsBadge">
+        <ion-col width-25 text-center>{{badgeRelationBadge.value }}</ion-col>
+        <ion-col width-25 text-center>{{badgeRelationBadge.student.name }}</ion-col>
+        <ion-col width-25 text-center>{{badge.value }}</ion-col>      
+        <ion-col width-25 text-center>{{badge.value*badgeRelationBadge.value }}</ion-col>
+      </ion-row>    
+    </ion-list>
+  </ion-col>
+</ion-row>
+</ion-content>

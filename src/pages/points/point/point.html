@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{ point.name }}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content *ngIf="myRole == role.TEACHER">
+  <ion-row class="logo-row">
+    <ion-col></ion-col>
+    <ion-col width-67>
+      <img [src]="point.image" width="200px" height="200px" />
+    </ion-col>
+    <ion-col></ion-col>
+  </ion-row>  
+  <ion-list>
+    <ion-item>
+      <ion-label color="primary" fixed>{{ 'POINT.NAME' | translate }}</ion-label>                
+      <ion-input class="alignme" [disabled]="isDisabled" type="text" placeholder="{{ point.name }}" name="name" required></ion-input>      
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" fixed>{{ 'POINT.VALUE' | translate }}</ion-label>       
+      <ion-input class="alignme" [disabled]="isDisabled" type="value" placeholder="{{ point.value }}" name="value" required></ion-input>      
+    </ion-item>         
+  </ion-list>
+</ion-content>
+<ion-content *ngIf="myRole == role.SCHOOLADMIN">
+  <ion-row *ngIf="isDisabled == false" class="logo-row">
+    <ion-col></ion-col>
+    <ion-col width-67>
+      <img [src]="point.image" width="200px" height="200px" />
+    </ion-col>
+    <ion-col></ion-col>
+  </ion-row>
+  <button *ngIf="isDisabled == false" ion-button class="buttonright" ion-button (click)="deletePoint(point)">Eliminar Punto</button>
+  <ion-list *ngIf="isDisabled == false">
+    <ion-item>
+      <ion-label color="primary" fixed>Nombre</ion-label>                
+      <ion-input class="alignme" [disabled]="isDisabled" type="text" placeholder="{{ point.name }}" name="name" required></ion-input>      
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" fixed>Valor</ion-label>       
+      <ion-input class="alignme" [disabled]="isDisabled" type="value" placeholder="{{ point.value }}" name="value" required></ion-input>      
+    </ion-item>
+  </ion-list>
+  <ion-label *ngIf="isDisabled == true" color="primary" fixed>Eliminada</ion-label>
+</ion-content>

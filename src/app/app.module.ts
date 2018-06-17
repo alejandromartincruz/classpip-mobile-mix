@@ -45,7 +45,14 @@ import {CardCreate} from "../pages/collection/collection-teacher/create-card/cre
 import {CardEdit} from "../pages/collection/collection-teacher/edit-card/edit-card";
 import {CardAssign} from "../pages/collection/collection-teacher/assign-card/assign-card";
 import {CardAssignStudent} from "../pages/collection/collection-teacher/assign-card/assign-card-student/assign-card-student";
-
+import {PointsPage} from "../pages/points/points";
+import {BadgesPage} from "../pages/badges/badges";
+import {BadgePage} from "../pages/badges/badge/badge";
+import {PointPage} from "../pages/points/point/point";
+import {GroupPointPage} from "../pages/group/groupPoint/groupPoint";
+import {GroupBadgeCreatePage} from "../pages/group/groupBadgeCreate/groupBadgeCreate";
+import {GroupBadgePage} from "../pages/group/groupBadge/groupBadge";
+import {GroupPointCreatePage} from "../pages/group/groupPointCreate/groupPointCreate";
 
 // pipes
 import { OrderByIdPipe } from '../pipes/order-by-id.pipe';
@@ -130,6 +137,14 @@ export function exportTranslateStaticLoader(http: Http) {
     CardEdit,
     CardAssign,
     CardAssignStudent,
+    PointsPage,
+    BadgesPage,
+    BadgePage,
+    GroupPointPage,
+    GroupPointCreatePage,
+    GroupBadgeCreatePage,
+    GroupBadgePage,
+    PointPage,
     // pipes
     OrderByIdPipe,
     OrderByNamePipe,
@@ -181,7 +196,16 @@ export function exportTranslateStaticLoader(http: Http) {
     CardCreate,
     CardEdit,
     CardAssign,
-    CardAssignStudent
+    CardAssignStudent,
+    PointsPage,
+    PointPage,
+    BadgesPage,
+    BadgePage,
+    GroupPointPage,
+    GroupBadgeCreatePage,
+    GroupBadgePage,
+    GroupPointCreatePage,
+    GroupPage
   ],
   providers: [
     IonicService,
@@ -205,7 +229,11 @@ export function exportTranslateStaticLoader(http: Http) {
     File,
     Transfer,
     Camera,
-    FilePath
+    FilePath,
+    PointService,
+    BadgeService,
+    PointRelationService,
+    BadgeRelationService
   ]
 })
 export class AppModule { }

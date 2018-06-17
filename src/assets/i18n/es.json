@@ -153,5 +153,15 @@
   },
   "CARD-ASSIGN-STUDENT": {
     "TITLE": "Asignar carta a estudiante"
+  },
+  "POINTSBADGES": {
+    "TITLE": "Puntos e insignias"
+  },
+  "POINTS": {
+    "TITLE": "Puntos"
+  },
+  "BADGES": {
+    "TITLE": "Insignias"
   }
+
 }

@@ -111,6 +111,30 @@ export class PointService {
       .catch((error: Response) => this.utilsService.handleAPIError(error));
   }
 
+  public savePoint(name: string, value: number, image: string): Observable<Point> {
+
+    let options: RequestOptions = new RequestOptions({
+      headers: this.utilsService.setAuthorizationHeader(new Headers(), this.utilsService.currentUser.id)
+    });
+
+    let url: string;
+    url = AppConfig.POINT_URL;
+    let postParams = {
+      name: name,
+      value: value,
+      image: image,
+      teacherId: this.utilsService.currentUser.userId,
+      schoolId: this.utilsService.currentSchool.id
+    }
+
+    return this.http.post(url, postParams, options)
+      .map(response => {
+
+        return Point.toObject(response.json());
+      })
+      .catch((error: Response) => this.utilsService.handleAPIError(error));
+
+  }
 
   public deletePoint(id: string): Observable<Point> {
     let options: RequestOptions = new RequestOptions({
