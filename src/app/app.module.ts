@@ -91,6 +91,7 @@ import { Camera } from "@ionic-native/camera";
 import { Transfer, TransferObject } from '@ionic-native/transfer';
 import { File } from "@ionic-native/file";
 import { FilePath } from "@ionic-native/file-path";
+import {PointsAndBadgesPage} from "../pages/pointsAndBadges/pointsAndBadges";
 
 export function exportTranslateStaticLoader(http: Http) {
   return new TranslateStaticLoader(http, AppConfig.LANG_PATH, AppConfig.LANG_EXT);
@@ -145,6 +146,7 @@ export function exportTranslateStaticLoader(http: Http) {
     GroupBadgeCreatePage,
     GroupBadgePage,
     PointPage,
+    PointsAndBadgesPage,
     // pipes
     OrderByIdPipe,
     OrderByNamePipe,
@@ -205,7 +207,8 @@ export function exportTranslateStaticLoader(http: Http) {
     GroupBadgeCreatePage,
     GroupBadgePage,
     GroupPointCreatePage,
-    GroupPage
+    GroupPage,
+    PointsAndBadgesPage
   ],
   providers: [
     IonicService,

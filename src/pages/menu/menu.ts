@@ -20,6 +20,11 @@ import {GroupService} from "../../providers/group.service";
 import {CollectionSpage} from "../collection/collection-student/collection-student";
 import {CollectionTpage} from "../collection/collection-teacher/collection-teacher";
 import {Role} from "../../model/role";
+import {PointsAndBadgesPage} from "../pointsAndBadges/pointsAndBadges";
+import {Point} from "../../model/point";
+import {PointsPage} from "../points/points";
+import {Badge} from "../../model/badge";
+import {BadgesPage} from "../badges/badges";
 
 @Component({
   selector: 'page-menu',
@@ -32,6 +37,7 @@ export class MenuPage {
   public rootPage: Component;
   public homePage: Page;
   public schoolPage: Page;
+  public pointsAndBadges: Page;
   public loginPage: Page = new Page(LoginPage);
 
   constructor(
@@ -46,6 +52,7 @@ export class MenuPage {
     this.rootPage = HomePage;
     this.homePage = new Page(HomePage, this.translateService.instant('HOME.TITLE'));
     this.schoolPage = new Page(SchoolPage, this.translateService.instant('SCHOOL.TITLE'));
+    this.pointsAndBadges = new Page(PointsAndBadgesPage, this.translateService.instant('POINTSANDBADGES.TITLE'));
   }
 
   /**
@@ -121,5 +128,52 @@ export class MenuPage {
     }
 
     this.ionicService.removeLoading();
+  }
+
+  /**
+   * Method called from the home page to open the details of the
+   * points and badges
+   * @param {School} school to open
+   */
+  public goToPointsAndBadges(): void {
+
+    //this.ionicService.showLoading(this.translateService.instant('APP.WAIT'));
+
+    /*this.schoolService.getMySchool().subscribe(
+      ((value: School) => this.navController.push(SchoolPage, { school: value })),
+      error => {
+        this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
+        this.ionicService.removeLoading();
+      });*/
+
+      this.ionicService.showLoading(this.translateService.instant('APP.WAIT'));
+
+    this.schoolService.getMySchoolPoints().subscribe(
+      ((value1: Array<Point>) => {
+        this.schoolService.getMySchoolBadges().subscribe(
+          ((value2: Array<Badge>)=> {
+            this.navController.push(PointsAndBadgesPage, { badges: value1, points: value2})
+          }),
+          error => {
+          this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
+          this.ionicService.removeLoading();
+        });
+       // this.navController.push(PointsPage, { points: value})
+      }),
+      error => {
+        this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
+        this.ionicService.removeLoading();
+      });
+
+
+      /*this.ionicService.showLoading(this.translateService.instant('APP.WAIT'));
+
+    this.schoolService.getMySchoolBadges().subscribe(
+      ((value: Array<Badge>) => this.navController.push(BadgesPage, { badges: value})),
+      error => {
+        this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
+        this.ionicService.removeLoading();
+      });*/
+
   }
 }

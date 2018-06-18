@@ -41,7 +41,7 @@ export class BadgeRelationService {
       headers: this.utilsService.setAuthorizationHeader(new Headers(), this.utilsService.currentUser.id)
     });
 
-    var url: string = this.utilsService.getMySchoolUrl() + AppConfig.BADGERELATION_URL;
+    var url: string = this.utilsService.getMySchoolUrl() + AppConfig.BADGESRELATION_URL;
 
     return this.http.get(url, options)
       .map((response: Response, index: number) => BadgeRelation.toObjectArray(response.json()))
@@ -58,7 +58,7 @@ export class BadgeRelationService {
       headers: this.utilsService.setAuthorizationHeader(new Headers(), this.utilsService.currentUser.id)
     });
 
-    var url: string = this.utilsService.getMyUrl() + AppConfig.BADGERELATION_URL;
+    var url: string = this.utilsService.getMyUrl() + AppConfig.BADGESRELATION_URL;
 
     return this.http.get(url, options)
       .map((response: Response, index: number) => BadgeRelation.toObjectArray(response.json()))
@@ -180,13 +180,31 @@ export class BadgeRelationService {
    * of the current students logged into the application
    * @return {Array<BadgeRelation>} returns the list of groups
    */
+  public getStudentBadgesBien(): Observable<Array<BadgeRelation>> {
+
+    let options: RequestOptions = new RequestOptions({
+      headers: this.utilsService.setAuthorizationHeader(new Headers(), this.utilsService.currentUser.id)
+    });
+
+    var url: string = this.utilsService.getMyUrl() + AppConfig.BADGESRELATION_URL;
+
+    return this.http.get(url, options)
+      .map((response: Response, index: number) => BadgeRelation.toObjectArray(response.json()))
+
+  }
+
+  /**
+   * This method returns all the relation badges of the student in this group
+   * of the current students logged into the application
+   * @return {Array<BadgeRelation>} returns the list of groups
+   */
   public getStudentBadges(studentId: string): Observable<Array<BadgeRelation>> {
 
     let options: RequestOptions = new RequestOptions({
       headers: this.utilsService.setAuthorizationHeader(new Headers(), this.utilsService.currentUser.id)
     });
 
-    return this.http.get(AppConfig.STUDENT_URL + '/' + studentId + AppConfig.BADGERELATION_URL, options)
+    return this.http.get(AppConfig.STUDENT_URL + '/' + studentId + AppConfig.BADGESRELATION_URL, options)
       .map((response: Response, index: number) => BadgeRelation.toObjectArray(response.json()))
 
   }
@@ -451,7 +469,7 @@ export class BadgeRelationService {
       headers: this.utilsService.setAuthorizationHeader(new Headers(), this.utilsService.currentUser.id)
     });
 
-    return this.http.get(AppConfig.BADGE_URL + '/' + badgeId + AppConfig.BADGERELATION_URL, options)
+    return this.http.get(AppConfig.BADGE_URL + '/' + badgeId + AppConfig.BADGESRELATION_URL, options)
       .map((response: Response, index: number) => BadgeRelation.toObjectArray(response.json()))
 
   }
@@ -462,7 +480,7 @@ export class BadgeRelationService {
       headers: this.utilsService.setAuthorizationHeader(new Headers(), this.utilsService.currentUser.id)
     });
 
-    return this.http.delete(AppConfig.BADGE_URL + '/' + id + AppConfig.BADGERELATION_URL, options)
+    return this.http.delete(AppConfig.BADGE_URL + '/' + id + AppConfig.BADGESRELATION_URL, options)
       .map(response => {
         return response;
       })
@@ -474,7 +492,7 @@ export class BadgeRelationService {
       headers: this.utilsService.setAuthorizationHeader(new Headers(), this.utilsService.currentUser.id)
     });
 
-    return this.http.delete(AppConfig.SCHOOL_URL + '/' + id + AppConfig.BADGERELATION_URL, options)
+    return this.http.delete(AppConfig.SCHOOL_URL + '/' + id + AppConfig.BADGESRELATION_URL, options)
       .map(response => {
         return response;
       })
@@ -605,7 +623,7 @@ export class BadgeRelationService {
     });
 
     var count: number = 0;
-    var url: string = AppConfig.GROUP_URL + '/' + id + AppConfig.BADGERELATION_URL;
+    var url: string = AppConfig.GROUP_URL + '/' + id + AppConfig.BADGESRELATION_URL;
 
     return this.http.get(url, options)
       .map((response: Response, index: number) => BadgeRelation.toObjectArray(response.json()))

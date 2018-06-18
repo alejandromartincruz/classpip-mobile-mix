@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{ 'POINTSBADGES.TITLE' | translate }}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+
+  <ion-refresher (ionRefresh)="getInfo($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-segment [(ngModel)]="icons">
+    <ion-segment-button value="points" (ionSelect)="selectedPoints($event)">
+      <ion-icon name="game-controller-b"></ion-icon>
+      {{ 'POINTS.TITLE' | translate }}
+    </ion-segment-button>
+    <ion-segment-button value="badges" (ionSelect)="selectedBadges($event)">
+      <ion-icon name="ribbon"></ion-icon>
+      {{ 'BADGES.TITLE' | translate }}
+    </ion-segment-button>
+  </ion-segment>
+  <div [ngSwitch]="icons" *ngIf="myRole == role.STUDENT">
+    <ion-list *ngSwitchCase="'points'">
+      <ion-item *ngFor="let pointi of pointArray | orderByIdPipe">
+        <ion-thumbnail item-left>
+          <img [src]="pointi.image">
+        </ion-thumbnail>
+        <h2 text-uppercase>{{ pointi.name }}</h2>
+        <h3>{{ pointi.id }} - {{ pointi.value }}</h3>
+      </ion-item>
+    </ion-list>
+    <ion-list *ngSwitchCase="'badges'">
+      <ion-item *ngFor="let badgei of badgesArray | orderByIdPipe">
+        <ion-thumbnail item-left>
+          <img [src]="badgei.image">
+        </ion-thumbnail>
+        <h2 text-uppercase>{{ badgei.name }}</h2>
+        <h3>{{ badgei.id }} - {{ badgei.value }}</h3>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

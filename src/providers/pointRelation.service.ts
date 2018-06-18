@@ -57,7 +57,7 @@ export class PointRelationService {
       headers: this.utilsService.setAuthorizationHeader(new Headers(), this.utilsService.currentUser.id)
     });
 
-    var url: string = this.utilsService.getMyUrl() + AppConfig.POINTRELATION_URL;
+    var url: string = this.utilsService.getMyUrl() + AppConfig.POINTSRELATION_URL;
 
     return this.http.get(url, options)
       .map((response: Response, index: number) => PointRelation.toObjectArray(response.json()))
@@ -74,14 +74,14 @@ export class PointRelationService {
 
     var ret: Array<PointRelation> = new Array<PointRelation>();
     var obj: Array<PointRelation> = new Array<PointRelation>();
-    var count = 0 /* Este contador es para contar las veces que un elemento del array pointRelations no se copia en el array ret*/
-    var count2 = 0 /* Este contador es para contar las veces que un elemento del array ret no se copia en el array obj*/
-    var count3 = false /* Este contador es para hacer el push del objeto si no se encuentra repetido en el array obj*/
-    var count4 = true /* Este contador es para hacer el push del objeto si no se encuentra repetido en el array obj*/
-    var count5 = false
-    var count6 = 0
-    var count7 = 0
-    var numGroupid = parseFloat(groupId)
+    var count = 0; /* Este contador es para contar las veces que un elemento del array pointRelations no se copia en el array ret*/
+    var count2 = 0; /* Este contador es para contar las veces que un elemento del array ret no se copia en el array obj*/
+    var count3 = false; /* Este contador es para hacer el push del objeto si no se encuentra repetido en el array obj*/
+    var count4 = true; /* Este contador es para hacer el push del objeto si no se encuentra repetido en el array obj*/
+    var count5 = false;
+    var count6 = 0;
+    var count7 = 0;
+    var numGroupid = parseFloat(groupId);
 
     return Observable.create(observer => {
        this.getMyStudentPoints().subscribe(
@@ -100,7 +100,7 @@ export class PointRelationService {
             if (pointRelation.groupId != numGroupid){
               /*ok*/
               /* Si no coincide el grupo*/
-              count = count + 1
+              count = count + 1;
               if (ret.length + count === pointRelations.length) {
                 count3 = true
               }
@@ -111,21 +111,21 @@ export class PointRelationService {
               if (ret.length > 0){
                 /*ok*/
                 /* El segundo valor lo miramos para ver si ya existe en el array ret*/
-                count4 = true
-                count5 = false
-                count6 = ret.length
-                count7 = 0
+                count4 = true;
+                count5 = false;
+                count6 = ret.length;
+                count7 = 0;
                 ret.forEach(itemRet =>{
                   if (itemRet.pointId == pointRelation.pointId){
-                    itemRet.value = itemRet.value + 1
-                    count2 = count2 + 1
+                    itemRet.value = itemRet.value + 1;
+                    count2 = count2 + 1;
                     count4 = false;
-                    count5 = false
-                    count7 = count7 + 1
+                    count5 = false;
+                    count7 = count7 + 1;
                     /*OK*/
                   }
                   if (itemRet.pointId != pointRelation.pointId){
-                    count7 = count7 + 1
+                    count7 = count7 + 1;
                     if(count6 === count7){
                       if (count4 = true){
                         ret.push(pointRelation);
@@ -161,7 +161,7 @@ export class PointRelationService {
                 this.pointService.getPointName(itemRet.pointId).subscribe(
                   point => {
                     itemRet.point = point;
-                    obj.push(itemRet)
+                    obj.push(itemRet);
                     if (obj.length === ret.length) {
                       observer.next(obj);
                       observer.complete();
@@ -179,13 +179,31 @@ export class PointRelationService {
    * of the current students logged into the application
    * @return {Array<PointRelation>} returns the list of groups
    */
+  public getStudentPointsBien(): Observable<Array<PointRelation>> {
+
+    let options: RequestOptions = new RequestOptions({
+      headers: this.utilsService.setAuthorizationHeader(new Headers(), this.utilsService.currentUser.id)
+    });
+
+    var url: string = this.utilsService.getMyUrl() + AppConfig.POINTSRELATION_URL;
+
+    return this.http.get(url, options)
+      .map((response: Response, index: number) => PointRelation.toObjectArray(response.json()))
+
+  }
+
+  /**
+   * This method returns all the relation points of the student in this group
+   * of the current students logged into the application
+   * @return {Array<PointRelation>} returns the list of groups
+   */
   public getStudentPoints(studentId: string): Observable<Array<PointRelation>> {
 
     let options: RequestOptions = new RequestOptions({
       headers: this.utilsService.setAuthorizationHeader(new Headers(), this.utilsService.currentUser.id)
     });
 
-    return this.http.get(AppConfig.STUDENT_URL + '/' + studentId + AppConfig.POINTRELATION_URL, options)
+    return this.http.get(AppConfig.STUDENT_URL + '/' + studentId + AppConfig.POINTSRELATION_URL, options)
       .map((response: Response, index: number) => PointRelation.toObjectArray(response.json()))
 
   }
@@ -450,7 +468,7 @@ export class PointRelationService {
       headers: this.utilsService.setAuthorizationHeader(new Headers(), this.utilsService.currentUser.id)
     });
 
-    return this.http.get(AppConfig.POINT_URL + '/' + pointId + AppConfig.POINTRELATION_URL, options)
+    return this.http.get(AppConfig.POINT_URL + '/' + pointId + AppConfig.POINTSRELATION_URL, options)
       .map((response: Response, index: number) => PointRelation.toObjectArray(response.json()))
 
   }
@@ -579,7 +597,7 @@ export class PointRelationService {
     });
 
     var count: number = 0;
-    var url: string = AppConfig.GROUP_URL + '/' + id + AppConfig.POINTRELATION_URL;
+    var url: string = AppConfig.GROUP_URL + '/' + id + AppConfig.POINTSRELATION_URL;
 
     return this.http.get(url, options)
       .map((response: Response, index: number) => PointRelation.toObjectArray(response.json()))
@@ -677,7 +695,7 @@ export class PointRelationService {
       headers: this.utilsService.setAuthorizationHeader(new Headers(), this.utilsService.currentUser.id)
     });
 
-    return this.http.delete(AppConfig.POINT_URL + '/' + id + AppConfig.POINTRELATION_URL, options)
+    return this.http.delete(AppConfig.POINT_URL + '/' + id + AppConfig.POINTSRELATION_URL, options)
       .map(response => {
         return response;
       })
@@ -689,7 +707,7 @@ export class PointRelationService {
       headers: this.utilsService.setAuthorizationHeader(new Headers(), this.utilsService.currentUser.id)
     });
 
-    return this.http.delete(AppConfig.SCHOOL_URL + '/' + id + AppConfig.POINTRELATION_URL, options)
+    return this.http.delete(AppConfig.SCHOOL_URL + '/' + id + AppConfig.POINTSRELATION_URL, options)
       .map(response => {
         return response;
       })
