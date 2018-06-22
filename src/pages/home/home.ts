@@ -23,8 +23,6 @@ import {PointService} from "../../providers/point.service";
 import {BadgeService} from "../../providers/badge.service";
 import {BadgeRelationService} from "../../providers/badgeRelation.service";
 import {PointRelationService} from "../../providers/pointRelation.service";
-import {PointsPage} from "../points/points";
-import {BadgesPage} from "../badges/badges";
 import {Point} from "../../model/point";
 import {Badge} from "../../model/badge";
 
@@ -203,7 +201,7 @@ export class HomePage {
    * Method called from the home page to open the list of the
    * points of the school of the current user
    */
-  public goToPoints(): void {
+  /*public goToPoints(): void {
 
     this.ionicService.showLoading(this.translateService.instant('APP.WAIT'));
 
@@ -213,13 +211,13 @@ export class HomePage {
         this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
         this.ionicService.removeLoading();
       });
-  }
+  }*/
 
   /**
    * Method called from the home page to open the list of the
    * points of the school of the current user
    */
-  public goToBadges(): void {
+ /* public goToBadges(): void {
 
     this.ionicService.showLoading(this.translateService.instant('APP.WAIT'));
 
@@ -229,7 +227,7 @@ export class HomePage {
         this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
         this.ionicService.removeLoading();
       });
-  }
+  }*/
 
   /**
   * Method called from the home page to open the list of the

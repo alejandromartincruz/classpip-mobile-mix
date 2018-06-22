@@ -45,8 +45,6 @@ import {CardCreate} from "../pages/collection/collection-teacher/create-card/cre
 import {CardEdit} from "../pages/collection/collection-teacher/edit-card/edit-card";
 import {CardAssign} from "../pages/collection/collection-teacher/assign-card/assign-card";
 import {CardAssignStudent} from "../pages/collection/collection-teacher/assign-card/assign-card-student/assign-card-student";
-import {PointsPage} from "../pages/points/points";
-import {BadgesPage} from "../pages/badges/badges";
 import {BadgePage} from "../pages/pointsAndBadges/badgeDetail/badge";
 import {PointPage} from "../pages/pointsAndBadges/pointDetails/point";
 import {GroupPointPage} from "../pages/group/groupPoint/groupPoint";
@@ -140,8 +138,6 @@ export function exportTranslateStaticLoader(http: Http) {
     CardEdit,
     CardAssign,
     CardAssignStudent,
-    PointsPage,
-    BadgesPage,
     BadgePage,
     GroupPointPage,
     GroupPointCreatePage,
@@ -203,9 +199,7 @@ export function exportTranslateStaticLoader(http: Http) {
     CardEdit,
     CardAssign,
     CardAssignStudent,
-    PointsPage,
     PointPage,
-    BadgesPage,
     BadgePage,
     GroupPointPage,
     GroupBadgeCreatePage,
