@@ -59,7 +59,30 @@ export class BadgeService {
       .map((response: Response, index: number) => Badge.toObject(response.json()))
   }
 
+  public saveBadge(name: string, value: number, image: string): Observable<Badge> {
 
+    let options: RequestOptions = new RequestOptions({
+      headers: this.utilsService.setAuthorizationHeader(new Headers(), this.utilsService.currentUser.id)
+    });
+
+    let url: string;
+    url = AppConfig.BADGE_URL;
+    let postParams = {
+      name: name,
+      value: value,
+      image: image,
+      teacherId: this.utilsService.currentUser.userId,
+      schoolId: this.utilsService.currentSchool.id
+    }
+
+    return this.http.post(url, postParams, options)
+      .map(response => {
+
+        return Badge.toObject(response.json());
+      })
+      .catch((error: Response) => this.utilsService.handleAPIError(error));
+
+  }
 
   public deleteBadge(id: string): Observable<Badge> {
 

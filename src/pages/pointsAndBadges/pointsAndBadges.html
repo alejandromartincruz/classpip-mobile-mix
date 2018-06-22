@@ -13,33 +13,166 @@
   </ion-refresher>
 
   <ion-segment [(ngModel)]="icons">
-    <ion-segment-button value="points" (ionSelect)="selectedPoints($event)">
+    <ion-segment-button value="points">
       <ion-icon name="game-controller-b"></ion-icon>
       {{ 'POINTS.TITLE' | translate }}
     </ion-segment-button>
-    <ion-segment-button value="badges" (ionSelect)="selectedBadges($event)">
+    <ion-segment-button value="totales">
+      {{ 'POINTSBADGES.TOTAL' | translate }}
+    </ion-segment-button>
+    <ion-segment-button value="badges">
       <ion-icon name="ribbon"></ion-icon>
       {{ 'BADGES.TITLE' | translate }}
     </ion-segment-button>
   </ion-segment>
+
+  <!-- STUDENTS  -->
   <div [ngSwitch]="icons" *ngIf="myRole == role.STUDENT">
     <ion-list *ngSwitchCase="'points'">
-      <ion-item *ngFor="let pointi of pointArray | orderByIdPipe">
+      <ion-item *ngFor="let pointi of pointPointRelationArray | orderByIdPipe">
         <ion-thumbnail item-left>
-          <img [src]="pointi.image">
+          <img [src]="pointi.point.image">
         </ion-thumbnail>
-        <h2 text-uppercase>{{ pointi.name }}</h2>
-        <h3>{{ pointi.id }} - {{ pointi.value }}</h3>
+        <h2 text-uppercase>{{ pointi.point.name }}</h2>
+        <h4 class="cosa">{{'POINTS.OBTAINED' | translate}}: {{ pointi.pointRelation.value }}</h4>
+        <ion-note>{{'POINTS.VALUEOF' | translate}}: {{ pointi.point.value }}</ion-note>
       </ion-item>
     </ion-list>
+
+    <div *ngSwitchCase="'totales'">
+      <ion-item *ngIf="totalPointsStudent" text-wrap>
+        <h1>{{'POINTS.TOTAL' | translate}}</h1>
+        <h2 item-right>{{ totalPointsStudent }}</h2>
+        <ion-note text-wrap>{{ 'POINTS.DESCOP' | translate}}</ion-note>
+      </ion-item>
+      <ion-item *ngIf="totalBadgesStudent">
+        <h1>{{'BADGES.TOTAL' | translate}}</h1>
+        <h2 item-right>{{ totalBadgesStudent }}</h2>
+      </ion-item>
+    </div>
+
     <ion-list *ngSwitchCase="'badges'">
-      <ion-item *ngFor="let badgei of badgesArray | orderByIdPipe">
+      <ion-item *ngFor="let badgei of badgeBadgeRelationArray | orderByIdPipe">
         <ion-thumbnail item-left>
-          <img [src]="badgei.image">
+          <img [src]="badgei.badge.image">
         </ion-thumbnail>
-        <h2 text-uppercase>{{ badgei.name }}</h2>
-        <h3>{{ badgei.id }} - {{ badgei.value }}</h3>
+        <h2 text-uppercase>{{ badgei.badge.name }}</h2>
+        <ion-note>{{'BADGES.VALUEOF' | translate}}: {{ badgei.badge.value }}</ion-note>
       </ion-item>
     </ion-list>
+  </div>
+
+  <!-- TEACHER  -->
+  <div [ngSwitch]="icons" *ngIf="myRole == role.TEACHER">
+    <div *ngSwitchCase="'points'">
+      <!-- asignar puntos -->
+      <button ion-button full clear item-right icon-only (click)="goToAssignPointsPage()">
+        {{ 'POINTS.ASSIGN' | translate }}
+        <ion-icon name="ios-arrow-forward"></ion-icon>
+      </button>
+
+      <!-- crear puntos -->
+      <button ion-button full clear item-right icon-only (click)="getPostPoint()">
+        {{ 'POINTS.CREATE' | translate }}
+        <ion-icon *ngIf="enablePostPoint == false" name="ios-arrow-down"></ion-icon>
+        <ion-icon *ngIf="enablePostPoint == true" name="ios-arrow-up"></ion-icon>
+      </button>
+      <form (ngSubmit)="postPoint()" #loginForm="ngForm" *ngIf="enablePostPoint == true">
+        <ion-list no-lines>
+          <ion-item>
+            <ion-label stacked>{{ 'POINTS.NAMEOF' | translate }}</ion-label>
+            <ion-input type="text" name="name" [(ngModel)]="createPoint.name" required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label stacked>{{ 'POINTS.IMAGEOF' | translate }}</ion-label>
+            <ion-input type="text" name="image" [(ngModel)]="createPoint.image" required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label stacked>{{ 'POINTS.VALUEOF' | translate }}</ion-label>
+            <ion-input type="text" name="value" [(ngModel)]="createPoint.value" required></ion-input>
+          </ion-item>
+        </ion-list>
+        <button ion-button full type="submit" [disabled]="!loginForm.form.valid">{{ 'COMMON.CREATE' | translate }}</button>
+      </form>
+
+      <!-- mostrar puntos creados -->
+      <ion-item *ngIf="pointsCount">
+        {{'POINTS.NUM' | translate}} {{ pointsCount }}
+      </ion-item>
+      <ion-refresher (ionRefresh)="getPoints($event)">
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
+      <ion-list>
+        <ion-item *ngFor="let point of points" (click)="goToPointDetail(point)">
+          <ion-thumbnail item-left>
+            <img [src]="point.image">
+          </ion-thumbnail>
+          <h2>{{ point.name }}</h2>
+          <ion-note>{{ 'COMMON.VALUE' | translate}}: {{ point.value }}</ion-note>
+          <button ion-button clear item-right icon-only>
+            <ion-icon name="ios-arrow-forward"></ion-icon>
+          </button>
+        </ion-item>
+      </ion-list>
+
+
+    </div>
+
+    <div *ngSwitchCase="'totales'">
+
+    </div>
+
+    <div *ngSwitchCase="'badges'">
+      <!-- asignar insignias -->
+      <button ion-button full clear item-right icon-only (click)="goToAssignBadgesPage()">
+        {{ 'BADGES.ASSIGN' | translate }}
+        <ion-icon name="ios-arrow-forward"></ion-icon>
+      </button>
+
+      <!-- crear insignias -->
+      <button ion-button full clear item-right icon-only (click)="getPostBadge()">
+        {{ 'BADGES.CREATE' | translate }}
+        <ion-icon *ngIf="enablePostBadge == false" name="ios-arrow-down"></ion-icon>
+        <ion-icon *ngIf="enablePostBadge == true" name="ios-arrow-up"></ion-icon>
+      </button>
+      <form (ngSubmit)="postBadge()" #loginForm="ngForm" *ngIf="enablePostBadge == true">
+        <ion-list no-lines>
+          <ion-item>
+            <ion-label stacked>{{ 'BADGES.NAMEOF' | translate }}</ion-label>
+            <ion-input type="text" name="name" [(ngModel)]="createBadge.name" required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label stacked>{{ 'BADGES.IMAGEOF' | translate }}</ion-label>
+            <ion-input type="text" name="image" [(ngModel)]="createBadge.image" required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label stacked>{{ 'BADGES.VALUEOF' | translate }}</ion-label>
+            <ion-input type="text" name="value" [(ngModel)]="createBadge.value" required></ion-input>
+          </ion-item>
+        </ion-list>
+        <button ion-button full type="submit" [disabled]="!loginForm.form.valid">{{ 'COMMON.CREATE' | translate }}</button>
+      </form>
+
+      <!-- Mostrar insignias -->
+      <ion-item *ngIf="badgesCount">
+        {{'BADGES.NUM' | translate}} {{ badgesCount }}
+      </ion-item>
+      <ion-refresher (ionRefresh)="getBadges($event)">
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
+      <ion-list>
+        <ion-item *ngFor="let badge of badges" (click)="goToBadgeDetail(badge)">
+          <ion-thumbnail item-left>
+            <img [src]="badge.image">
+          </ion-thumbnail>
+          <h2>{{ badge.name }}</h2>
+          <ion-note>{{ 'COMMON.VALUE' | translate}}: {{ badge.value }}</ion-note>
+          <button ion-button clear item-right icon-only>
+            <ion-icon name="ios-arrow-forward"></ion-icon>
+          </button>
+        </ion-item>
+      </ion-list>
+    </div>
+
   </div>
 </ion-content>

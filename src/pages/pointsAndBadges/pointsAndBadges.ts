@@ -14,11 +14,15 @@ import {School} from "../../model/school";
 import {Badge} from "../../model/badge";
 import {Point} from "../../model/point";
 import {Page} from "../../model/page";
-import {PointPage} from "../points/point/point";
-import {BadgePage} from "../badges/badge/badge";
+import {PointPage} from "./pointDetails/point";
+import {BadgePage} from "./badgeDetail/badge";
 import {PointRelationService} from "../../providers/pointRelation.service";
 import {PointRelation} from "../../model/pointRelation";
 import {PointService} from "../../providers/point.service";
+import {PointPointRelation} from "../../model/pointPointRelation";
+import {BadgeBadgeRelation} from "../../model/badgeBadgeRelation";
+import {AssignPointsPage} from "./assignPoints/assignPoints";
+import {AssignBadgesPage} from "./assignBadges/assignBadges";
 
 @Component({
   selector: 'page-pointsAndBadges',
@@ -27,24 +31,36 @@ import {PointService} from "../../providers/point.service";
 
 export class PointsAndBadgesPage {
   public createBadge: Badge = new Badge();
+  public createPoint: Point = new Point();
+  public pointsCount: number;
+  public totalPointsStudent: number = 0;
+  public totalBadgesStudent: number = 0;
+
   public school: School;
   public badges: Array<Badge>;
   public points: Array<Point>;
   public badgesCount: number;
   public badgeRelation: BadgeRelation;
   public isDisabled = true;
-  public enablePostBadge = false;
 
-  public pointRelationArray: Array<PointRelation>;
+  public enablePostPoint = false;
+  public enablePostBadge = false;
+  public enableAssignPoints = false;
+  public enableAssignBadges = false;
+
+  public pointRelationArray: Array<PointRelation> = new Array<PointRelation>();
   public badgeRelationsArray: Array<BadgeRelation>;
   public badgesArray: Array<Badge> = new Array<Badge>();
   public pointArray: Array<Point> = new Array<Point>();
+  public pointPointRelationArray: Array<PointPointRelation> = new Array<PointPointRelation>();
+  public badgeBadgeRelationArray: Array<BadgeBadgeRelation> = new Array<BadgeBadgeRelation>();
+  selectedStudents: Array<Point>;
 
   public myRole: Role;
   public role = Role;
 
-  public pointPage: Page;
-  public badgPage: Page;
+  //public pointPage: Page;
+  //public badgPage: Page;
 
   public esPuntos: Boolean;
 
@@ -63,12 +79,12 @@ export class PointsAndBadgesPage {
     public pointRelationService: PointRelationService,
     public pointService: PointService) {
 
-    this.badges = this.navParams.data.badges;
-    this.points = this.navParams.data.point;
+    //this.badges = this.navParams.data.badges;
+    //this.points = this.navParams.data.point;
     this.myRole = this.utilsService.role;
 
-    this.pointPage = new Page(PointPage, this.translateService.instant('POINTS.TITLE'));
-    this.badgPage = new Page(BadgePage, this.translateService.instant('BADGES.TITLE'));
+    //this.pointPage = new Page(PointPage, this.translateService.instant('POINTS.TITLE'));
+    //this.badgPage = new Page(BadgePage, this.translateService.instant('BADGES.TITLE'));
 
 
   }
@@ -90,45 +106,150 @@ export class PointsAndBadgesPage {
    */
   private getInfo(refresher?: Refresher): void {
     if(this.myRole == this.role.STUDENT) {
-      this.pointRelationService.getStudentPointsBien().subscribe(
+      this.totalPointsStudent = 0;
+      this.pointRelationService.getStudentPointsBien().finally(() => {
+        refresher ? refresher.complete() : null;
+        this.ionicService.removeLoading();
+      }).subscribe(
         ((value: Array<PointRelation>) => {
           this.pointRelationArray = value;
-          for (let point of value) {
+          this.pointRelationArray.sort(function(a,b){return a.pointId - b.pointId});
+          for (let point of this.pointRelationArray) {
             this.pointService.getPoint(+point.pointId).subscribe(
               ((value2: Point) => {
-                this.pointArray.push(value2);
+                this.totalPointsStudent += value2.value * point.value;
+                this.pointPointRelationArray.push(new PointPointRelation(value2, point));
+                //this.pointArray.push(value2);
               })
             )
           }
-
         }),
         error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
 
-      this.badgeRelationService.getStudentBadgesBien().subscribe(
+      this.totalBadgesStudent = 0;
+      this.badgeRelationService.getStudentBadgesBien().finally(() => {
+        refresher ? refresher.complete() : null;
+        this.ionicService.removeLoading();
+      }).subscribe(
         ((value: Array<BadgeRelation>) => {
           this.badgeRelationsArray = value;
           for (let badge of value) {
             this.badgeService.getBadge(+badge.badgeId).subscribe(
               ((value2: Badge) => {
-                this.badgesArray.push(value2);
+                //this.badgesArray.push(value2);
+                this.totalBadgesStudent += 1;
+                this.badgeBadgeRelationArray.push(new BadgeBadgeRelation(value2, badge));
               })
             )
           }
-
         }),
+        error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
+    } else if(this.myRole == this.role.TEACHER){
+
+      this.getPointsCount(refresher);
+      this.getBadgesCount(refresher);
+      this.getPoints(refresher);
+      this.getBadges(refresher);
+
+      this.schoolService.getMySchoolPoints().finally(() => {
+        refresher ? refresher.complete() : null;
+      }).subscribe(
+        ((value: Array<Point>) => this.points = value),
         error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
     }
   }
 
 
-  public selectedBadges(refresher?: Refresher):void{
-    this.esPuntos = false;
+  private getPostBadge(): void {
+    this.enablePostBadge? this.enablePostBadge = false: this.enablePostBadge = true;
+  }
+
+  private getPostPoint(): void{
+    this.enablePostPoint? this.enablePostPoint = false: this.enablePostPoint = true;
+  }
+
+  private getAssignPoint(): void{
+    this.enableAssignPoints? this.enableAssignPoints = false: this.enableAssignPoints = true;
+  }
+
+  private postPoint(): void {
+    this.pointService.savePoint(this.createPoint.name, this.createPoint.value, this.createPoint.image).subscribe(
+      response => {
+        this.enablePostPoint = false
+      },
+      error => {
+        this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
+      });
+    this.createPoint = new Point();
+  }
+
+  private postBadge(): void {
+    this.badgeService.saveBadge(this.createBadge.name, this.createBadge.value, this.createBadge.image).subscribe(
+      response => {
+        this.enablePostBadge=false
+      },
+      error => {
+        this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
+      });
+    this.createBadge = new Badge();
+  }
+
+  private assignPoint():void{
 
   }
 
-  public selectedPoints(refresher?: Refresher): void{
-    this.esPuntos = true;
-
+  private getPoints(refresher?: Refresher): void {
+    this.schoolService.getMySchoolPoints().finally(() => {
+      refresher ? refresher.complete() : null;
+    }).subscribe(
+      ((value: Array<Point>) => this.points = value),
+      error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
+  }
+  private getBadges(refresher?: Refresher): void {
+    this.schoolService.getMySchoolBadges().finally(() => {
+      refresher ? refresher.complete() : null;
+    }).subscribe(
+      ((value: Array<Badge>) => this.badges = value),
+      error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
+  }
+  private getPointsCount(refresher?: Refresher): void {
+    this.schoolService.getMySchoolPointsCount().finally(() => {
+      refresher ? refresher.complete() : null;
+      this.ionicService.removeLoading();
+    }).subscribe(
+      ((value: number) => this.pointsCount = value),
+      error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
+  }
+  /**
+   * Method called from the home page to open the list of the
+   * students of the school of the current user
+   */
+  public goToPointDetail(point: Point): void {
+    this.navController.push(PointPage, { point: point })
   }
 
+  private getBadgesCount(refresher?: Refresher): void {
+    this.schoolService.getMySchoolBadgesCount().finally(() => {
+      refresher ? refresher.complete() : null;
+      this.ionicService.removeLoading();
+    }).subscribe(
+      ((value: number) => this.badgesCount = value),
+      error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
+  }
+  /**
+   * Method called from the home page to open the list of the
+   * students of the school of the current user
+   */
+  public goToBadgeDetail(badge: Badge): void {
+    this.navController.push(BadgePage, { badge: badge })
+  }
+
+
+  public goToAssignPointsPage(): void {
+    this.navController.push(AssignPointsPage);
+  }
+
+  public goToAssignBadgesPage(): void {
+    this.navController.push(AssignBadgesPage);
+  }
 }

@@ -67,6 +67,9 @@
     "WEBSITE": "Web",
     "LANGUAGE": "Escoge el idioma"
   },
+  "GROUP": {
+    "TITLE": "Grupo"
+  },
   "SCHOOL": {
     "TITLE": "Mi Escuela"
   },
@@ -155,13 +158,43 @@
     "TITLE": "Asignar carta a estudiante"
   },
   "POINTSBADGES": {
-    "TITLE": "Puntos e insignias"
+    "TITLE": "Puntos e insignias",
+    "TOTAL": "Totales"
   },
   "POINTS": {
-    "TITLE": "Puntos"
+    "TITLE": "Puntos",
+    "CREATE": "Crear punto",
+    "NAMEOF": "Nombre del punto",
+    "IMAGEOF": "Imagen del punto",
+    "VALUEOF": "Valor del punto",
+    "NUM": "Número de puntos",
+    "TOTAL": "Puntos totales",
+    "ASSIGN": "Asignar puntos",
+    "OBTAINED": "Puntos obtenidos",
+    "DESCOP": "Sumatorio de los puntos obtenidor por el valor del punto",
+    "SINGULAR": "Punto",
+    "CORASSIGN": "Puntos asignados correctamente"
   },
   "BADGES": {
-    "TITLE": "Insignias"
+    "TITLE": "Insignias",
+    "CREATE": "Crear insignia",
+    "NAMEOF": "Nombre de la insignia",
+    "IMAGEOF": "Imagen de la insignia",
+    "VALUEOF": "Valor de la insignia",
+    "NUM": "Número de insignias",
+    "TOTAL": "Insignias totales",
+    "ASSIGN": "Asignar insignias",
+    "SINGULAR": "Insignia",
+    "CORASSIGN": "Insignias asignadas correctamente"
+  },
+  "COMMON": {
+    "CREATE": "Crear",
+    "EDIT": "Editar",
+    "DELETE": "Eliminar",
+    "NAME": "Nombre",
+    "VALUE": "Valor",
+    "TOTAL": "Total",
+    "ASSIGN": "Asignar",
+    "ESTIRAR": "Estirar la pantalla hacia abajo para cargar los estudiantes"
   }
-
 }

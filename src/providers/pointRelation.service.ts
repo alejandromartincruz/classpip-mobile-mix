@@ -670,24 +670,31 @@ export class PointRelationService {
     return result;
   }
 
-  public postPointRelation(pointId, studentId, schoolId, groupId, value): Observable<Response> {
+  public postPointRelation(pointId: string, studentId: string, schoolId: string, groupId: string, value: number): Observable<PointRelation> {
 
     let options: RequestOptions = new RequestOptions({
-        headers: this.utilsService.setAuthorizationHeader(new Headers(), this.utilsService.currentUser.id)
-      });
-
-    let pointRelation: PointRelation = new PointRelation(value, pointId, groupId, studentId, schoolId);
-    var myObject = this.toObject(pointRelation);
+      headers: this.utilsService.setAuthorizationHeader(new Headers(), this.utilsService.currentUser.id)
+    });
 
     var url: string;
     url = AppConfig.POINTRELATION_URL;
 
-      return this.http.post(url, myObject)
-        .map(response => {
+    let postParams = {
 
-          return response;
-        })
-        .catch((error: Response) => this.utilsService.handleAPIError(error));
+      value: value,
+      pointId: pointId,
+      studentId: studentId,
+      schoolId: schoolId,
+      groupId: groupId
+
+    };
+
+    return this.http.post(url, postParams, options)
+      .map(response => {
+        return PointRelation.toObject(response.json());
+      })
+
+      .catch((error: Response) => this.utilsService.handleAPIError(error));
   }
 
   public deletePointRelations(id: string): Observable<Point> {

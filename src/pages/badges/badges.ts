@@ -7,7 +7,7 @@ import { SchoolService } from '../../providers/school.service';
 import { UtilsService } from '../../providers/utils.service';
 import { BadgeService } from '../../providers/badge.service';
 import { BadgeRelationService } from '../../providers/badgeRelation.service';
-import { BadgePage } from './badge/badge';
+import { BadgePage } from '../pointsAndBadges/badgeDetail/badge';
 import { Badge } from '../../model/badge';
 import { School } from '../../model/school';
 import { BadgeRelation } from '../../model/badgeRelation';
@@ -25,7 +25,7 @@ export class BadgesPage {
   public badges: Array<Badge>;
   public badgesCount: number;
   public badgeRelations: Array<BadgeRelation>;
-  public badgeRelation: BadgeRelation; 
+  public badgeRelation: BadgeRelation;
   public isDisabled = true;
   public enablePostBadge = false;
 
@@ -67,17 +67,17 @@ export class BadgesPage {
   this.schoolService.getMySchool().finally(() => {}).subscribe(
 		((value: School) => {
 		  this.school = value
-    })) 
+    }))
   }
 
   /**
    * GetBadgePage
    */
-  public getBadge(): void {    
+  public getBadge(): void {
     this.navController.push(BadgePage)
-  }  
-   
-  private getBadges(refresher?: Refresher): void {	  
+  }
+
+  private getBadges(refresher?: Refresher): void {
   this.schoolService.getMySchoolBadges().finally(() => {
       refresher ? refresher.complete() : null;
     }).subscribe(
@@ -85,7 +85,7 @@ export class BadgesPage {
       error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
   }
 
-  private getBadgesRelation(): void {	  
+  private getBadgesRelation(): void {
   this.badgeRelationService.getBadgeRelation().subscribe(
       ((value: Array<BadgeRelation>) => this.badgeRelations = value),
       error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
@@ -98,7 +98,7 @@ export class BadgesPage {
   private getPostBadge(): void {
      this.enablePostBadge=true
   }
-  
+
   private getBadgesCount(refresher?: Refresher): void {
   this.schoolService.getMySchoolBadgesCount().finally(() => {
               refresher ? refresher.complete() : null;
@@ -118,20 +118,20 @@ export class BadgesPage {
   private postBadge(): void {
 	  this.badgeService.postBadge(this.createBadge).subscribe(
       response => {
-        this.enablePostBadge=false		
+        this.enablePostBadge=false
       },
-      error => {        
+      error => {
         this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
-      });     
+      });
   }
 
   private deleteBadge(): void{
     this.badgeRelationService.deleteBadgeRelationsSchool(this.school.id).subscribe(
-    response => {                       		
+    response => {
     },
-    error => {        
+    error => {
       this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
     });
   }
-  
+
 }

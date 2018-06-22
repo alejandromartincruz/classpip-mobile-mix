@@ -53,8 +53,6 @@
         <ion-icon name="ios-arrow-forward"></ion-icon>
       </button>
     </ion-item>
-    <button ion-button (click)="getPoints()">Página de Puntos</button>
-    <button ion-button (click)="getBadges()">Página de Insignias</button>
   </ion-list>
   <ion-list>
     <ion-item *ngFor="let group of groups | orderByIdPipe" (click)="goToGroup(group)">
@@ -65,33 +63,6 @@
       </button>
     </ion-item>
   </ion-list>
-  <button ion-button *ngIf="myRole == role.STUDENT" class="buttonright" ion-button (click)="getGroupsCheckBox()">Ver mis Puntos</button>
-  <button ion-button *ngIf="myRole == role.STUDENT" class="buttonright" ion-button (click)="getGroupsCheckBox2()">Ver mis Insignias</button>
-  <button ion-button *ngIf="groupCheckbox == true" class="buttonright" ion-button (click)="ocultarCheckBox()">Normal</button>
-  <ion-row *ngIf="myRole == role.STUDENT">
-    <ion-col  width-33>
-      <ion-list *ngIf="groupCheckbox == true">
-        <ion-item *ngFor="let group of groups; let i=index">
-          <ion-label>{{group.name}}</ion-label>
-          <ion-checkbox item-right [ngModel]="checkedIdx == i" (click)="getPointsStudent(group)" (ngModelChange)="$event ? checkedIdx = i : checkedIdx = -1"></ion-checkbox>
-        </ion-item>
-      </ion-list>
-      <ion-list *ngIf="groupCheckbox2 == true">
-        <ion-item *ngFor="let group of groups; let i=index">
-          <ion-label>{{group.name}}</ion-label>
-          <ion-checkbox item-right [ngModel]="checkedIdx == i" (click)="getBadgesStudent(group)" (ngModelChange)="$event ? checkedIdx = i : checkedIdx = -1"></ion-checkbox>
-        </ion-item>
-      </ion-list>
-    </ion-col>
-    <ion-col>
-      <ion-list *ngIf="studentsPoint == true">
-        <h3 ngFor="let pointRelationTotal of pointRelationsTotal" text-center>Puntos totales: {{pointRelationTotal}}</h3>
-      </ion-list>
-      <ion-list *ngIf="studentsBadge == true">
-        <h3 ngFor="let badgeRelationTotal of badgeRelationsTotal" text-center>Insignias totales: {{badgeRelationTotal}}</h3>
-      </ion-list>
-    </ion-col>
-  </ion-row>
   <!-- school (schooladministrators) -->
   <ion-card *ngIf="myRole == role.SCHOOLADMIN && school">
     <ion-item>

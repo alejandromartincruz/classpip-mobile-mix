@@ -7,7 +7,7 @@ import { SchoolService } from '../../providers/school.service';
 import { UtilsService } from '../../providers/utils.service';
 import { PointService } from '../../providers/point.service';
 import { PointRelationService } from '../../providers/pointRelation.service';
-import { PointPage } from './point/point';
+import { PointPage } from '../pointsAndBadges/pointDetails/point';
 import { Point } from '../../model/point';
 import { PointRelation } from '../../model/pointRelation';
 import { Role } from '../../model/role';
