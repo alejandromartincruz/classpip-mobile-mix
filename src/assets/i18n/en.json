@@ -203,5 +203,10 @@
     "PENDING": "Pendientes",
     "COMPLETED": "Completados",
     "DATE": "Fecha"
+  },
+  "IMAGE": {
+    "LOADFROM": "Load from Library",
+    "CAMERA": "Use camera",
+    "IMGSOURCE": "Image source"
   }
 }

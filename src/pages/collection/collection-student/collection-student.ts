@@ -9,6 +9,7 @@ import {CollectionCard} from "../../../model/collectionCard";
 import {IonicService} from "../../../providers/ionic.service";
 import {CollectionStudentDetail} from "./collection-student-detail/collection-student-detail";
 import {Card} from "../../../model/card";
+import {UtilsService} from "../../../providers/utils.service";
 
 
 declare let google;
@@ -28,7 +29,8 @@ export class CollectionSpage {
     public translateService: TranslateService,
     public collectionService: CollectionService,
     public ionicService: IonicService,
-    public navController: NavController) {
+    public navController: NavController,
+    public utilsServices: UtilsService) {
 
   }
 

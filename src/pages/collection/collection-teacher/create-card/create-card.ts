@@ -36,6 +36,8 @@ export class CardCreate {
   public cardToPost: Card = new Card();
   public profile: Profile;
   public id: string;
+  public esUrl: Boolean = true;
+  public imageType: string;
 
   constructor(
     public navParams: NavParams,
@@ -52,10 +54,21 @@ export class CardCreate {
     this.id = this.navParams.data.id;
   }
   public createCard(): void {
-    this.uploadImageService.uploadImage(this.card.image);
+    if(!this.esUrl) {
+      this.uploadImageService.uploadImage(this.card.image);
+    }
     this.postNewCard(AppConfig.SERVER_URL+/public/+this.card.image);
   }
 
+  public imageTypeSelected(type: string): void {
+    if (type == 'camara'){
+      this.card.image=this.uploadImageService.takePicture(this.camera.PictureSourceType.CAMERA);
+      this.esUrl = false;
+    } else if (type == 'libreria'){
+      this.card.image=this.uploadImageService.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
+      this.esUrl = false;
+    }
+  }
   /**
    *
    * Modal that appears when clicking image input
@@ -96,7 +109,11 @@ export class CardCreate {
     this.cardToPost.ratio=this.card.ratio;
     this.cardToPost.rank=this.card.rank;
     this.cardToPost.collectionId=this.id;
-    this.cardToPost.image=dbpath;
+    if(this.esUrl){
+      this.cardToPost.image = this.card.image;
+    } else {
+      this.cardToPost.image=dbpath;
+    }
     this.collectionService.postCard(this.cardToPost).subscribe(
       response => {
         this.returnedCard = response;

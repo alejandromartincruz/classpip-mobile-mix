@@ -35,7 +35,8 @@ export class CollectionCreate {
   public collectionCard: CollectionCard = new CollectionCard();
   public collectionToPost: CollectionCard = new CollectionCard();
   public profile: Profile;
-
+  public esUrl: Boolean = true;
+  public imageType: string;
 
   constructor(
     public navController: NavController,
@@ -51,8 +52,20 @@ export class CollectionCreate {
 
   }
   public createCollection(): void {
-    this.uploadImageService.uploadImage(this.collectionCard.image);
+    if(!this.esUrl) {
+      this.uploadImageService.uploadImage(this.collectionCard.image);
+    }
     this.postNewCollection(AppConfig.SERVER_URL+/public/+this.collectionCard.image);
+  }
+
+  public imageTypeSelected(type: string): void {
+    if (type == 'camara'){
+      this.collectionCard.image=this.uploadImageService.takePicture(this.camera.PictureSourceType.CAMERA);
+      this.esUrl = false;
+    } else if (type == 'libreria'){
+      this.collectionCard.image=this.uploadImageService.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
+      this.esUrl = false;
+    }
   }
 
   /**
@@ -68,13 +81,22 @@ export class CollectionCreate {
           {
             text: 'Load from Library',
             handler: () => {
-              this.collectionCard.image=this.uploadImageService.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY)
+              this.collectionCard.image=this.uploadImageService.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
+              this.esUrl = false;
             }
           },
           {
             text: 'Use Camera',
             handler: () => {
-              this.collectionCard.image=this.uploadImageService.takePicture(this.camera.PictureSourceType.CAMERA)
+              this.collectionCard.image=this.uploadImageService.takePicture(this.camera.PictureSourceType.CAMERA);
+              this.esUrl = false;
+            }
+          },
+          {
+            text: 'Url',
+            handler: () => {
+              //this.collectionCard.image=this.uploadImageService.takePicture(this.camera.PictureSourceType.CAMERA);
+              this.esUrl = true;
             }
           },
           {
@@ -93,7 +115,11 @@ export class CollectionCreate {
   private postNewCollection(dbpath): void {
     this.collectionToPost.name=this.collectionCard.name;
     this.collectionToPost.num=this.collectionCard.num;
-    this.collectionToPost.image=dbpath;
+    if(this.esUrl){
+      this.collectionToPost.image = this.collectionCard.image;
+    }else{
+      this.collectionToPost.image=dbpath;
+    }
     this.userService.getMyProfile().finally(() => {
       this.collectionToPost.createdBy = this.profile.username;
       this.collectionService.postCollection(this.collectionToPost).subscribe(

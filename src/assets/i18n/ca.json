@@ -203,5 +203,10 @@
     "PENDING": "Pendents",
     "COMPLETED": "Completats",
     "DATE": "Data"
+  },
+  "IMAGE": {
+    "LOADFROM": "Load from Library",
+    "CAMERA": "Use camera",
+    "IMGSOURCE": "Origen de la imatge"
   }
 }

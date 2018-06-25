@@ -34,8 +34,16 @@
         </ion-select>
       </ion-item>
       <ion-item>
+        <ion-label stacked>{{ 'IMAGE.IMGSOURCE' | translate }}</ion-label>
+        <ion-select full [(ngModel)]="imageType" name="image" placeholder="{{ 'IMAGE.IMGSOURCE' | translate }}" required (ionChange)="imageTypeSelected(imageType)">
+          <ion-option value="camara">{{ 'IMAGE.CAMERA' | translate }}</ion-option>
+          <ion-option value="libreria">{{ 'IMAGE.LOADFROM' | translate }}</ion-option>
+          <ion-option value="url">URL</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
         <ion-label stacked>{{ 'CREATE-CARD.IMAGE' | translate }}</ion-label>
-        <ion-input type="text" name="image" (tap)="presentActionSheet()" [(ngModel)]="card.image" placeholder="{{ 'CREATE-CARD.IMAGE' | translate }}" required ></ion-input>
+        <ion-input type="text" name="image" [(ngModel)]="card.image" placeholder="{{ 'CREATE-CARD.IMAGE' | translate }}" required ></ion-input>
       </ion-item>
     </ion-list>
     <button ion-button full type="submit" [disabled]="!createCardForm.form.valid">{{ 'CREATE-CARD.CREATE' | translate }}</button>
