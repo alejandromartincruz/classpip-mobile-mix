@@ -30,9 +30,11 @@
   },
     "GETQUESTIONNAIRE": {
     "TITLE": "My Questionnaires",
+      "SHORTTITLE": "Questionnaires",
     "USERNAME": "Username",
     "CODE": "Code of the Questionnaire",
-    "LOGIN": "GET IN"
+    "LOGIN": "GET IN",
+      "MAKE": "Hacer cuestionario"
   },
     "QUESTIONNAIRES": {
     "TITLE": "My Questionnaires",
@@ -56,8 +58,10 @@
     "TEXT6": "Total questions:",
     "TEXT7": "Total answers right:",
     "TEXT8": "Total unanswered answers:",
-    "TEXT9": "Result:"
-  },
+    "TEXT9": "Result:",
+    "TEXT10": "Grade out of 10",
+    "TEXT11": "Achieved points"
+    },
   "HOME": {
     "TITLE": "Home",
     "TEACHERS": "Teachers",
@@ -195,6 +199,9 @@
     "VALUE": "Valor",
     "TOTAL": "Total",
     "ASSIGN": "Asignar",
-    "ESTIRAR": "Estirar la pantalla hacia abajo para cargar los estudiantes"
+    "ESTIRAR": "Estirar la pantalla hacia abajo para cargar los estudiantes",
+    "PENDING": "Pendientes",
+    "COMPLETED": "Completados",
+    "DATE": "Fecha"
   }
 }

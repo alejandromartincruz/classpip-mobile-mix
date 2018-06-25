@@ -49,8 +49,8 @@
     {{ 'QUESTIONNAIRE.TEXT7' | translate }} {{ numAnswerCorrect }} <br>
     {{ 'QUESTIONNAIRE.TEXT8' | translate }} {{ numAnswerNoCorrect }} <br>
     {{ 'QUESTIONNAIRE.TEXT9' | translate }} {{ finalNote }} <br>
-    Nota sobre 10: {{mark}}<br>
-    Puntos conseguidos: {{pointsWon}}<br>
+    {{ 'QUESTIONNAIRE.TEXT10' | translate }}: {{mark}}<br>
+    {{ 'QUESTIONNAIRE.TEXT11' | translate }}: {{pointsWon}}<br>
 </ion-card-content>
 
 <button ion-button full type="button" on-click="outQuestionnaire()">{{ 'QUESTIONNAIRE.LOGOUT' | translate }}</button>

@@ -108,88 +108,83 @@ export class ResultQuestionnairePage {
   */
   public getCorrectionQuestionnaire(): void {
 
-    for(var i = 0; i < this.numTotalQuestions; i++){
-      if(this.dataAnswers[i] === this.myQuestionsCorrectAnswers[i].correctAnswer[0].name){
+    for (var i = 0; i < this.numTotalQuestions; i++) {
+      if (this.dataAnswers[i] === this.myQuestionsCorrectAnswers[i].correctAnswer[0].name) {
         this.numAnswerCorrect += 1;
       }
-      else{
+      else {
         this.numAnswerNoCorrect += 1;
       }
     }
 
-    this.mark = this.numAnswerCorrect*10/this.numTotalQuestions;
-   switch(Math.floor(this.mark))
-   {
-     case 10:
-     this.pointsWon = this.myQuestionnaire.points[0];
-      break;
-     case 9:
-     this.pointsWon = this.myQuestionnaire.points[1];
-     break;
-     case 8:
-     this.pointsWon = this.myQuestionnaire.points[2];
-     break;
-     case 7:
-     this.pointsWon = this.myQuestionnaire.points[3];
-     break;
-     case 6:
-     this.pointsWon = this.myQuestionnaire.points[4];
-     break;
-     case 5:
-     this.pointsWon = this.myQuestionnaire.points[5];
-     break;
-     default:
-     this.pointsWon = this.myQuestionnaire.points[6];
-     break;
-
-
-   }
+    this.mark = this.numAnswerCorrect * 10 / this.numTotalQuestions;
+    switch (Math.floor(this.mark)) {
+      case 10:
+        this.pointsWon = this.myQuestionnaire.points[0];
+        break;
+      case 9:
+        this.pointsWon = this.myQuestionnaire.points[1];
+        break;
+      case 8:
+        this.pointsWon = this.myQuestionnaire.points[2];
+        break;
+      case 7:
+        this.pointsWon = this.myQuestionnaire.points[3];
+        break;
+      case 6:
+        this.pointsWon = this.myQuestionnaire.points[4];
+        break;
+      case 5:
+        this.pointsWon = this.myQuestionnaire.points[5];
+        break;
+      default:
+        this.pointsWon = this.myQuestionnaire.points[6];
+        break;
+    }
 
     this.finalNote = this.numAnswerCorrect - this.numAnswerNoCorrect;
 
-      this.questionnaireService.saveResults(this.student, this.myQuestionnaire, this.myQuestionnaire.name, this.myQuestionnaire.id, this.numTotalQuestions, this.numAnswerCorrect, this.numAnswerNoCorrect, this.finalNote, this.dataAnswers).subscribe(
+    this.questionnaireService.saveResults(this.student, this.myQuestionnaire, this.myQuestionnaire.name, this.myQuestionnaire.id, this.numTotalQuestions, this.numAnswerCorrect, this.numAnswerNoCorrect, this.finalNote, this.dataAnswers).subscribe(
       ((value: ResultQuestionnaire) => this.result = value),
       error =>
         this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
 
+    this.pointService.getPoint(this.num).subscribe(
+      ((value: Point) => this.points = value),
+      error =>
+        this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
 
-           this.pointService.getPoint(this.num).subscribe(
-             ((value: Point)=> this.points = value),
-             error =>
-                 this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
+    this.groupService.getMyGroups().subscribe(
+      ((value: Array<Group>) => this.myGroups = value),
+      error =>
+        this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
 
-            this.groupService.getMyGroups().subscribe(
-              ((value: Array<Group>)=> this.myGroups = value),
-             error =>
-                 this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
-
-             /* for(var i = 0; i < this.myGroups.length; i++)
-              {
-                  for(var n = 0; n < this.myGroups[i].students.length; n++)
-                {
-                  if(this.myGroups[i].students[n].id == this.student.id)
-                  {
-                    this.group = this.myGroups[i];
-                  }
-
-
-                }
-
-
-              }*/
-         //this.pointRelation = new PointRelation(this.pointsWon,this.num,Number(this.group.id),Number(this.student.id),Number(this.student.schoolId))
-            //TODO: arreglar
-
-           //this.pointsSend(this.group.id);
-          this.pointsSend("point won"+this.pointsWon);
-
-
-
-          //this.pointRelationService.postPointRelation(this.pointRelation.pointId,this.pointRelation.studentId,this.pointRelation.schoolId,this.pointRelation.groupId,this.pointsWon);
-          //this.pointsSend("send");
+    let hayPuntos: Boolean = false;
+    for (let q of this.myQuestionnaire.points) {
+      if (q != 0) {
+        hayPuntos = true;
+      }
+    }
+    if (hayPuntos) {
+      this.pointRelationService.postPointRelation(this.num.toString(), this.student.id, this.student.schoolId.toString(),this.myQuestionnaire.groupid, this.pointsWon).subscribe(
+        response => {
+        },
+        error => {
+          this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
+        });
+    }
+     /* for(var i = 0; i < this.myGroups.length; i++)
+      {
+          for(var n = 0; n < this.myGroups[i].students.length; n++)
+        {
+          if(this.myGroups[i].students[n].id == this.student.id)
+          {
+            this.group = this.myGroups[i];
+          }
+        }
 
 
-
+      }*/
   }
 
 }

@@ -17,6 +17,7 @@ import { Questionnaire } from '../../model/questionnaire';
 import { Question } from '../../model/question';
 import { Answer } from '../../model/answer';
 import {Group} from "../../model/group";
+import {ResultQuestionnaire} from "../../model/resultQuestionnaire";
 //import { TimerComponent } from '../../components/timer/timer';
 
 @Component({
@@ -35,6 +36,17 @@ export class GetQuestionnairePage {
   public dataAnswers  = [];
   public groups: Array<Group>;
   public found: Boolean;
+  public enableGetQuest: Boolean = false;
+
+  listQuest:string;
+
+  public questionnairesArrayDone: Array<Questionnaire> = new Array<Questionnaire>();
+  public questionnairesArrayNOTDone: Array<Questionnaire> = new Array<Questionnaire>();
+
+  public result: ResultQuestionnaire = new ResultQuestionnaire();
+
+  public myRole: Role;
+  public role = Role;
 
   constructor(
     public navController: NavController,
@@ -52,10 +64,12 @@ export class GetQuestionnairePage {
       case Role.STUDENT:
         this.credentials.username = 'student-1';
         this.credentials.id = this.credentials.id;
+        this.getQuestionnairesStudents();
         break;
       case Role.TEACHER:
         this.credentials.username = 'teacher-1';
         this.credentials.id = this.credentials.id;
+        this.getQuestionnaireTeacher();
         break;
       case Role.SCHOOLADMIN:
         this.credentials.username = 'school-admin-1';
@@ -64,9 +78,52 @@ export class GetQuestionnairePage {
       default:
         break;
     }
-
-
+    this.myRole = this.utilsService.role;
     this.groups = this.navParms.data.groups;
+  }
+
+  public getQuestionnaireTeacher():void {
+    this.questionnaireService.getTeacherQuestionnaires().subscribe(
+      ((quest: Array<Questionnaire>) => {
+        this.questionnairesArrayDone = quest;
+      }),
+      error =>
+        this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
+  }
+
+  public getQuestionnairesStudents(): void {
+    /*this.questionnaireService.getResultQuestionnaires().subscribe(
+      ((resultQuest: Array<ResultQuestionnaire>) => {
+        for (let q of resultQuest) {
+          this.pointsSend("ggg" + q.questionnaireName);
+        }
+      }),
+      error =>
+        this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
+*/
+    this.questionnaireService.getQuestionnaires().subscribe(
+      ((quest: Array<Questionnaire>) => {
+        /*this.questionnaireService.getResultQuestionnaires().subscribe(
+          ((resultQuest: Array<ResultQuestionnaire>) => {*/
+            for (let questi of quest) {
+              for (let gro of this.groups) {
+                if (questi.groupid == gro.id) {
+                  this.questionnairesArrayDone.push(questi);
+                  /*for(let res of resultQuest) {
+                    this.result = res;
+                    this.pointsSend( "ggg" + this.result);
+                    this.pointsSend( "quest" + this.result.questionnaireId);
+                  }*/
+
+                }
+              }
+            }
+          }),
+        error =>
+          this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
+      /*}),
+      error =>
+        this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));*/
   }
 
     /**
@@ -83,6 +140,10 @@ export class GetQuestionnairePage {
       duration: 2000
     });
     toast.present();
+  }
+
+  private getEnableGetQuest(): void{
+    this.enableGetQuest? this.enableGetQuest = false: this.enableGetQuest = true;
   }
 
   /**

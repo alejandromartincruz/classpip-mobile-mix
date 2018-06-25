@@ -15,6 +15,7 @@ import { IonicService } from '../providers/ionic.service';
 import { TranslateService } from 'ng2-translate/ng2-translate';
 import { GetQuestionnairePage } from '../pages/getQuestionnaire/getQuestionnaire';
 import { ResultQuestionnaire } from '../model/resultQuestionnaire';
+import {Point} from "../model/point";
 
 @Injectable()
 export class QuestionnaireService {
@@ -26,6 +27,67 @@ export class QuestionnaireService {
     public utilsService: UtilsService) {
 
     }
+
+  /**
+   * This method returns all questionnaires.
+   * @return {Observable<Array<Questionnaire>>} returns an observable with the result
+   * of the operation
+   */
+  public getQuestionnaires(): Observable<Array<Questionnaire>> {
+
+    let options: RequestOptions = new RequestOptions({
+      headers: this.utilsService.setAuthorizationHeader(new Headers(), this.utilsService.currentUser.id)
+    });
+
+    var url: string = AppConfig.QUESTIONNAIRE_URL;
+
+    return this.http.get(url, options)
+      .map((response: Response, index: number) => {
+        return Questionnaire.toObjectArray(response.json())
+      })
+      .catch((error: Response) => this.utilsService.handleAPIError(error));
+  }
+
+  /**
+   * This method returns all questionnaires.
+   * @return {Observable<Array<Questionnaire>>} returns an observable with the result
+   * of the operation
+   */
+  public getTeacherQuestionnaires(): Observable<Array<Questionnaire>> {
+
+    let options: RequestOptions = new RequestOptions({
+      headers: this.utilsService.setAuthorizationHeader(new Headers(), this.utilsService.currentUser.id)
+    });
+
+    var url: string = AppConfig.TEACHER_URL + "/" +this.utilsService.currentUser.userId  + AppConfig.QUESTIONNAIRES_URL;
+
+    return this.http.get(url, options)
+      .map((response: Response, index: number) => {
+        return Questionnaire.toObjectArray(response.json())
+      })
+      .catch((error: Response) => this.utilsService.handleAPIError(error));
+  }
+
+  /**
+   * This method returns all questionnaires.
+   * @return {Observable<Array<Questionnaire>>} returns an observable with the result
+   * of the operation
+   */
+  public getResultQuestionnaires(): Observable<Array<ResultQuestionnaire>> {
+
+    let options: RequestOptions = new RequestOptions({
+      headers: this.utilsService.setAuthorizationHeader(new Headers(), this.utilsService.currentUser.id)
+    });
+
+    var url: string = AppConfig.RESULTQUESTIONNAIRE_URL;
+
+    return this.http.get(url, options)
+      .map((response: Response, index: number) =>
+        Questionnaire.toObjectArray(response.json())
+      )
+      .catch((error: Response) => this.utilsService.handleAPIError(error));
+
+  }
 
   /**
    * This method returns the current questionnaire of the logged

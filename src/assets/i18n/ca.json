@@ -30,9 +30,11 @@
   },
     "GETQUESTIONNAIRE": {
     "TITLE": "Els meus Qüestionaris",
+      "SHORTTITLE": "Qüestionaris",
     "USERNAME": "Nom d'Usuari",
     "CODE": "Codi del Qüestionari",
-    "LOGIN": "ACCEDIR"
+    "LOGIN": "ACCEDIR",
+      "MAKE": "Fer qüestionari"
   },
     "QUESTIONNAIRES": {
     "TITLE": "Els meus Qüestionaris",
@@ -56,7 +58,9 @@
     "TEXT6": "Total preguntes:",
     "TEXT7": "Total respostes correctes:",
     "TEXT8": "Total respostes incorrectes:",
-    "TEXT9": "Resultat:"
+    "TEXT9": "Resultat:",
+    "TEXT10": "Nota sobre 10",
+    "TEXT11": "Punts aconseguits"
   },
   "HOME": {
     "TITLE": "Inici",
@@ -68,7 +72,7 @@
     "LANGUAGE": "Escull l'idioma"
   },
   "GROUP": {
-    "TITLE": "Grupo"
+    "TITLE": "Grup"
   },
   "SCHOOL": {
     "TITLE": "La meva Escola"
@@ -78,7 +82,7 @@
     "ACCOUNT": "Compte",
     "NAME": "Nom",
     "USERNAME": "Nom d'Usuari",
-    "EMAIL": "Correu Electrónic",
+    "EMAIL": "Correu Electrònic",
     "CHANGEPASS": "Cambiar Contrasenya",
     "RESOURCES": "Recursos",
     "HELP": "Ajuda",
@@ -97,7 +101,7 @@
   "TEACHER": {
     "NAME": "Nom",
     "USERNAME": "Nom d'Usuari",
-    "EMAIL": "Correu Electrónic"
+    "EMAIL": "Correu Electrònic"
   },
   "STUDENTS": {
     "TITLE": "Estudiants"
@@ -105,7 +109,7 @@
   "STUDENT": {
     "NAME": "Nom",
     "USERNAME": "Nom d'Usuari",
-    "EMAIL": "Correo Electrónic"
+    "EMAIL": "Correo Electrònic"
   },
   "ERROR": {
     "LOGIN_FAILED": "El nom d'usuari i / o contrasenya invàlides.",
@@ -113,88 +117,91 @@
     "INTERNAL_ERROR": "Hi ha hagut un error intern al servidor. Si us plau contacta amb el teu administrador."
   },
   "COLLECTION": {
-    "TITLE": "Mis Colecciones"
+    "TITLE": "Les meves Coleccions"
   },
   "CREATE-COLLECTION": {
-    "TITLE": "Crear colección",
-    "NAME": "Nombre de la nueva colección",
-    "NUM": "Número de cartas de la nueva colección",
-    "IMAGE": "Imagen de portada para la colección",
+    "TITLE": "Crear colecció",
+    "NAME": "Nom de la nova colecció",
+    "NUM": "Número de cartes de la nova colecció",
+    "IMAGE": "Imatge de portada per la colecció",
     "CREATE": "CREAR"
   },
   "COLLECTION-ASSIGN": {
-    "TITLE": "Asignar a grupo"
+    "TITLE": "Asignar a un grup"
   },
   "EDIT-COLLECTION": {
-    "TITLE": "Editar colección",
-    "NAME": "Nombre de la colección",
-    "NUM": "Número de cartas de la colección",
-    "IMAGE": "Imagen de portada de la colección",
+    "TITLE": "Editar colecció",
+    "NAME": "Nom de la nova colecció",
+    "NUM": "Número de cartes de la nova colecció",
+    "IMAGE": "Imatge de portada per la colecció",
     "EDIT": "EDITAR"
   },
   "COLLECTIONS-ASSIGNED": {
-    "TITLE": "Grupos asignados"
+    "TITLE": "Grups asignats"
   },
   "CREATE-CARD": {
     "TITLE": "Crear Carta",
-    "NAME": "Nombre de la nueva carta",
-    "RATIO": "Ratio de aparición de la carta",
-    "RANK": "Calidad de la carta (rareza)",
-    "IMAGE": "Imagen de la carta",
+    "NAME": "Nom de la nova carta",
+    "RATIO": "Ratio d'aparició de la carta",
+    "RANK": "Calitat de la carta (rareza)",
+    "IMAGE": "Imatge de la carta",
     "CREATE": "CREAR"
   },
   "EDIT-CARD": {
     "TITLE": "Editar carta",
-    "NAME": "Nombre de la carta",
-    "RATIO": "Ratio de aparición de la carta",
-    "RANK": "Calidad de la carta (rareza)",
-    "IMAGE": "Imagen de la carta",
+    "NAME": "Nom de la carta",
+    "RATIO": "Ratio d'aparició de la carta",
+    "RANK": "Calitat de la carta (rareza)",
+    "IMAGE": "Imatge de la carta",
     "EDIT": "EDITAR"
   },
   "CARD-ASSIGN": {
-    "TITLE": "Selecciona un grupo"
+    "TITLE": "Selecciona un grup"
   },
   "CARD-ASSIGN-STUDENT": {
-    "TITLE": "Asignar carta a estudiante"
+    "TITLE": "Asignar una carta a un estudiant"
   },
   "POINTSBADGES": {
-    "TITLE": "Puntos e insignias",
-    "TOTAL": "Totales"
+    "TITLE": "Punts i insígnias",
+    "TOTAL": "Totals"
   },
   "POINTS": {
-    "TITLE": "Puntos",
-    "CREATE": "Crear punto",
-    "NAMEOF": "Nombre del punto",
-    "IMAGEOF": "Imagen del punto",
-    "VALUEOF": "Valor del punto",
-    "NUM": "Número de puntos",
-    "TOTAL": "Puntos totales",
-    "ASSIGN": "Asignar puntos",
-    "OBTAINED": "Puntos obtenidos",
-    "DESCOP": "Sumatorio de los puntos obtenidor por el valor del punto",
-    "SINGULAR": "Punto",
-    "CORASSIGN": "Puntos asignados correctamente"
+    "TITLE": "Punts",
+    "CREATE": "Crear punt",
+    "NAMEOF": "Nom del punt",
+    "IMAGEOF": "Imatge del punt",
+    "VALUEOF": "Valor del punt",
+    "NUM": "Número de punts",
+    "TOTAL": "Punts totals",
+    "ASSIGN": "Asignar punts",
+    "OBTAINED": "Punts obtinguts",
+    "DESCOP": "Sumatori dels punts obtinguts per el valor del punt",
+    "SINGULAR": "Punt",
+    "CORASSIGN": "Punts assignats correctament"
   },
   "BADGES": {
-    "TITLE": "Insignias",
-    "CREATE": "Crear insignia",
-    "NAMEOF": "Nombre de la insignia",
-    "IMAGEOF": "Imagen de la insignia",
-    "VALUEOF": "Valor de la insignia",
-    "NUM": "Número de insignias",
-    "TOTAL": "Insignias totales",
-    "ASSIGN": "Asignar insignias",
-    "SINGULAR": "Insignia",
-    "CORASSIGN": "Insignias asignadas correctamente"
+    "TITLE": "Insígnies",
+    "CREATE": "Crear insígnia",
+    "NAMEOF": "Nombre de l'insígnia",
+    "IMAGEOF": "Imatge de l'insígnia",
+    "VALUEOF": "Valor de l'insígnia",
+    "NUM": "Número d'insígnies",
+    "TOTAL": "Insígnies totals",
+    "ASSIGN": "Assignar insígnies",
+    "SINGULAR": "Insígnia",
+    "CORASSIGN": "Insígnies asignades correctament"
   },
   "COMMON": {
     "CREATE": "Crear",
     "EDIT": "Editar",
     "DELETE": "Eliminar",
-    "NAME": "Nombre",
+    "NAME": "Nom",
     "VALUE": "Valor",
     "TOTAL": "Total",
-    "ASSIGN": "Asignar",
-    "ESTIRAR": "Estirar la pantalla hacia abajo para cargar los estudiantes"
+    "ASSIGN": "Assignar",
+    "ESTIRAR": "Estirar la pantalla cap a baix per carregar els estudiants",
+    "PENDING": "Pendents",
+    "COMPLETED": "Completats",
+    "DATE": "Data"
   }
 }

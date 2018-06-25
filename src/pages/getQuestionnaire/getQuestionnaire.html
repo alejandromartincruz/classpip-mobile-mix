@@ -1,14 +1,20 @@
-<ion-header no-border>
+<ion-header no-border text-wrap>
   <ion-navbar color="primary">
-    <ion-title>{{ 'GETQUESTIONNAIRE.TITLE' | translate }}</ion-title>
+    <ion-title>{{ 'GETQUESTIONNAIRE.SHORTTITLE' | translate }}</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-  <form (ngSubmit)="getQuestionnaire()" #loginForm="ngForm">
+  <!-- Escoger el questionario -->
+  <button ion-button full clear item-right icon-only (click)="getEnableGetQuest()" *ngIf="myRole == role.STUDENT">
+    {{ 'GETQUESTIONNAIRE.MAKE' | translate }}
+    <ion-icon *ngIf="enableGetQuest == false" name="ios-arrow-down"></ion-icon>
+    <ion-icon *ngIf="enableGetQuest == true" name="ios-arrow-up"></ion-icon>
+  </button>
+  <form (ngSubmit)="getQuestionnaire()" #loginForm="ngForm" *ngIf="enableGetQuest == true">
     <ion-list no-lines>
       <ion-item>
         <ion-label stacked>{{ 'GETQUESTIONNAIRE.USERNAME' | translate }}</ion-label>
-        <ion-input type="text" name="username" [(ngModel)]="credentials.username" required></ion-input>
+        <ion-input type="text" name="username" [disabled]="true" [(ngModel)]="credentials.username" required></ion-input>
       </ion-item>
       <ion-item>
         <ion-label stacked>{{ 'GETQUESTIONNAIRE.CODE' | translate }}</ion-label>
@@ -17,4 +23,14 @@
     </ion-list>
     <button ion-button full type="submit" [disabled]="!loginForm.form.valid">{{ 'GETQUESTIONNAIRE.LOGIN' | translate }}</button>
   </form>
+  <div>
+    <ion-list>
+      <ion-item *ngFor="let quest of questionnairesArrayDone">
+        <h2>{{ quest.name }}</h2>
+        <ion-note>{{ 'COMMON.DATE' | translate}}: {{ quest.date }}</ion-note>
+      </ion-item>
+    </ion-list>
+
+  </div>
+
 </ion-content>

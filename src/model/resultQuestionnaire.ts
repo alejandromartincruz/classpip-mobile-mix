@@ -49,6 +49,17 @@ export class ResultQuestionnaire {
     }
     return result;
   }
+  /* tslint:disable */
+  static toObjectArray(object: any): Array<ResultQuestionnaire> {
+    /* tslint:enable */
+    let resultArray: Array<ResultQuestionnaire> = new Array<ResultQuestionnaire>();
+    if (object != null) {
+      for (let i = 0; i < object.length; i++) {
+        resultArray.push(ResultQuestionnaire.toObject(object[i]));
+      }
+    }
+    return resultArray;
+  }
 
   public get id(): string {
     return this._id;
