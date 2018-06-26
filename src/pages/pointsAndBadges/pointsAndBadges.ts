@@ -23,6 +23,8 @@ import {PointPointRelation} from "../../model/pointPointRelation";
 import {BadgeBadgeRelation} from "../../model/badgeBadgeRelation";
 import {AssignPointsPage} from "./assignPoints/assignPoints";
 import {AssignBadgesPage} from "./assignBadges/assignBadges";
+import {Group} from "../../model/group";
+import {GroupService} from "../../providers/group.service";
 
 @Component({
   selector: 'page-pointsAndBadges',
@@ -39,6 +41,7 @@ export class PointsAndBadgesPage {
   public school: School;
   public badges: Array<Badge>;
   public points: Array<Point>;
+  public groupsArray: Array<Group> = new Array<Group>();
   public badgesCount: number;
   public badgeRelation: BadgeRelation;
   public isDisabled = true;
@@ -77,7 +80,8 @@ export class PointsAndBadgesPage {
     public badgeRelationService: BadgeRelationService,
     public translateService: TranslateService,
     public pointRelationService: PointRelationService,
-    public pointService: PointService) {
+    public pointService: PointService,
+    public groupService: GroupService) {
 
     //this.badges = this.navParams.data.badges;
     //this.points = this.navParams.data.point;
@@ -156,9 +160,15 @@ export class PointsAndBadgesPage {
       }).subscribe(
         ((value: Array<Point>) => this.points = value),
         error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
+      this.groupService.getMyGroups().subscribe(
+        ((value: Array<Group>) => this.groupsArray = value),
+        error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
     }
   }
 
+  private goToGroup(group: string): void{
+
+  }
 
   private getPostBadge(): void {
     this.enablePostBadge? this.enablePostBadge = false: this.enablePostBadge = true;
@@ -246,10 +256,10 @@ export class PointsAndBadgesPage {
 
 
   public goToAssignPointsPage(): void {
-    this.navController.push(AssignPointsPage);
+    this.navController.push(AssignPointsPage, {groupsArray: this.groupsArray});
   }
 
   public goToAssignBadgesPage(): void {
-    this.navController.push(AssignBadgesPage);
+    this.navController.push(AssignBadgesPage, {groupsArray: this.groupsArray});
   }
 }

@@ -4,6 +4,7 @@ export class Questionnaire {
   private _name: string;
   private _date: string;
   private _points: number [];
+  private _badges: string [];
   private _groupid: string;
 
   constructor(id?: string, name?: string, date?: string, points?: number[]) {
@@ -24,6 +25,7 @@ export class Questionnaire {
       result.date = object.date;
       result.points = object.points;
       result.groupid = object.groupid;
+      result.badges = object.badges;
     }
     return result;
   }
@@ -75,5 +77,12 @@ export class Questionnaire {
 
   public set groupid(value: string) {
     this._groupid = value;
+  }
+  public get badges(): string[] {
+    return this._badges;
+  }
+
+  public set badges(value: string[]) {
+    this._badges = value;
   }
 }

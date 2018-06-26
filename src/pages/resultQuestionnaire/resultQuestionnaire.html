@@ -40,18 +40,57 @@
     <ion-label> {{ dataAnswer }}</ion-label>
 </ion-item>
 
+  <ion-card>
 <ion-card-header style="font-weight: bold">
    {{ 'QUESTIONNAIRE.TEXT5' | translate }}
 </ion-card-header>
-
-<ion-card-content>
-    {{ 'QUESTIONNAIRE.TEXT6' | translate }} {{ numTotalQuestions }} <br>
-    {{ 'QUESTIONNAIRE.TEXT7' | translate }} {{ numAnswerCorrect }} <br>
-    {{ 'QUESTIONNAIRE.TEXT8' | translate }} {{ numAnswerNoCorrect }} <br>
-    {{ 'QUESTIONNAIRE.TEXT9' | translate }} {{ finalNote }} <br>
-    {{ 'QUESTIONNAIRE.TEXT10' | translate }}: {{mark}}<br>
-    {{ 'QUESTIONNAIRE.TEXT11' | translate }}: {{pointsWon}}<br>
-</ion-card-content>
+<ion-list>
+    <ion-item>
+      {{ 'QUESTIONNAIRE.TEXT6' | translate }}
+      <ion-note item-right class="cosa">{{ numTotalQuestions }}</ion-note>
+    </ion-item>
+    <ion-item>
+      {{ 'QUESTIONNAIRE.TEXT7' | translate }}
+      <ion-note item-right class="cosa">{{ numAnswerCorrect }}</ion-note>
+    </ion-item>
+  <ion-item>
+    {{ 'QUESTIONNAIRE.TEXT8' | translate }}
+    <ion-note item-right class="cosa">{{ numAnswerNoCorrect }}</ion-note>
+  </ion-item>
+  <ion-item>
+    {{ 'QUESTIONNAIRE.TEXT9' | translate }}
+    <ion-note item-right class="cosa">{{ finalNote }}</ion-note>
+  </ion-item>
+  <ion-item>
+    {{ 'QUESTIONNAIRE.TEXT10' | translate }}:
+    <ion-note item-right class="cosa">{{ mark }}</ion-note>
+  </ion-item>
+  <ion-item>
+    {{ 'QUESTIONNAIRE.TEXT11' | translate }}:
+    <ion-note item-right class="cosa">{{ pointsWon }}</ion-note>
+  </ion-item>
+</ion-list>
+</ion-card>
+<ion-card>
+  <ion-list>
+    <ion-item *ngIf="hayBadges == true">
+      <ion-note stacked>Insignia ganada:</ion-note>
+      <ion-thumbnail item-left>
+        <img [src]="badgeItem.image">
+      </ion-thumbnail>
+      <h2>{{ badgeItem.name }}</h2>
+      <ion-note>{{ 'COMMON.VALUE' | translate}}: {{ badgeItem.value }}</ion-note>
+    </ion-item>
+    <ion-item *ngIf="hayPuntos == true">
+      <ion-note stacked>Punto ganado:</ion-note>
+      <ion-thumbnail item-left>
+        <img [src]="pointItem.image">
+      </ion-thumbnail>
+      <h2>{{ pointItem.name }}</h2>
+      <ion-note>{{ 'COMMON.VALUE' | translate}}: {{ pointsWon }}</ion-note>
+    </ion-item>
+  </ion-list>
+</ion-card>
 
 <button ion-button full type="button" on-click="outQuestionnaire()">{{ 'QUESTIONNAIRE.LOGOUT' | translate }}</button>
 

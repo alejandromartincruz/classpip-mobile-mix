@@ -118,6 +118,15 @@
     </div>
 
     <div *ngSwitchCase="'totales'">
+      <ion-list>
+        <ion-item *ngFor="let group of groupsArray | orderByIdPipe" (click)="goToGroup(group)">
+          <h2 text-uppercase>{{ group.name }}</h2>
+          <h3>{{ group.grade.name }} - {{ group.matter.name }}</h3>
+          <button ion-button clear item-right icon-only>
+            <ion-icon name="ios-arrow-forward"></ion-icon>
+          </button>
+        </ion-item>
+      </ion-list>
 
     </div>
 

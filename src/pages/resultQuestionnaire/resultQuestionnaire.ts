@@ -19,6 +19,10 @@ import { PointService} from '../../providers/point.service';
 import { GroupService} from '../../providers/group.service';
 import { PointRelationService } from '../../providers/pointRelation.service';
 import { PointRelation } from '../../model/pointRelation';
+import {BadgeRelationService} from "../../providers/badgeRelation.service";
+import {BadgeService} from "../../providers/badge.service";
+import {Badge} from "../../model/badge";
+import {BadgeBadgeRelation} from "../../model/badgeBadgeRelation";
 
 @Component({
   selector: 'page-resultQuestionnaire',
@@ -48,6 +52,11 @@ export class ResultQuestionnairePage {
   public mark: number = 0;
   public num: number = 100006;
   public pointsWon: number;
+  public badgeWon: string;
+  public hayPuntos: Boolean;
+  public hayBadges: Boolean;
+  public badgeItem: Badge = new Badge();
+  public pointItem: Point = new Point();
 
 
   constructor(
@@ -59,7 +68,9 @@ export class ResultQuestionnairePage {
     public pointService: PointService,
     public pointRelationService: PointRelationService,
     public questionnaireService: QuestionnaireService,
-    public translateService: TranslateService) {
+    public translateService: TranslateService,
+    public badgeService: BadgeService,
+    public badgeRelationService: BadgeRelationService) {
 
     this.myQuestionsCorrectAnswers = this.navParams.data.myQuestionsCorrectAnswers;
     //this.myResults = this.navParams.data.myResults;
@@ -159,13 +170,20 @@ export class ResultQuestionnairePage {
       error =>
         this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
 
-    let hayPuntos: Boolean = false;
+    this.hayPuntos = false;
     for (let q of this.myQuestionnaire.points) {
       if (q != 0) {
-        hayPuntos = true;
+        this.hayPuntos = true;
       }
     }
-    if (hayPuntos) {
+    if (this.hayPuntos && this.pointsWon != 0) {
+      this.pointService.getPoint(this.num).subscribe(
+        ((value2: Point) => {
+          this.pointItem = value2;
+        }),
+        error => {
+          this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
+        });
       this.pointRelationService.postPointRelation(this.num.toString(), this.student.id, this.student.schoolId.toString(),this.myQuestionnaire.groupid, this.pointsWon).subscribe(
         response => {
         },
@@ -173,6 +191,41 @@ export class ResultQuestionnairePage {
           this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
         });
     }
+    let x = this.mark;
+    switch (true) {
+      case (x > 9):
+        this.badgeWon = this.myQuestionnaire.badges[0];
+        break;
+      case (x > 7):
+        this.badgeWon = this.myQuestionnaire.badges[1];
+        break;
+      case (x > 5):
+        this.badgeWon = this.myQuestionnaire.badges[2];
+        break;
+      default:
+        this.badgeWon = "null";
+        break;
+    }
+    if(typeof this.myQuestionnaire.badges != 'undefined' && this.badgeWon != "null"){
+      this.hayBadges = true;
+      this.badgeService.getBadge(+this.badgeWon).subscribe(
+        ((value2: Badge) => {
+          this.badgeItem = value2;
+        }),
+          error => {
+            this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
+        });
+
+      this.badgeRelationService.postBadgeRelation(this.badgeWon, this.student.id, this.student.schoolId.toString(), this.myQuestionnaire.groupid, 1).subscribe(
+        response => {
+
+        },
+        error => {
+          this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
+        });
+    }
+
+
      /* for(var i = 0; i < this.myGroups.length; i++)
       {
           for(var n = 0; n < this.myGroups[i].students.length; n++)

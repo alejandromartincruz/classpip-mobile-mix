@@ -21,7 +21,7 @@
   <ion-item>
     <ion-label>{{ 'GROUP.TITLE' | translate }}</ion-label>
     <ion-select [(ngModel)]="groupsArraySelected" multiple="false">
-      <ion-option *ngFor="let g of groupsArray" value="{{g.id}}" selected="false" (ionChange)="showselected(groupsArraySelected, $event)">
+      <ion-option *ngFor="let g of groupsArray | orderByIdPipe" value="{{g.id}}" selected="false" (ionChange)="showselected(groupsArraySelected, $event)">
         {{g.name}}
       </ion-option>
     </ion-select>

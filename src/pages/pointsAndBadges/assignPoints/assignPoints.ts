@@ -56,7 +56,7 @@ export class AssignPointsPage{
     //this.badges = this.navParams.data.badges;
     //this.points = this.navParams.data.point;
     this.myRole = this.utilsService.role;
-
+    //this.groupsArray = this.navParams.data.groups;
     //this.pointPage = new Page(PointPage, this.translateService.instant('POINTS.TITLE'));
     //this.badgPage = new Page(BadgePage, this.translateService.instant('BADGES.TITLE'));
 
