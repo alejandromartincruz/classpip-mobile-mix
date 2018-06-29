@@ -23,14 +23,12 @@
     </ion-list>
     <button ion-button full type="submit" [disabled]="!loginForm.form.valid">{{ 'GETQUESTIONNAIRE.LOGIN' | translate }}</button>
   </form>
-  <ion-content *ngIf="questionnairesArrayDone">
+  <ion-card *ngIf="questionnairesArrayDone">
     <ion-list>
       <ion-item *ngFor="let quest of questionnairesArrayDone">
-        <h2>{{ quest.name }}</h2>
-        <ion-note>
-          {{ 'COMMON.DATE' | translate}}: {{ quest.date }} <br>
-        </ion-note>
+        <label item-left>{{ quest.name }} <br></label>
+        <ion-toggle [checked]="quest.active" (ionChange)="changeActive(quest)" *ngIf="myRole == role.TEACHER"></ion-toggle>
       </ion-item>
     </ion-list>
-  </ion-content>
+  </ion-card>
 </ion-content>

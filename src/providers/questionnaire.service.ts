@@ -160,6 +160,31 @@ export class QuestionnaireService {
     return this.http.get(url, options)
       .map((response: Response, index: number) =>  Question.toObjectArray(response.json()))
   }
+  /**
+   * Returns the list of answers by a questionnaire id.
+   * @return Observable{Array<Answer>} returns the list of answers
+   */
+  public patchQuestionnaire(id: string, name?: string, date?: string, points?: number[], badges?: string[], groupid?: string, active?: boolean): Observable<Questionnaire> {
+
+    let options: RequestOptions = new RequestOptions({
+      headers: this.utilsService.setAuthorizationHeader(new Headers(), this.utilsService.currentUser.id)
+    });
+
+    var url: string = AppConfig.QUESTIONNAIRE_URL + '/' + id;
+
+    let postParams = {
+      id: id,
+      name: name,
+      date: date,
+      points: points,
+      badges: badges,
+      groupid: groupid,
+      active: active
+    };
+
+    return this.http.patch(url, postParams, options)
+      .map((response: Response, index: number) => Questionnaire.toObject(response.json()))
+  }
 
   /**
    * Returns the list of answers by a questionnaire id.

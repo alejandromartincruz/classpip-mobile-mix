@@ -62,12 +62,11 @@ export class GetQuestionnairePage {
     // TODO: remove this
     switch (utilsService.role) {
       case Role.STUDENT:
-        this.credentials.username = 'student-1';
+        this.credentials.username = "student-1";
         this.credentials.id = this.credentials.id;
         this.getQuestionnairesStudents();
         break;
       case Role.TEACHER:
-        this.credentials.username = 'teacher-1';
         this.credentials.id = this.credentials.id;
         this.getQuestionnaireTeacher();
         break;
@@ -146,23 +145,40 @@ export class GetQuestionnairePage {
     this.enableGetQuest? this.enableGetQuest = false: this.enableGetQuest = true;
   }
 
+  private changeActive(quest: Questionnaire): void{
+    quest.active? quest.active = false: quest.active = true;
+    //this.ionicService.showAlert("", "HOLA");
+    this.questionnaireService.patchQuestionnaire(quest.id, quest.name, quest.date, quest.points, quest.badges, quest.groupid, quest.active ).subscribe(
+      response => {
+        //this.ionicService.showAlert("",response.active.toString());
+      },
+      error => {
+        this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
+      });
+  }
+
   /**
    * This method manages the call to the service for performing a getQuestionnaire
    * against the public services
    */
   public getQuestionnaire(): void {
-    //var found: Boolean;
+    let active: Boolean = true;
     this.found = false;
     this.questionnaireService.getMyQuestionnaire(this.credentials).subscribe(
       ((value: Questionnaire) => {
         this.myQuestionnaire = value;
-
-        for (let gro of this.groups) {
-          if (gro.id == this.myQuestionnaire.groupid) {
-            this.found = true;
+        if(this.myQuestionnaire.active == true) {
+          for (let gro of this.groups) {
+            if (gro.id == this.myQuestionnaire.groupid) {
+              this.found = true;
+            }
           }
         }
-
+        else
+        {
+          active = false;
+          this.ionicService.showAlert("", "Aquest qüestionari està tancat")
+        }
         if (this.found) {
           this.questionnaireService.getMyQuestionnaireQuestions(this.credentials).subscribe(
             ((value: Array<Question>) => {
@@ -210,9 +226,9 @@ export class GetQuestionnairePage {
           //this.pointsSend(this.myQuestionnaire.groupid);
         }
         else{
-          this.pointsSend("No tens accés a aquest qüestionari");
-          this.pointsSend(this.utilsService.currentUser.id);
-
+          if(active) {
+            this.ionicService.showAlert("", "No tens accés a aquest qüestionari");
+          }
         }
 
         }),

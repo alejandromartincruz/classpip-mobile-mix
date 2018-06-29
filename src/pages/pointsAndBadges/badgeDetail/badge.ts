@@ -70,6 +70,7 @@ export class BadgePage {
    * Used to get all the data needed in page
    */
   public ionViewDidEnter(): void {
+    this.ionicService.removeLoading();
   }
 
   public deleteBadge(id: number): void {

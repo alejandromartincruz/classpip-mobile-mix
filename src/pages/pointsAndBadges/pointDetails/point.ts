@@ -67,6 +67,7 @@ export class PointPage {
    * Used to get all the data needed in page
    */
   public ionViewDidEnter(): void {
+    this.ionicService.removeLoading();
   }
 
 

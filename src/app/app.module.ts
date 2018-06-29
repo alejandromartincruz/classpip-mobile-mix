@@ -47,17 +47,20 @@ import {CardAssign} from "../pages/collection/collection-teacher/assign-card/ass
 import {CardAssignStudent} from "../pages/collection/collection-teacher/assign-card/assign-card-student/assign-card-student";
 import {BadgePage} from "../pages/pointsAndBadges/badgeDetail/badge";
 import {PointPage} from "../pages/pointsAndBadges/pointDetails/point";
-import {GroupPointPage} from "../pages/group/groupPoint/groupPoint";
 import {GroupBadgeCreatePage} from "../pages/group/groupBadgeCreate/groupBadgeCreate";
 import {GroupBadgePage} from "../pages/group/groupBadge/groupBadge";
 import {GroupPointCreatePage} from "../pages/group/groupPointCreate/groupPointCreate";
 import {PointsAndBadgesPage} from "../pages/pointsAndBadges/pointsAndBadges";
 import {AssignPointsPage} from "../pages/pointsAndBadges/assignPoints/assignPoints";
+import {AssignBadgesPage} from "../pages/pointsAndBadges/assignBadges/assignBadges";
+import {GroupPointPage} from "../pages/group/groupPoint/groupPoint";
+import {listStudentTotalsPage} from "../pages/pointsAndBadges/listStudentTotals/listStudentTotals";
 
 // pipes
 import { OrderByIdPipe } from '../pipes/order-by-id.pipe';
 import { OrderByNamePipe } from '../pipes/order-by-name.pipe';
 import { OrderBySurnamePipe } from '../pipes/order-by-surname.pipe';
+import {OrderByTotalPointsPipe} from "../pipes/order-by-totalPoints.pipe";
 
 // services
 import { IonicService } from '../providers/ionic.service';
@@ -91,7 +94,6 @@ import { Camera } from "@ionic-native/camera";
 import { Transfer, TransferObject } from '@ionic-native/transfer';
 import { File } from "@ionic-native/file";
 import { FilePath } from "@ionic-native/file-path";
-import {AssignBadgesPage} from "../pages/pointsAndBadges/assignBadges/assignBadges";
 
 export function exportTranslateStaticLoader(http: Http) {
   return new TranslateStaticLoader(http, AppConfig.LANG_PATH, AppConfig.LANG_EXT);
@@ -147,10 +149,12 @@ export function exportTranslateStaticLoader(http: Http) {
     PointsAndBadgesPage,
     AssignPointsPage,
     AssignBadgesPage,
+    listStudentTotalsPage,
     // pipes
     OrderByIdPipe,
     OrderByNamePipe,
-    OrderBySurnamePipe
+    OrderBySurnamePipe,
+    OrderByTotalPointsPipe
   ],
   imports: [
     TranslateModule.forRoot({
@@ -209,6 +213,7 @@ export function exportTranslateStaticLoader(http: Http) {
     PointsAndBadgesPage,
     AssignPointsPage,
     AssignBadgesPage,
+    listStudentTotalsPage
   ],
   providers: [
     IonicService,

@@ -25,6 +25,9 @@ import {AssignPointsPage} from "./assignPoints/assignPoints";
 import {AssignBadgesPage} from "./assignBadges/assignBadges";
 import {Group} from "../../model/group";
 import {GroupService} from "../../providers/group.service";
+import {Student} from "../../model/student";
+import {GroupPage} from "../group/group";
+import {listStudentTotalsPage} from "./listStudentTotals/listStudentTotals";
 
 @Component({
   selector: 'page-pointsAndBadges',
@@ -166,8 +169,12 @@ export class PointsAndBadgesPage {
     }
   }
 
-  private goToGroup(group: string): void{
-
+  private goToGroup(group: Group): void{
+    this.groupService.getMyGroupStudents(group.id).subscribe(
+      ((value: Array<Student>) => this.navController.push(listStudentTotalsPage, { students: value, group: group })),
+      error => {
+        this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
+      });
   }
 
   private getPostBadge(): void {
@@ -204,9 +211,6 @@ export class PointsAndBadgesPage {
     this.createBadge = new Badge();
   }
 
-  private assignPoint():void{
-
-  }
 
   private getPoints(refresher?: Refresher): void {
     this.schoolService.getMySchoolPoints().finally(() => {
@@ -235,6 +239,7 @@ export class PointsAndBadgesPage {
    * students of the school of the current user
    */
   public goToPointDetail(point: Point): void {
+    this.ionicService.showLoading(this.translateService.instant('APP.WAIT'));
     this.navController.push(PointPage, { point: point })
   }
 
@@ -251,15 +256,18 @@ export class PointsAndBadgesPage {
    * students of the school of the current user
    */
   public goToBadgeDetail(badge: Badge): void {
+    this.ionicService.showLoading(this.translateService.instant('APP.WAIT'));
     this.navController.push(BadgePage, { badge: badge })
   }
 
 
   public goToAssignPointsPage(): void {
+    this.ionicService.showLoading(this.translateService.instant('APP.WAIT'));
     this.navController.push(AssignPointsPage, {groupsArray: this.groupsArray});
   }
 
   public goToAssignBadgesPage(): void {
+    this.ionicService.showLoading(this.translateService.instant('APP.WAIT'));
     this.navController.push(AssignBadgesPage, {groupsArray: this.groupsArray});
   }
 }

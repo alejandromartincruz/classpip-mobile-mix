@@ -109,8 +109,6 @@ export class AssignBadgesPage{
        for(let obj of value){
          this.studentsSelectedArray.push(new StudentsSelected(obj, false));
        }
-
-
     }),
       error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
     this.showStudents = true;
