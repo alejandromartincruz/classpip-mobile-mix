@@ -288,6 +288,20 @@ export class CollectionService {
       .catch ((error : Response) => this.utilsService.handleAPIError(error));
   }
 
+  public getCard(cardId) {
+    let options: RequestOptions = new RequestOptions({
+      headers: this.utilsService.setAuthorizationHeader(new Headers(), this.utilsService.currentUser.id)
+    });
+
+    let url: string = this.utilsService.getMyUrl() + AppConfig.CARDS_URL + "/" + cardId;
+
+    return this.http.get(url, options)
+      .map(response => {
+        return Card.toObject(response.json())
+      })
+      .catch ((error : Response) => this.utilsService.handleAPIError(error));
+  }
+
   public assignCardToStudent (studentId, cardId) {
     let options: RequestOptions = new RequestOptions({
       headers: this.utilsService.setAuthorizationHeader(new Headers(), this.utilsService.currentUser.id)

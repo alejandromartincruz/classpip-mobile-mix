@@ -34,7 +34,8 @@
     "USERNAME": "Nom d'Usuari",
     "CODE": "Codi del Qüestionari",
     "LOGIN": "ACCEDIR",
-      "MAKE": "Fer qüestionari"
+      "MAKE": "Fer qüestionari",
+      "WONCARDS": "Cartas ganadas:"
   },
     "QUESTIONNAIRES": {
     "TITLE": "Els meus Qüestionaris",

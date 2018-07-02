@@ -91,6 +91,17 @@
     </ion-item>
   </ion-list>
 </ion-card>
+<ion-card *ngIf="cartasGanadas">
+  <ion-note class="cosa">{{ 'GETQUESTIONNAIRE.WONCARDS' | translate}}</ion-note>
+  <ion-list>
+    <ion-item *ngFor="let ca of cartasGanadas">
+      <ion-thumbnail item-left>
+        <img [src]="ca.image">
+      </ion-thumbnail>
+      <h2>{{ ca.name }}</h2>
+    </ion-item>
+  </ion-list>
+</ion-card>
 
 <button ion-button full type="button" on-click="outQuestionnaire()">{{ 'QUESTIONNAIRE.LOGOUT' | translate }}</button>
 

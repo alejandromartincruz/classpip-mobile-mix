@@ -34,7 +34,8 @@
     "USERNAME": "Nombre de Usuario",
     "CODE": "Código del Cuestionario",
     "LOGIN": "ACCEDER",
-      "MAKE": "Hacer cuestionario"
+      "MAKE": "Hacer cuestionario",
+      "WONCARDS": "Cartas ganadas:"
 
   },
     "QUESTIONNAIRES": {

@@ -34,7 +34,8 @@
     "USERNAME": "Username",
     "CODE": "Code of the Questionnaire",
     "LOGIN": "GET IN",
-      "MAKE": "Hacer cuestionario"
+      "MAKE": "Hacer cuestionario",
+      "WONCARDS": "Cartas ganadas:"
   },
     "QUESTIONNAIRES": {
     "TITLE": "My Questionnaires",

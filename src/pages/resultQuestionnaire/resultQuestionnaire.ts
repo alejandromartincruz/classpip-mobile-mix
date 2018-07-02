@@ -23,6 +23,12 @@ import {BadgeRelationService} from "../../providers/badgeRelation.service";
 import {BadgeService} from "../../providers/badge.service";
 import {Badge} from "../../model/badge";
 import {BadgeBadgeRelation} from "../../model/badgeBadgeRelation";
+import {Card} from "../../model/card";
+import {CardAssign} from "../collection/collection-teacher/assign-card/assign-card";
+import {CollectionService} from "../../providers/collection.service";
+import {GradeService} from "../../providers/grade.service";
+import {CollectionTeacherDetail} from "../collection/collection-teacher/collection-teacher-detail/collection-teacher-detail";
+import {CollectionTpage} from "../collection/collection-teacher/collection-teacher";
 
 @Component({
   selector: 'page-resultQuestionnaire',
@@ -57,6 +63,8 @@ export class ResultQuestionnairePage {
   public hayBadges: Boolean;
   public badgeItem: Badge = new Badge();
   public pointItem: Point = new Point();
+  public numCartas: number;
+  public cartasGanadas: Array<Card> = new Array<Card>();
 
 
   constructor(
@@ -70,7 +78,8 @@ export class ResultQuestionnairePage {
     public questionnaireService: QuestionnaireService,
     public translateService: TranslateService,
     public badgeService: BadgeService,
-    public badgeRelationService: BadgeRelationService) {
+    public badgeRelationService: BadgeRelationService,
+    public collectionService: CollectionService) {
 
     this.myQuestionsCorrectAnswers = this.navParams.data.myQuestionsCorrectAnswers;
     //this.myResults = this.navParams.data.myResults;
@@ -184,7 +193,7 @@ export class ResultQuestionnairePage {
         error => {
           this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
         });
-      this.pointRelationService.postPointRelation(this.num.toString(), this.student.id, this.student.schoolId.toString(),this.myQuestionnaire.groupid, this.pointsWon).subscribe(
+      this.pointRelationService.postPointRelation(this.num.toString(), this.student.id, this.student.schoolId.toString(), this.myQuestionnaire.groupid, this.pointsWon).subscribe(
         response => {
         },
         error => {
@@ -206,14 +215,14 @@ export class ResultQuestionnairePage {
         this.badgeWon = "null";
         break;
     }
-    if(typeof this.myQuestionnaire.badges != 'undefined' && this.badgeWon != "null"){
+    if (typeof this.myQuestionnaire.badges != 'undefined' && this.badgeWon != "null") {
       this.hayBadges = true;
       this.badgeService.getBadge(+this.badgeWon).subscribe(
         ((value2: Badge) => {
           this.badgeItem = value2;
         }),
-          error => {
-            this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
+        error => {
+          this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
         });
 
       this.badgeRelationService.postBadgeRelation(this.badgeWon, this.student.id, this.student.schoolId.toString(), this.myQuestionnaire.groupid, 1).subscribe(
@@ -223,21 +232,106 @@ export class ResultQuestionnairePage {
         error => {
           this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
         });
+
     }
 
 
-     /* for(var i = 0; i < this.myGroups.length; i++)
-      {
-          for(var n = 0; n < this.myGroups[i].students.length; n++)
-        {
-          if(this.myGroups[i].students[n].id == this.student.id)
-          {
-            this.group = this.myGroups[i];
-          }
-        }
+    if (typeof this.myQuestionnaire.packCards != 'undefined') {
+      let x = this.mark;
+      switch (true) {
+        case (x > 9):
+          this.numCartas = this.myQuestionnaire.packCards[1];
+          break;
+        case (x > 7):
+          this.numCartas = this.myQuestionnaire.packCards[2];
+          break;
+        case (x > 5):
+          this.numCartas = this.myQuestionnaire.packCards[3];
+          break;
+        default:
+          this.numCartas = 0;
+          break;
+      }
+      this.collectionService.getCollectionDetails(this.myQuestionnaire.packCards[0]).subscribe(
+        ((value: Array<Card>) => {
+          //this.navController.push(CollectionTeacherDetail, { cards: value, collectionCard: collectionCard })
+          this.goToAssignRandomCard(this.numCartas, value);
+        }),
+        error => {
+          this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
+        });
+    }
+  }
 
 
-      }*/
+  public goToAssignRandomCard(num: number, cards: Array<Card>) {
+    let randomCards = Array<Card>();
+    let altoArray = Array<Card>();
+    let medioArray = Array<Card>();
+    let bajoArray = Array<Card>();
+    let raroArray = Array<Card>();
+    cards.forEach(card => {
+      if (card.ratio === "alto"){
+        altoArray.push(card);
+      }
+      if (card.ratio === "medio"){
+        medioArray.push(card);
+      }
+      if (card.ratio === "bajo"){
+        bajoArray.push(card);
+      }
+      if (card.ratio === "raro"){
+        raroArray.push(card);
+      }
+    });
+    for (let i = 0; i<num; i++){
+      let randomNumber = this.randomNumber(1,100);
+      if ((randomNumber > 65)&&(altoArray.length!=0)){
+        let cardPosition = this.randomNumber(0,altoArray.length -1);
+        randomCards.push(altoArray[cardPosition]);
+      }
+      else if ((randomNumber > 35)&&(medioArray.length!=0)){
+        let cardPosition = this.randomNumber(0,medioArray.length -1);
+        randomCards.push(medioArray[cardPosition]);
+
+      }
+      else if ((randomNumber > 10)&&(bajoArray.length!=0)){
+        let cardPosition = this.randomNumber(0,bajoArray.length -1);
+        randomCards.push(bajoArray[cardPosition]);
+      }
+      else if ((randomNumber > 0)&&(raroArray.length!=0)){
+        let cardPosition = this.randomNumber(0,raroArray.length -1);
+        randomCards.push(raroArray[cardPosition]);
+      }
+    }
+    this.goToAssignCard(randomCards);
+  };
+
+  public goToAssignCard(cards){
+
+    for (let i=0 ; i<cards.length ; i++){
+      this.collectionService.assignCardToStudent(this.student.id,cards[i].id).subscribe(response => {
+          //this.utilsService.presentToast('Card assigned to student successfuly');
+          //this.ionicService.showAlert("", response.cardId.toSource());
+          this.collectionService.getCard(cards[i].id).subscribe(response =>{
+            this.cartasGanadas.push(response);
+          },
+            error => {
+              this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
+            });
+        },
+        error => {
+          this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
+        });
+    }
+    /*this.navController.setRoot(MenuPage).then(()=>{
+      this.navController.push(CollectionTpage);
+    });*/
+
+  }
+
+  public randomNumber(min, max) {
+    return Math.round(Math.random() * (max - min) + min);
   }
 
 }
