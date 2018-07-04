@@ -79,13 +79,15 @@ export class CollectionService {
     let options: RequestOptions = new RequestOptions({
       headers: this.utilsService.setAuthorizationHeader(new Headers(), this.utilsService.currentUser.id)
     });
-    let url: string = AppConfig.COLLECTION_URL;
-    //let url: string = this.utilsService.getMyUrl() + AppConfig.COLLECTIONS_URL;
+    //let url: string = AppConfig.COLLECTION_URL;
+    let url: string = this.utilsService.getMyUrl() + AppConfig.COLLECTIONS_URL;
+
     let body = {
       name: collectionCard.name,
       num: collectionCard.num,
       image: collectionCard.image,
-      createdBy: collectionCard.createdBy
+      createdBy: collectionCard.createdBy,
+      badgeId: collectionCard.badgeId
     };
 
     return this.http.post(url,body,options)
@@ -168,7 +170,9 @@ export class CollectionService {
       "name": collectionCard.name,
       "image": collectionCard.image,
       "num": collectionCard.num,
-      "createdBy": collectionCard.createdBy
+      "createdBy": collectionCard.createdBy,
+      "badgeId": collectionCard.badgeId,
+      "tacherid": this.utilsService.currentUser.userId
     };
 
     return this.http.put(url, body, options)

@@ -6,15 +6,16 @@ export class CollectionCard {
   private _name: string;
   private _image: string;
   private _num: string;
+  private _badgeId: string;
   private _createdBy: string;
 
-  constructor(id?: string, name?: string, image?: string, num?: string, createdBy?: string) {
+  constructor(id?: string, name?: string, image?: string, num?: string, createdBy?: string, badgeId?:string) {
     this._id = id;
     this._name = name;
     this._image = image;
     this._num = num;
     this._createdBy = createdBy;
-
+    this._badgeId = badgeId;
   }
 
   /* tslint:disable */
@@ -27,6 +28,7 @@ export class CollectionCard {
       result.image = object.image;
       result.num = object.num;
       result.createdBy = object.createdBy;
+      result.badgeId = object.badgeId;
     }
     return result;
   }
@@ -82,6 +84,14 @@ export class CollectionCard {
 
   set num(value: string) {
     this._num = value;
+  }
+
+  get badgeId(): string {
+    return this._badgeId;
+  }
+
+  set badgeId(value: string) {
+    this._badgeId = value;
   }
 
   get createdBy(): string {

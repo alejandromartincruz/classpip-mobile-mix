@@ -94,6 +94,7 @@ import { Camera } from "@ionic-native/camera";
 import { Transfer, TransferObject } from '@ionic-native/transfer';
 import { File } from "@ionic-native/file";
 import { FilePath } from "@ionic-native/file-path";
+import {AssignCardsMultipleStudent} from "../pages/collection/collection-teacher/assign-cards-multipleStudent/assignCardsMultipleStudent";
 
 export function exportTranslateStaticLoader(http: Http) {
   return new TranslateStaticLoader(http, AppConfig.LANG_PATH, AppConfig.LANG_EXT);
@@ -150,6 +151,7 @@ export function exportTranslateStaticLoader(http: Http) {
     AssignPointsPage,
     AssignBadgesPage,
     listStudentTotalsPage,
+    AssignCardsMultipleStudent,
     // pipes
     OrderByIdPipe,
     OrderByNamePipe,
@@ -213,7 +215,8 @@ export function exportTranslateStaticLoader(http: Http) {
     PointsAndBadgesPage,
     AssignPointsPage,
     AssignBadgesPage,
-    listStudentTotalsPage
+    listStudentTotalsPage,
+    AssignCardsMultipleStudent
   ],
   providers: [
     IonicService,

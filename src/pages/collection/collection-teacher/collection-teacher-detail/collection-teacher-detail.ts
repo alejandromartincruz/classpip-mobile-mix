@@ -20,6 +20,9 @@ import {CardEdit} from "../edit-card/edit-card";
 import {CardAssign} from "../assign-card/assign-card";
 import {GradeService} from "../../../../providers/grade.service";
 import {MatterService} from "../../../../providers/matter.service";
+import {AssignCardsMultipleStudent} from "../assign-cards-multipleStudent/assignCardsMultipleStudent";
+import {CollectionAssign} from "../assign-collection/assign-collection";
+import {GroupService} from "../../../../providers/group.service";
 
 declare let google;
 
@@ -35,6 +38,9 @@ export class CollectionTeacherDetail {
   public collectionCard: CollectionCard;
   public profile: Profile;
 
+  public assignedGroups: Array<Group> = new Array<Group>();
+  public allGroups: Array<Group>;
+
   constructor(
     public navParams: NavParams,
     public translateService: TranslateService,
@@ -47,7 +53,8 @@ export class CollectionTeacherDetail {
     public navController: NavController,
     public menuController: MenuController,
     public actionSheetCtrl: ActionSheetController,
-    public alertCtrl: AlertController) {
+    public alertCtrl: AlertController,
+    public groupService: GroupService) {
 
     this.cards = this.navParams.data.cards;
     this.collectionCard = this.navParams.data.collectionCard;
@@ -278,6 +285,19 @@ export class CollectionTeacherDetail {
           text: 'Asignar 5 carta aleatorias',
           handler: () => {
             this.goToAssignRandomCard(5);
+          }
+        },
+        {
+          text: 'Asignar X cartas a varios estudiantes',
+          handler: () => {
+            this.collectionService.getAssignedGroups(this.collectionCard.id).finally(()=>{
+            }).subscribe(
+              ((value: Array<Group>) => {
+                this.navController.push(AssignCardsMultipleStudent, { cards: this.cards, collectionCard: this.collectionCard, groups: value });
+              }),
+              error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error)
+            );
+
           }
         },
         {
