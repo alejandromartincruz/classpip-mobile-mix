@@ -7,6 +7,10 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
+  <ion-item *ngIf="completeda == true">
+    <ion-icon item-left name="ribbon"></ion-icon>
+    <h2>{{ 'COLLECTION.COMPLETED' | translate }}</h2>
+  </ion-item>
   <ion-grid>
     <ion-row *ngFor="let row of grid">
       <ion-col width-50 *ngFor="let card of row">

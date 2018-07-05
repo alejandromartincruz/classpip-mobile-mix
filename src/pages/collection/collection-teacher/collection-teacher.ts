@@ -116,36 +116,50 @@ export class CollectionTpage {
    * @param collectionId
    */
   public goToAssignCollection(collectionId): void {
-    //first of all, get all previous assigned groups to that collection
-    this.collectionService.getAssignedGroups(collectionId).finally(()=>{
-      //compare that assigned groups with all groups to show only the NON assigned groups
-      this.ionicService.showLoading(this.translateService.instant('APP.WAIT'));
-      let groupArray = Array<Group>();
-      this.groupService.getMyGroups().subscribe(
-        ((value: Array<Group>) =>  {
-          this.allGroups = value;
-          for (let i=0;i<this.allGroups.length;i++) {
-            let exists: boolean = false;
-            for (let j = 0; j < this.assignedGroups.length; j++) {
-              if (this.allGroups[i].id === this.assignedGroups[j].id) {
-                exists = true;
-                break;
-              }
+    this.collectionService.getCollectionsCardCount(collectionId).subscribe(
+      ((countCard: string) => {
+        this.collectionService.getCollectionById(collectionId).subscribe(
+          ((collectionCart: CollectionCard) => {
+            if(collectionCart.num == countCard){
+              //first of all, get all previous assigned groups to that collection
+              this.collectionService.getAssignedGroups(collectionId).finally(() => {
+                //compare that assigned groups with all groups to show only the NON assigned groups
+                this.ionicService.showLoading(this.translateService.instant('APP.WAIT'));
+                let groupArray = Array<Group>();
+                this.groupService.getMyGroups().subscribe(
+                  ((value: Array<Group>) => {
+                    this.allGroups = value;
+                    for (let i = 0; i < this.allGroups.length; i++) {
+                      let exists: boolean = false;
+                      for (let j = 0; j < this.assignedGroups.length; j++) {
+                        if (this.allGroups[i].id === this.assignedGroups[j].id) {
+                          exists = true;
+                          break;
+                        }
+                      }
+                      if (!exists) {
+                        groupArray.push(this.allGroups[i]);
+                      }
+                    }
+                    this.navController.push(CollectionAssign, {groups: groupArray, id: collectionId})
+                  }),
+                  error => {
+                    this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
+                  });
+                this.ionicService.removeLoading();
+              }).subscribe(
+                ((value: Array<Group>) => this.assignedGroups = value),
+                error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error)
+              );
+            } else {
+              this.ionicService.showAlert("", "Esta coleccion no esta acabada");
             }
-            if (!exists) {
-              groupArray.push(this.allGroups[i]);
-            }
-          }
-          this.navController.push(CollectionAssign, { groups: groupArray, id: collectionId })
-        }),
-        error => {
-          this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
-        });
-      this.ionicService.removeLoading();
-    }).subscribe(
-      ((value: Array<Group>) => this.assignedGroups = value),
-      error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error)
+
+          }), error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error)
+        );
+      }), error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error)
     );
+
   }
 
   public goToAssignedCollections(collectionId): void {

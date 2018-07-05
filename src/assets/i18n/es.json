@@ -119,7 +119,8 @@
     "INTERNAL_ERROR": "Ha ocurrido un error interno en el servidor. Por favor contacta con tu administrador. "
   },
   "COLLECTION": {
-    "TITLE": "Mis Colecciones"
+    "TITLE": "Mis Colecciones",
+    "COMPLETED": "Colección completada"
   },
   "CREATE-COLLECTION": {
     "TITLE": "Crear colección",
@@ -204,11 +205,12 @@
     "ESTIRAR": "Estirar la pantalla hacia abajo para cargar los estudiantes",
     "PENDING": "Pendientes",
     "COMPLETED": "Completados",
-    "DATE": "Fecha"
+    "DATE": "Fecha",
+    "CREATEDBY": "Creado por"
   },
     "IMAGE": {
-      "LOADFROM": "Load from Library",
-      "CAMERA": "Use camera",
-      "IMGSOURCE": "Origen de la imagen"
+      "LOADFROM": "Cargar de librería",
+      "CAMERA": "Càmara",
+      "IMGSOURCE": "Orígen de la imagen"
     }
 }

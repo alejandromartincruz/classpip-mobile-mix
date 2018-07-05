@@ -14,6 +14,8 @@ import {GroupService} from "../../../providers/group.service";
 import {Student} from "../../../model/student";
 import {StudentsSelected} from "../../../model/studentsSelected";
 import {Point} from "../../../model/point";
+import {PointsAndBadgesPage} from "../pointsAndBadges";
+import {MenuPage} from "../../menu/menu";
 
 @Component({
   selector: 'page-assignPoints',
@@ -152,12 +154,15 @@ export class AssignPointsPage{
           },
           error => {
             this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
+            corr = false;
           });
       }
     }
     if(corr){
-      this.newRelation();
       this.ionicService.showAlert("",this.translateService.instant('POINTS.CORASSIGN'));
+      this.navController.setRoot(MenuPage).then(()=>{
+        this.navController.push(PointsAndBadgesPage);
+      });
     }
 
   }

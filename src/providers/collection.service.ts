@@ -51,6 +51,22 @@ export class CollectionService {
       .map((response: Response, index: number) => CollectionCard.toObjectArray(response.json()));
 
   }
+  /**
+   * This method returns the list of CollectionCards in the school
+   * @return {CollectionCard} returns an array of collectionCards
+   */
+  public getCollectionById(id: string): Observable<CollectionCard> {
+
+    let options: RequestOptions = new RequestOptions({
+      headers: this.utilsService.setAuthorizationHeader(new Headers(), this.utilsService.currentUser.id)
+    });
+
+    let url: string = AppConfig.COLLECTION_URL + "/" + id;
+
+    return this.http.get(url, options)
+      .map((response: Response, index: number) => CollectionCard.toObject(response.json()));
+
+  }
 
   /**
    * This method returns the list of cards of a certain collectionCard
@@ -164,18 +180,18 @@ export class CollectionService {
     let options: RequestOptions = new RequestOptions({
       headers: this.utilsService.setAuthorizationHeader(new Headers(), this.utilsService.currentUser.id)
     });
-
-    let url: string = this.utilsService.getMyUrl() + AppConfig.COLLECTIONS_URL  + '/' + collectionCard.id;
+    let url: string = AppConfig.COLLECTION_URL  + '/' + collectionCard.id;
+    //let url: string = this.utilsService.getMyUrl() + AppConfig.COLLECTIONS_URL  + '/' + collectionCard.id;
     let body = {
       "name": collectionCard.name,
       "image": collectionCard.image,
       "num": collectionCard.num,
       "createdBy": collectionCard.createdBy,
       "badgeId": collectionCard.badgeId,
-      "tacherid": this.utilsService.currentUser.userId
+      "id": collectionCard.id
     };
 
-    return this.http.put(url, body, options)
+    return this.http.patch(url, body, options)
       .map(response => {
         return response.json()
       })
@@ -326,7 +342,7 @@ export class CollectionService {
       headers: this.utilsService.setAuthorizationHeader(new Headers(), this.utilsService.currentUser.id)
     });
 
-    let url: string = AppConfig.COLLECTION_URL + '/' + id + AppConfig.CARD_URL + '/count';
+    let url: string = AppConfig.COLLECTION_URL + '/' + id + AppConfig.CARDS_URL + '/count';
 
     return this.http.get(url, options)
       .map((response: Response, index: number) => CollectionCard.toObjectNumber(response.json()));

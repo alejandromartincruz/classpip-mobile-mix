@@ -25,6 +25,8 @@ export class CollectionStudentDetail {
   public grid: Array<Array<Card>>; //array of arrays
   private elements: number = 2;
   public id: string;
+  public completeda: Boolean;
+
   constructor(
     public navParams: NavParams,
     public translateService: TranslateService,
@@ -34,6 +36,7 @@ export class CollectionStudentDetail {
 
     this.cards = this.navParams.data.cards;
     this.collectionCard = this.navParams.data.collectionCard;
+    this.completeda = this.navParams.data.completeda;
     this.grid = Array(Math.ceil(this.cards.length / this.elements));
   }
 

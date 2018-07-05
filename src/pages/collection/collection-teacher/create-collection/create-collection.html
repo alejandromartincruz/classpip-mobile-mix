@@ -21,7 +21,7 @@
       </ion-item>
       <ion-item>
         <ion-label stacked>{{ 'IMAGE.IMGSOURCE' | translate }}</ion-label>
-        <ion-select full [(ngModel)]="imageType" name="image" placeholder="{{ 'IMAGE.IMGSOURCE' | translate }}" required (ionChange)="imageTypeSelected(imageType)">
+        <ion-select full [(ngModel)]="imageType" [ngModelOptions]="{standalone: true}" name="image" placeholder="{{ 'IMAGE.IMGSOURCE' | translate }}" required (ionChange)="imageTypeSelected(imageType)">
           <ion-option value="camara">{{ 'IMAGE.CAMERA' | translate }}</ion-option>
           <ion-option value="libreria">{{ 'IMAGE.LOADFROM' | translate }}</ion-option>
           <ion-option value="url">URL</ion-option>
@@ -30,6 +30,14 @@
       <ion-item>
         <ion-label stacked>{{ 'CREATE-COLLECTION.IMAGE' | translate }}</ion-label>
         <ion-input type="text" name="image" [(ngModel)]="collectionCard.image" placeholder="{{ 'CREATE-COLLECTION.IMAGE' | translate }}" required ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>{{ 'BADGES.SINGULAR' | translate }}</ion-label>
+        <ion-select [(ngModel)]="collectionCard.badgeId" multiple="false" [ngModelOptions]="{standalone: true}">
+          <ion-option *ngFor="let point of badgeArray" value="{{point.id}}" selected="false" >
+            {{point.name}}
+          </ion-option>
+        </ion-select>
       </ion-item>
     </ion-list>
     <button ion-button full type="submit" [disabled]="!createCollectionCardForm.form.valid">{{ 'CREATE-COLLECTION.CREATE' | translate }}</button>

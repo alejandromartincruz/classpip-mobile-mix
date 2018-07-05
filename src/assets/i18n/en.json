@@ -73,7 +73,7 @@
     "LANGUAGE": "Choose the language"
   },
   "GROUP": {
-    "TITLE": "Grupo"
+    "TITLE": "Group"
   },
   "SCHOOL": {
     "TITLE": "My school"
@@ -118,93 +118,96 @@
     "INTERNAL_ERROR": "An internal error has occurred on the server. Please contact your administrator. "
   },
   "COLLECTION": {
-    "TITLE": "Mis Colecciones"
+    "TITLE": "My Collections",
+    "COMPLETED": "Collection completed"
   },
   "CREATE-COLLECTION": {
-    "TITLE": "Crear colección",
-    "NAME": "Nombre de la nueva colección",
-    "NUM": "Número de cartas de la nueva colección",
-    "IMAGE": "Imagen de portada para la colección",
-    "CREATE": "CREAR"
+    "TITLE": "Create collection",
+    "NAME": "Name",
+    "NUM": "Number of cards",
+    "IMAGE": "Image",
+    "CREATE": "CREATE"
   },
   "COLLECTION-ASSIGN": {
-    "TITLE": "Asignar a grupo"
+    "TITLE": "Assign to a group"
   },
   "EDIT-COLLECTION": {
-    "TITLE": "Editar colección",
-    "NAME": "Nombre de la colección",
-    "NUM": "Número de cartas de la colección",
-    "IMAGE": "Imagen de portada de la colección",
-    "EDIT": "EDITAR"
+    "TITLE": "Edit collection",
+    "NAME": "Name",
+    "NUM": "Number of cards",
+    "IMAGE": "Image",
+    "EDIT": "EDIT"
   },
   "COLLECTIONS-ASSIGNED": {
-    "TITLE": "Grupos asignados"
+    "TITLE": "Assigned groups"
   },
   "CREATE-CARD": {
-    "TITLE": "Crear Carta",
-    "NAME": "Nombre de la nueva carta",
+    "TITLE": "Create Card",
+    "NAME": "Name",
     "RATIO": "Ratio de aparición de la carta",
     "RANK": "Calidad de la carta (rareza)",
-    "IMAGE": "Imagen de la carta",
-    "CREATE": "CREAR"
+    "IMAGE": "Image",
+    "CREATE": "CRETE"
   },
   "EDIT-CARD": {
-    "TITLE": "Editar carta",
-    "NAME": "Nombre de la carta",
+    "TITLE": "Edit card",
+    "NAME": "Name",
     "RATIO": "Ratio de aparición de la carta",
     "RANK": "Calidad de la carta (rareza)",
-    "IMAGE": "Imagen de la carta",
-    "EDIT": "EDITAR"
+    "IMAGE": "Image",
+    "EDIT": "EDIT"
   },
   "CARD-ASSIGN": {
-    "TITLE": "Selecciona un grupo"
+    "TITLE": "Select a group"
   },
   "CARD-ASSIGN-STUDENT": {
-    "TITLE": "Asignar carta a estudiante"
+    "TITLE": "Assign card to a student"
   },
   "POINTSBADGES": {
-    "TITLE": "Puntos e insignias",
-    "TOTAL": "Totales"
+    "TITLE": "Points and badges",
+    "TOTAL": "Totals"
   },
   "POINTS": {
-    "TITLE": "Puntos",
-    "CREATE": "Crear punto",
-    "NAMEOF": "Nombre del punto",
-    "IMAGEOF": "Imagen del punto",
-    "VALUEOF": "Valor del punto",
-    "NUM": "Número de puntos",
-    "TOTAL": "Puntos totales",
-    "ASSIGN": "Asignar puntos",
-    "OBTAINED": "Puntos obtenidos",
-    "DESCOP": "Sumatorio de los puntos obtenidor por el valor del punto",
-    "SINGULAR": "Punto",
-    "CORASSIGN": "Puntos asignados correctamente"
+    "TITLE": "Points",
+    "CREATE": "Create point",
+    "NAMEOF": "Name",
+    "IMAGEOF": "Image",
+    "VALUEOF": "Value",
+    "NUM": "Number of points",
+    "TOTAL": "Total points",
+    "ASSIGN": "Assign points",
+    "OBTAINED": "Points earned",
+    "DESCOP": "Sum of points earned per the point's value",
+    "SINGULAR": "Point",
+    "CORASSIGN": "Points assigned"
   },
   "BADGES": {
-    "TITLE": "Insignias",
-    "CREATE": "Crear insignia",
-    "NAMEOF": "Nombre de la insignia",
-    "IMAGEOF": "Imagen de la insignia",
-    "VALUEOF": "Valor de la insignia",
-    "NUM": "Número de insignias",
-    "TOTAL": "Insignias totales",
-    "ASSIGN": "Asignar insignias",
-    "SINGULAR": "Insignia",
-    "CORASSIGN": "Insignias asignadas correctamente"
+    "TITLE": "Badges",
+    "CREATE": "Create badge",
+    "NAMEOF": "Name",
+    "IMAGEOF": "Image",
+    "VALUEOF": "Value",
+    "NUM": "Number of badges",
+    "TOTAL": "Total badges",
+    "ASSIGN": "Assign badges",
+    "SINGULAR": "Badge",
+    "CORASSIGN": "Badge assigned"
   },
   "COMMON": {
-    "CREATE": "Crear",
-    "EDIT": "Editar",
-    "DELETE": "Eliminar",
-    "NAME": "Nombre",
-    "VALUE": "Valor",
+    "CREATE": "Create",
+    "EDIT": "Edit",
+    "DELETE": "Delete",
+    "NAME": "Name",
+    "VALUE": "Value",
     "TOTAL": "Total",
-    "ASSIGN": "Asignar",
-    "ESTIRAR": "Estirar la pantalla hacia abajo para cargar los estudiantes",
-    "PENDING": "Pendientes",
-    "COMPLETED": "Completados",
-    "DATE": "Fecha"
+    "ASSIGN": "Assign",
+    "ESTIRAR": "Refresh the window to see the students of the group",
+    "PENDING": "Pending",
+    "COMPLETED": "Completed",
+    "DATE": "Date",
+    "CREATEDBY": "Created by"
   },
+
   "IMAGE": {
     "LOADFROM": "Load from Library",
     "CAMERA": "Use camera",

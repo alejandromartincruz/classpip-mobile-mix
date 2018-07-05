@@ -16,6 +16,8 @@ import {Group} from "../../../../model/group";
 import {StudentsSelected} from "../../../../model/studentsSelected";
 import {Student} from "../../../../model/student";
 import {GroupService} from "../../../../providers/group.service";
+import {CollectionTpage} from "../collection-teacher";
+import {MenuPage} from "../../../menu/menu";
 
 @Component({
   selector: 'page-assignCardsMultipleStudent',
@@ -77,18 +79,10 @@ export class AssignCardsMultipleStudent{
 
   public postCardsToStudents(){
     this.goToAssignRandomCard(this.numCartas,this.cards);
-    /*for(let st of this.studentsSelectedArray) {
-      if(st.selected) {
-        /*this.collectionService.postBadgeRelation(this.badgeSelected, st.student.id, st.student.schoolId.toString(), this.groupSelected, this.valueRel).subscribe(
-          response => {
-
-          },
-          error => {
-            this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
-            corr = false;
-          });
-      }
-    }*/
+    this.utilsService.presentToast('Cards assigned successfully');
+    this.navController.setRoot(MenuPage).then(()=>{
+      this.navController.push(CollectionTpage);
+    });
   }
   public getSelectedStudents(stuArray: Array<StudentsSelected>){
     this.studentsSelectedArray = stuArray;

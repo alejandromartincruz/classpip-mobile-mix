@@ -20,6 +20,8 @@ import {Profile} from "../../../../model/profile";
 import {UploadImageService} from "../../../../providers/uploadImage.service";
 import {CollectionTpage} from "../collection-teacher";
 import {AppConfig} from "../../../../app/app.config";
+import {Badge} from "../../../../model/badge";
+import {SchoolService} from "../../../../providers/school.service";
 
 declare let google;
 declare let cordova;
@@ -37,6 +39,9 @@ export class CollectionCreate {
   public profile: Profile;
   public esUrl: Boolean = true;
   public imageType: string;
+  badgeArraySelected: Array<Badge> = new Array<Badge>();
+  public badgeArray: Array<Badge> = new Array<Badge>();
+  public badgeSelected: string;
 
   constructor(
     public navController: NavController,
@@ -48,9 +53,14 @@ export class CollectionCreate {
     public userService: UserService,
     private camera: Camera,
     public actionSheetCtrl: ActionSheetController,
-    public platform: Platform) {
+    public platform: Platform,
+    public schoolService: SchoolService) {
 
+    this.schoolService.getMySchoolBadges().subscribe(
+      ((value: Array<Badge>) => this.badgeArray = value),
+      error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
   }
+
   public createCollection(): void {
     if(!this.esUrl) {
       this.uploadImageService.uploadImage(this.collectionCard.image);
@@ -66,6 +76,11 @@ export class CollectionCreate {
       this.collectionCard.image=this.uploadImageService.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
       this.esUrl = false;
     }
+  }
+
+  public getSelectedBadge(badge: string): void {
+    this.badgeSelected = badge;
+    this.ionicService.showAlert("", this.badgeSelected);
   }
 
   /**
@@ -120,6 +135,7 @@ export class CollectionCreate {
     }else{
       this.collectionToPost.image=dbpath;
     }
+    this.collectionToPost.badgeId = this.collectionCard.badgeId;
     this.userService.getMyProfile().finally(() => {
       this.collectionToPost.createdBy = this.profile.username;
       this.collectionService.postCollection(this.collectionToPost).subscribe(

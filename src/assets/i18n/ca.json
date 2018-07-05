@@ -118,7 +118,8 @@
     "INTERNAL_ERROR": "Hi ha hagut un error intern al servidor. Si us plau contacta amb el teu administrador."
   },
   "COLLECTION": {
-    "TITLE": "Les meves Coleccions"
+    "TITLE": "Les meves Coleccions",
+    "COMPLETED": "Colecció completada"
   },
   "CREATE-COLLECTION": {
     "TITLE": "Crear colecció",
@@ -203,11 +204,12 @@
     "ESTIRAR": "Estirar la pantalla cap a baix per carregar els estudiants",
     "PENDING": "Pendents",
     "COMPLETED": "Completats",
-    "DATE": "Data"
+    "DATE": "Data",
+    "CREATEDBY": "Creat per"
   },
   "IMAGE": {
-    "LOADFROM": "Load from Library",
-    "CAMERA": "Use camera",
+    "LOADFROM": "Carregar de la llibreria",
+    "CAMERA": "Càmera",
     "IMGSOURCE": "Origen de la imatge"
   }
 }

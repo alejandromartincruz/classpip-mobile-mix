@@ -10,6 +10,11 @@ import {IonicService} from "../../../providers/ionic.service";
 import {CollectionStudentDetail} from "./collection-student-detail/collection-student-detail";
 import {Card} from "../../../model/card";
 import {UtilsService} from "../../../providers/utils.service";
+import {BadgeRelationService} from "../../../providers/badgeRelation.service";
+import {GroupService} from "../../../providers/group.service";
+import {Group} from "../../../model/group";
+import {BadgeRelation} from "../../../model/badgeRelation";
+import {error} from "util";
 
 
 declare let google;
@@ -23,6 +28,7 @@ export class CollectionSpage {
 
   @ViewChild('map') mapElement: ElementRef;
   public collectionCards: Array<CollectionCard>;
+  public completada: Boolean = true;
 
   constructor(
     public navParams: NavParams,
@@ -30,7 +36,9 @@ export class CollectionSpage {
     public collectionService: CollectionService,
     public ionicService: IonicService,
     public navController: NavController,
-    public utilsServices: UtilsService) {
+    public utilsServices: UtilsService,
+    public badgeRelationService: BadgeRelationService,
+    public groupServices: GroupService) {
 
   }
 
@@ -64,6 +72,7 @@ export class CollectionSpage {
    * cards of the current collection
    */
   public goToCollectionDetail(collectionCard): void {
+    this.completada = true;
     this.ionicService.showLoading(this.translateService.instant('APP.WAIT'));
     this.collectionService.getCollectionDetails(collectionCard.id).subscribe(
       ((value: Array<Card>)=> {
@@ -76,22 +85,27 @@ export class CollectionSpage {
         unknownCard.image="https://image.flaticon.com/icons/png/512/37/37232.png";
         this.collectionService.getAssignedCards().subscribe((assignedCards: Array<Card>)=> {
           assignedCards.forEach((assignedCard) => {
-              assignedCardsIds.push(assignedCard.id);
+            assignedCardsIds.push(assignedCard.id);
           });
           allCards.forEach((allCard) => {
-            if (assignedCardsIds.indexOf(allCard.id) == -1){
+            if (assignedCardsIds.indexOf(allCard.id) == -1) {
               finalCards.push(unknownCard);
+              this.completada = false;
             }
             else {
               finalCards.push(allCard);
             }
           });
-        });
-        this.navController.push(CollectionStudentDetail, { cards: finalCards, collectionCard: collectionCard })
-      }),
+          this.navController.push(CollectionStudentDetail, {cards: finalCards, collectionCard: collectionCard, completeda: this.completada});
+
+      },
       error => {
-        this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
+        //this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
       });
+    }),
+    error =>
+      this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
+
     this.ionicService.removeLoading();
   }
 }

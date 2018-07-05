@@ -18,6 +18,9 @@ import { UserService } from "../../../../providers/user.service";
 import { UploadImageService } from "../../../../providers/uploadImage.service";
 import {CollectionTpage} from "../collection-teacher";
 import {AppConfig} from "../../../../app/app.config";
+import {Badge} from "../../../../model/badge";
+import {SchoolService} from "../../../../providers/school.service";
+import {BadgeService} from "../../../../providers/badge.service";
 
 declare let google;
 declare let cordova;
@@ -37,6 +40,12 @@ export class CollectionEdit {
   oldImage: string = null;
 
 
+  public esUrl: Boolean = true;
+  public imageType: string;
+  //badgeArraySelected: Badge; // Array<Badge> = new Array<Badge>();
+  public badgeArray: Array<Badge> = new Array<Badge>();
+  public badgeSelected: Badge = new Badge();
+
   constructor(
     public navParams: NavParams,
     public navController: NavController,
@@ -49,9 +58,15 @@ export class CollectionEdit {
     private camera: Camera,
     public actionSheetCtrl: ActionSheetController,
     public platform: Platform,
+    public schoolService: SchoolService,
+    public badgeService: BadgeService
     ) {
     this.collectionCard = this.navParams.data.collectionCard;
     this.oldImage = this.collectionCard.image;
+    this.schoolService.getMySchoolBadges().subscribe(
+      ((value: Array<Badge>) => this.badgeArray = value),
+      error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
+
   }
 
   public editCollection(): void {
@@ -65,9 +80,26 @@ export class CollectionEdit {
       }
     }
     else{
-      this.uploadImageService.uploadImage(this.collectionCard.image);
+      if(!this.esUrl) {
+        this.uploadImageService.uploadImage(this.collectionCard.image);
+        //this.putNewCollection(AppConfig.SERVER_URL+/public/+this.collectionCard.image);
+      }
       this.putNewCollection(AppConfig.SERVER_URL+/public/+this.collectionCard.image);
     }
+  }
+
+  public imageTypeSelected(type: string): void {
+    if (type == 'camara'){
+      this.collectionCard.image=this.uploadImageService.takePicture(this.camera.PictureSourceType.CAMERA);
+      this.esUrl = false;
+    } else if (type == 'libreria'){
+      this.collectionCard.image=this.uploadImageService.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
+      this.esUrl = false;
+    }
+  }
+
+  public getSelectedBadge(badge: Badge): void {
+    this.badgeSelected = badge;
   }
 
   /**
@@ -111,6 +143,7 @@ export class CollectionEdit {
     this.collectionToPost.num=this.collectionCard.num;
     this.collectionToPost.image=dbpath;
     this.collectionToPost.id=this.collectionCard.id;
+    this.collectionToPost.badgeId = this.collectionCard.badgeId;
     this.userService.getMyProfile().finally(() => {
       this.collectionToPost.createdBy = this.profile.username;
       this.collectionService.editCollection(this.collectionToPost).subscribe(

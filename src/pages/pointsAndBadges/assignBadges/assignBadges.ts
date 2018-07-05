@@ -12,6 +12,9 @@ import {GroupService} from "../../../providers/group.service";
 import {Student} from "../../../model/student";
 import {StudentsSelected} from "../../../model/studentsSelected";
 import {Badge} from "../../../model/badge";
+import {CollectionTpage} from "../../collection/collection-teacher/collection-teacher";
+import {MenuPage} from "../../menu/menu";
+import {PointsAndBadgesPage} from "../pointsAndBadges";
 
 @Component({
   selector: 'page-assignBadges',
@@ -141,7 +144,6 @@ export class AssignBadgesPage{
       if(st.selected) {
         this.badgeRelationService.postBadgeRelation(this.badgeSelected, st.student.id, st.student.schoolId.toString(), this.groupSelected, this.valueRel).subscribe(
           response => {
-
           },
           error => {
             this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
@@ -150,8 +152,10 @@ export class AssignBadgesPage{
       }
     }
     if(corr){
-      this.newRelation();
       this.ionicService.showAlert("",this.translateService.instant('BADGES.CORASSIGN'));
+      this.navController.setRoot(MenuPage).then(()=>{
+        this.navController.push(PointsAndBadgesPage);
+      });
     }
   }
 
