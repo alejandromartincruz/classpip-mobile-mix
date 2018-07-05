@@ -1,0 +1,110 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{ 'QUESTIONNAIRES.RESULTS' | translate }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content text-wrap class="cards-bg" text-wrap>
+  <h1> Premis possibles: </h1>
+  <ion-card *ngIf="hayPuntos()">
+    <ion-card-header style="font-weight: bold">
+      {{ 'POINTS.TITLE' | translate}}
+    </ion-card-header>
+    <ion-item>
+      <ion-thumbnail item-left>
+        <img [src]="point.image">
+      </ion-thumbnail>
+      <h2>{{ point.name }}</h2>
+      <ion-note>{{ 'COMMON.VALUE' | translate}}: {{ point.value }}</ion-note>
+    </ion-item>
+    <ion-list>
+      <ion-item>
+        <h3 class="cosa2"> De 9 a 10 </h3>
+        <ion-note class="cosa" item-right>{{ myQuestionnaire.points[0] }}:</ion-note>
+      </ion-item>
+      <ion-item>
+        <h3 class="cosa2"> De 8 a 8.99 </h3>
+        <ion-note class="cosa" item-right>{{ myQuestionnaire.points[1] }}:</ion-note>
+      </ion-item>
+      <ion-item>
+        <h3 class="cosa2"> De 7 a 7.99 </h3>
+        <ion-note class="cosa" item-right>{{ myQuestionnaire.points[2] }}:</ion-note>
+      </ion-item>
+      <ion-item>
+        <h3 class="cosa2"> De 6 a 6.99 </h3>
+        <ion-note class="cosa" item-right>{{ myQuestionnaire.points[3] }}:</ion-note>
+      </ion-item>
+      <ion-item>
+        <h3 class="cosa2"> De 5 a 5.99 </h3>
+        <ion-note class="cosa" item-right>{{ myQuestionnaire.points[4] }}:</ion-note>
+      </ion-item>
+      <ion-item>
+        <h3 class="cosa2"> De 0 a 4.99 </h3>
+        <ion-note class="cosa" item-right>{{ myQuestionnaire.points[5] }}:</ion-note>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+  <ion-card *ngIf="hayBadges()">
+    <ion-card-header style="font-weight: bold" text-wrap>
+      {{ 'BADGES.TITLE' | translate}}
+    </ion-card-header>
+
+    <ion-list>
+      <ion-item>
+        <h3> De 9 a 10 </h3>
+        <ion-thumbnail item-left>
+          <img [src]="badge0.image">
+        </ion-thumbnail>
+        <h2>{{ badge0.name }}</h2>
+        <ion-note>{{ 'COMMON.VALUE' | translate}}: {{ badge0.value }}</ion-note>
+      </ion-item>
+      <ion-item>
+        <h3> De 7 a 8.99 </h3>
+        <ion-thumbnail item-left>
+          <img [src]="badge1.image">
+        </ion-thumbnail>
+        <h2>{{ badge1.name }}</h2>
+        <ion-note>{{ 'COMMON.VALUE' | translate}}: {{ badge1.value }}</ion-note>
+      </ion-item>
+      <ion-item>
+        <h3> De 5 a 6.99 </h3>
+        <ion-thumbnail item-left>
+          <img [src]="badge2.image">
+        </ion-thumbnail>
+        <h2>{{ badge2.name }}</h2>
+        <ion-note>{{ 'COMMON.VALUE' | translate}}: {{ badge2.value }}</ion-note>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+  <ion-card>
+    <ion-card-header style="font-weight: bold" text-wrap>
+      {{ 'COLLECTIONS.TITLE' | translate}}
+    </ion-card-header>
+    <ion-item>
+      <ion-thumbnail item-left>
+        <img [src]="collection.image">
+      </ion-thumbnail>
+      <h2>{{ collection.name }}</h2>
+    </ion-item>
+
+    <ion-list>
+      <ion-item>
+        <h3 class="cosa2"> De 9 a 10 </h3>
+        <ion-note class="cosa" item-right>{{ myQuestionnaire.packCards[1] }}: </ion-note>
+      </ion-item>
+      <ion-item>
+        <h3 class="cosa2"> De 7 a 8.99 </h3>
+        <ion-note class="cosa" item-right>{{ myQuestionnaire.packCards[2] }}: </ion-note>
+      </ion-item>
+      <ion-item>
+        <h3 class="cosa2"> De 5 a 6.99 </h3>
+        <ion-note class="cosa" item-right>{{ myQuestionnaire.packCards[3] }}: </ion-note>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+  <button ion-button full type="button" on-click="outQuestionnaire()">{{ 'QUESTIONNAIRE.LOGOUT' | translate }}</button>
+</ion-content>

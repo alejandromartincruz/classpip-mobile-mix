@@ -15,6 +15,7 @@ import { StudentPage } from '../students/student/student';
 import { Questionnaire1Page } from '../../pages/questionnaire1/questionnaire1';
 import { ResultQuestionnairePage } from '../../pages/resultQuestionnaire/resultQuestionnaire';
 import { MenuPage } from '../../pages/menu/menu';
+import {ResultQuestionnaireOpenPage} from "./resultQuestionnaireOpen/resultQuestionnaireOpen";
 
 
 @Component({
@@ -54,6 +55,8 @@ export class CompletedQuestionnaire1Page {
 
   }
 
+  // Resultado de questinario con respuesta abierta
+
   /**
    * Fires when the page appears on the screen.
    * Used to get all the data needed in page
@@ -66,11 +69,13 @@ export class CompletedQuestionnaire1Page {
    * Method for displaying the MenuPage page
    */
   public outQuestionnaire(event) {
-
     this.finalNote = this.numAnswerCorrect - this.numAnswerNoCorrect;
 
       this.questionnaireService.saveResults(this.student, this.myQuestionnaire, this.myQuestionnaire.name, this.myQuestionnaire.id, this.numTotalQuestions, this.numAnswerCorrect, this.numAnswerNoCorrect, this.finalNote, this.dataAnswers).subscribe(
-      ((value: ResultQuestionnaire) => this.result = value),
+      ((value: ResultQuestionnaire) => {
+        this.result = value;
+        this.navController.setRoot(ResultQuestionnaireOpenPage, { student: this.student, myQuestionnaire: this.myQuestionnaire })
+      }),
       error =>
         this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
 

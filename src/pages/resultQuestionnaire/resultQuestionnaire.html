@@ -91,7 +91,7 @@
     </ion-item>
   </ion-list>
 </ion-card>
-<ion-card *ngIf="cartasGanadas">
+<ion-card *ngIf="cartasGanadas.length != 0">
   <ion-note class="cosa">{{ 'GETQUESTIONNAIRE.WONCARDS' | translate}}</ion-note>
   <ion-list>
     <ion-item *ngFor="let ca of cartasGanadas">
@@ -103,6 +103,6 @@
   </ion-list>
 </ion-card>
 
-<button ion-button full type="button" on-click="outQuestionnaire()">{{ 'QUESTIONNAIRE.LOGOUT' | translate }}</button>
+<button ion-button full type="button" on-click="outQuestionnaire($event)">{{ 'QUESTIONNAIRE.LOGOUT' | translate }}</button>
 
 </ion-content>

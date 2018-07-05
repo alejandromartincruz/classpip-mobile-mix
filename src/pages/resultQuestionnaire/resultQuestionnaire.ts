@@ -232,7 +232,6 @@ export class ResultQuestionnairePage {
         error => {
           this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
         });
-
     }
 
 

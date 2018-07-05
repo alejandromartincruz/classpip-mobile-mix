@@ -54,6 +54,7 @@ export class CompletedQuestionnairePage {
     this.myCredentials = this.navParams.data.myCredentials;
 
   }
+  // Resultado de questionario con respuesta multiple
 
   /**
    * Fires when the page appears on the screen.
@@ -76,7 +77,6 @@ export class CompletedQuestionnairePage {
    * @param Array<Question>
    */
   public getResults(event) {
-
     this.questionnaireService.getQuestionsAnswersCorrectAnswers(this.myCredentials).subscribe(
       ((value: Array<Question>) => this.navController.setRoot(ResultQuestionnairePage, { myQuestionsCorrectAnswers: value, student: this.student, myQuestionnaire: this.myQuestionnaire, numTotalQuestions: this.numTotalQuestions, numAnswerCorrect: this.numAnswerCorrect, numAnswerNoCorrect: this.numAnswerNoCorrect, finalNote: this.finalNote, dataAnswers: this.dataAnswers, myQuestions: this.myQuestions, myCredentials: this.myCredentials })),
       error =>
