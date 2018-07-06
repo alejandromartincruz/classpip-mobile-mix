@@ -119,7 +119,8 @@
   },
   "COLLECTION": {
     "TITLE": "Les meves Coleccions",
-    "COMPLETED": "Colecció completada"
+    "COMPLETED": "Colecció completada",
+    "TOTAL": "Cromo totals: "
   },
   "CREATE-COLLECTION": {
     "TITLE": "Crear colecció",

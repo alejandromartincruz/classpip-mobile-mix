@@ -28,7 +28,8 @@ export class CollectionSpage {
 
   @ViewChild('map') mapElement: ElementRef;
   public collectionCards: Array<CollectionCard>;
-  public completada: Boolean = true;
+  public completada: Boolean= true;
+  public numCards: number = 0;
 
   constructor(
     public navParams: NavParams,
@@ -90,13 +91,13 @@ export class CollectionSpage {
           allCards.forEach((allCard) => {
             if (assignedCardsIds.indexOf(allCard.id) == -1) {
               finalCards.push(unknownCard);
-              this.completada = false;
+              this.numCards++;
             }
             else {
               finalCards.push(allCard);
             }
           });
-          this.navController.push(CollectionStudentDetail, {cards: finalCards, collectionCard: collectionCard, completeda: this.completada});
+          this.navController.push(CollectionStudentDetail, {cards: finalCards, collectionCard: collectionCard, numCards: this.numCards});
 
       },
       error => {

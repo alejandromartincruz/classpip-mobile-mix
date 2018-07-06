@@ -120,7 +120,8 @@
   },
   "COLLECTION": {
     "TITLE": "Mis Colecciones",
-    "COMPLETED": "Colección completada"
+    "COMPLETED": "Colección completada",
+    "TOTAL": "Cromos totales: "
   },
   "CREATE-COLLECTION": {
     "TITLE": "Crear colección",

@@ -25,7 +25,8 @@ export class CollectionStudentDetail {
   public grid: Array<Array<Card>>; //array of arrays
   private elements: number = 2;
   public id: string;
-  public completeda: Boolean;
+  public numCardsBlack: number = 0;
+  public numCards: number = 0;
 
   constructor(
     public navParams: NavParams,
@@ -36,8 +37,9 @@ export class CollectionStudentDetail {
 
     this.cards = this.navParams.data.cards;
     this.collectionCard = this.navParams.data.collectionCard;
-    this.completeda = this.navParams.data.completeda;
+    this.numCardsBlack = this.navParams.data.numCards;
     this.grid = Array(Math.ceil(this.cards.length / this.elements));
+    this.numCards = +this.collectionCard.num - this.numCardsBlack;
   }
 
   /**

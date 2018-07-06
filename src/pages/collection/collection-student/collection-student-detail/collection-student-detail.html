@@ -7,9 +7,14 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-  <ion-item *ngIf="completeda == true">
+  <ion-item *ngIf="numCardsBlack == 0">
     <ion-icon item-left name="ribbon"></ion-icon>
     <h2>{{ 'COLLECTION.COMPLETED' | translate }}</h2>
+  </ion-item>
+  <ion-item>
+    <ion-icon item-left name="albums"></ion-icon>
+    <h2>{{ 'COLLECTION.TOTAL' | translate }} {{ numCards }} / {{ collectionCard.num }}</h2>
+
   </ion-item>
   <ion-grid>
     <ion-row *ngFor="let row of grid">

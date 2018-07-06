@@ -119,7 +119,8 @@
   },
   "COLLECTION": {
     "TITLE": "My Collections",
-    "COMPLETED": "Collection completed"
+    "COMPLETED": "Collection completed",
+    "TOTAL": "Total cards: "
   },
   "CREATE-COLLECTION": {
     "TITLE": "Create collection",
