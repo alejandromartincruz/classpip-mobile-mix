@@ -78,11 +78,20 @@ export class AssignCardsMultipleStudent{
   }
 
   public postCardsToStudents(){
-    this.goToAssignRandomCard(this.numCartas,this.cards);
-    this.utilsService.presentToast('Cards assigned successfully');
-    this.navController.setRoot(MenuPage).then(()=>{
-      this.navController.push(CollectionTpage);
-    });
+    if(this.studentsSelectedArray.length != 0) {
+      if(+this.numCartas >= 1) {
+        this.goToAssignRandomCard(this.numCartas, this.cards);
+        this.utilsService.presentToast('Cards assigned successfully');
+        this.navController.setRoot(MenuPage).then(() => {
+          this.navController.push(CollectionTpage);
+        });
+      } else {
+        this.ionicService.showAlert("", this.translateService.instant('VALIDATION.QTY'));
+      }
+    } else {
+      this.ionicService.showAlert("", this.translateService.instant('VALIDATION.STUDENTSELECTED'));
+    }
+
   }
   public getSelectedStudents(stuArray: Array<StudentsSelected>){
     this.studentsSelectedArray = stuArray;
@@ -137,14 +146,6 @@ export class AssignCardsMultipleStudent{
     for (let i=0 ; i<cards.length ; i++){
       for(let stu of this.studentsSelectedArray) {
         this.collectionService.assignCardToStudent(stu.student.id, cards[i].id).subscribe(response => {
-            //this.utilsService.presentToast('Card assigned to student successfuly');
-            //this.ionicService.showAlert("", response.cardId.toSource());
-            /*this.collectionService.getCard(cards[i].id).subscribe(response =>{
-                this.cartasGanadas.push(response);
-              },
-              error => {
-                this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
-              });*/
           },
           error => {
             this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);

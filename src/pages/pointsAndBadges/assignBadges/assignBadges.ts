@@ -23,7 +23,7 @@ import {PointsAndBadgesPage} from "../pointsAndBadges";
 export class AssignBadgesPage{
   groupsArraySelected: Array<Group> = new Array<Group>() ;
   studentsArraySelected: Array<Student> = new Array<Student>();
-  badgeArraySelected: Array<Badge> = new Array<Badge>();
+ // badgeArraySelected: Array<Badge> = new Array<Badge>();
 
   public myRole: Role;
   public role = Role;
@@ -83,11 +83,11 @@ export class AssignBadgesPage{
 
   public newRelation(): void {
     this.groupsArraySelected = new Array<Group>();
-    this.badgeArraySelected = new Array<Badge>();
+    //this.badgeArraySelected = new Array<Badge>();
     this.studentsArray = new Array<Student>();
     this.badgeArray = new Array<Badge>();
     this.groupSelected = "";
-    this.badgeSelected = "";
+    //this.badgeSelected = "";
     this.instruction = true;
   }
 
@@ -140,22 +140,34 @@ export class AssignBadgesPage{
 
   public postBadgesToStudents(): void {
     let corr: Boolean = true;
-    for(let st of this.studentsSelectedArray) {
-      if(st.selected) {
-        this.badgeRelationService.postBadgeRelation(this.badgeSelected, st.student.id, st.student.schoolId.toString(), this.groupSelected, this.valueRel).subscribe(
-          response => {
-          },
-          error => {
-            this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
-            corr = false;
-          });
+    if(+this.badgeSelected>= 1){
+      if (this.valueRel >= 1) {
+        if (this.studentsSelectedArray.length > 0) {
+          for (let st of this.studentsSelectedArray) {
+            if (st.selected) {
+              this.badgeRelationService.postBadgeRelation(this.badgeSelected, st.student.id, st.student.schoolId.toString(), this.groupSelected, this.valueRel).subscribe(
+                response => {
+                },
+                error => {
+                  this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
+                  corr = false;
+                });
+            }
+          }
+          if (corr) {
+            this.ionicService.showAlert("", this.translateService.instant('BADGES.CORASSIGN'));
+            this.navController.setRoot(MenuPage).then(() => {
+              this.navController.push(PointsAndBadgesPage);
+            });
+          }
+        } else {
+          this.ionicService.showAlert("", this.translateService.instant('VALIDATION.STUDENTSELECTED'));
+        }
+      } else {
+        this.ionicService.showAlert("", this.translateService.instant('VALIDATION.QTY'));
       }
-    }
-    if(corr){
-      this.ionicService.showAlert("",this.translateService.instant('BADGES.CORASSIGN'));
-      this.navController.setRoot(MenuPage).then(()=>{
-        this.navController.push(PointsAndBadgesPage);
-      });
+    } else {
+        this.ionicService.showAlert("", this.translateService.instant('VALIDATION.BADGE'));
     }
   }
 

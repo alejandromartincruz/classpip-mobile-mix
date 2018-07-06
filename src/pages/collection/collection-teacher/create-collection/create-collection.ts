@@ -62,10 +62,14 @@ export class CollectionCreate {
   }
 
   public createCollection(): void {
-    if(!this.esUrl) {
-      this.uploadImageService.uploadImage(this.collectionCard.image);
+    if (+this.collectionCard.num >= 1) {
+      if (!this.esUrl) {
+        this.uploadImageService.uploadImage(this.collectionCard.image);
+      }
+      this.postNewCollection(AppConfig.SERVER_URL + /public/ + this.collectionCard.image);
+    } else {
+      this.ionicService.showAlert("", this.translateService.instant('VALIDATION.QTY'));
     }
-    this.postNewCollection(AppConfig.SERVER_URL+/public/+this.collectionCard.image);
   }
 
   public imageTypeSelected(type: string): void {

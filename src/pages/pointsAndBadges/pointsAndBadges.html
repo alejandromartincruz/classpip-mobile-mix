@@ -89,7 +89,7 @@
           </ion-item>
           <ion-item>
             <ion-label stacked>{{ 'POINTS.VALUEOF' | translate }}</ion-label>
-            <ion-input type="text" name="value" [(ngModel)]="createPoint.value" required></ion-input>
+            <ion-input type="number" min="1" name="value" [(ngModel)]="createPoint.value" required></ion-input>
           </ion-item>
         </ion-list>
         <button ion-button full type="submit" [disabled]="!loginForm.form.valid">{{ 'COMMON.CREATE' | translate }}</button>
@@ -154,7 +154,7 @@
           </ion-item>
           <ion-item>
             <ion-label stacked>{{ 'BADGES.VALUEOF' | translate }}</ion-label>
-            <ion-input type="text" name="value" [(ngModel)]="createBadge.value" required></ion-input>
+            <ion-input type="number" min="1" name="value" [(ngModel)]="createBadge.value" required></ion-input>
           </ion-item>
         </ion-list>
         <button ion-button full type="submit" [disabled]="!loginForm.form.valid">{{ 'COMMON.CREATE' | translate }}</button>

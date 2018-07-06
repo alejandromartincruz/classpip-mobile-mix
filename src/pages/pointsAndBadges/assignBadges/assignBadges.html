@@ -8,14 +8,14 @@
 </ion-header>
 <ion-content>
   <ion-item>
-  <ion-refresher (ionRefresh)="refresh(groupsArraySelected,badgeArraySelected,$event)">
+  <ion-refresher (ionRefresh)="refresh(groupsArraySelected,badgeSelected,$event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   </ion-item>
   <ion-item>
     <ion-label>{{ 'BADGES.SINGULAR' | translate }}</ion-label>
-    <ion-select [(ngModel)]="badgeArraySelected" multiple="false">
-      <ion-option *ngFor="let point of badgeArray" value="{{point.id}}" selected="false" (ionChange)="getSelectedBadge(badgeArraySelected)">
+    <ion-select [(ngModel)]="badgeSelected" multiple="false">
+      <ion-option *ngFor="let point of badgeArray" value="{{point.id}}" selected="false">
         {{point.name}}
       </ion-option>
     </ion-select>

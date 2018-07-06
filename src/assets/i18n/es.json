@@ -207,11 +207,18 @@
     "PENDING": "Pendientes",
     "COMPLETED": "Completados",
     "DATE": "Fecha",
-    "CREATEDBY": "Creado por"
+    "CREATEDBY": "Creado por",
+    "QTY": "Cantidad"
   },
     "IMAGE": {
       "LOADFROM": "Cargar de librería",
       "CAMERA": "Càmara",
       "IMGSOURCE": "Orígen de la imagen"
-    }
+    },
+  "VALIDATION": {
+    "STUDENTSELECTED": "No se ha seleccionado ningún estudiante",
+    "QTY": "No se ha indicado la cantidad",
+    "POINT": "No se ha indicado el punto",
+    "BADGE": "No se ha indicado la insignia"
+  }
 }

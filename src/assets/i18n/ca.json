@@ -206,11 +206,19 @@
     "PENDING": "Pendents",
     "COMPLETED": "Completats",
     "DATE": "Data",
-    "CREATEDBY": "Creat per"
+    "CREATEDBY": "Creat per",
+    "QTY": "Cuantitat"
   },
   "IMAGE": {
     "LOADFROM": "Carregar de la llibreria",
     "CAMERA": "Càmera",
     "IMGSOURCE": "Origen de la imatge"
+  },
+  "VALIDATION": {
+    "STUDENTSELECTED": "No s'ha seleccionat ningun estudiant",
+    "QTY": "No s'ha indicat la quantitat",
+    "POINT": "No s'ha indicat el punt",
+    "BADGE": "No s'ha indicat la insígnia"
   }
+
 }

@@ -206,12 +206,19 @@
     "PENDING": "Pending",
     "COMPLETED": "Completed",
     "DATE": "Date",
-    "CREATEDBY": "Created by"
+    "CREATEDBY": "Created by",
+    "QTY": "Quantity"
   },
 
   "IMAGE": {
     "LOADFROM": "Load from Library",
     "CAMERA": "Use camera",
     "IMGSOURCE": "Image source"
+  },
+  "VALIDATION": {
+    "STUDENTSELECTED": "Any student has been selected",
+    "QTY": "The number of cards has not been selected",
+    "POINT": "The point has not been selected",
+    "BADGE": "The badge has not been selected"
   }
 }

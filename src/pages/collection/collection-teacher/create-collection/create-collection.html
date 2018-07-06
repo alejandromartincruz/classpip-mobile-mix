@@ -17,7 +17,7 @@
       </ion-item>
       <ion-item>
         <ion-label stacked>{{ 'CREATE-COLLECTION.NUM' | translate }}</ion-label>
-        <ion-input type="text" name="num" [(ngModel)]="collectionCard.num" placeholder="{{ 'CREATE-COLLECTION.NUM' | translate }}" required></ion-input>
+        <ion-input type="number" min="1" name="num" [(ngModel)]="collectionCard.num" placeholder="{{ 'CREATE-COLLECTION.NUM' | translate }}" required></ion-input>
       </ion-item>
       <ion-item>
         <ion-label stacked>{{ 'IMAGE.IMGSOURCE' | translate }}</ion-label>

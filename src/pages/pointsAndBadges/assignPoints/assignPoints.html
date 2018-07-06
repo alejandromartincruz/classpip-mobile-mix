@@ -7,34 +7,36 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-  <ion-refresher (ionRefresh)="refresh(groupsArraySelected,pointArraySelected,$event)">
+  <form (ngSubmit)="postPointsToStudents()" #assignPointsForm="ngForm">
+
+  <ion-refresher (ionRefresh)="refresh(groupsArraySelected,pointSelected,$event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ion-item>
     <ion-label>{{ 'POINTS.SINGULAR' | translate }}</ion-label>
-    <ion-select [(ngModel)]="pointArraySelected" multiple="false">
-      <ion-option *ngFor="let point of pointArray" value="{{point.id}}" selected="false" (ionChange)="getSelectedPoint(pointArraySelected)">
+    <ion-select [ngModelOptions]="{standalone: true}" [(ngModel)]="pointSelected" multiple="false" required>
+      <ion-option *ngFor="let point of pointArray" value="{{point.id}}" selected="false" required>
         {{point.name}}
       </ion-option>
     </ion-select>
   </ion-item>
   <ion-item>
     <ion-label>{{ 'GROUP.TITLE' | translate }}</ion-label>
-    <ion-select [(ngModel)]="groupsArraySelected" multiple="false">
-      <ion-option *ngFor="let g of groupsArray | orderByIdPipe" value="{{g.id}}" selected="false" (ionChange)="showselected(groupsArraySelected, $event)">
+    <ion-select [ngModelOptions]="{standalone: true}" [(ngModel)]="groupsArraySelected" multiple="false">
+      <ion-option *ngFor="let g of groupsArray | orderByIdPipe" value="{{g.id}}" selected="false" (ionChange)="showselected(groupsArraySelected, $event)" required>
         {{g.name}}
       </ion-option>
     </ion-select>
   </ion-item>
   <ion-item>
     <ion-label stacked>{{ 'POINTS.NUM' | translate }}</ion-label>
-    <ion-input item-right type="id" name="id" [(ngModel)]="valueRel" required></ion-input>
+    <ion-input item-right type="number" min="1" name="id" [(ngModel)]="valueRel" required></ion-input>
   </ion-item>
   <ion-item text-wrap>
     <ion-note *ngIf="instruction == true"> {{'COMMON.ESTIRAR' | translate }}</ion-note>
     <ion-list *ngIf="instruction == false">
       <ion-item *ngFor="let stu of studentsSelectedArray">
-        <ion-checkbox [(ngModel)]=stu.selected (ionChange)="getSelectedStudents(studentsSelectedArray)"></ion-checkbox>
+        <ion-checkbox [ngModelOptions]="{standalone: true}" [(ngModel)]=stu.selected (ionChange)="getSelectedStudents(studentsSelectedArray)" required></ion-checkbox>
         <ion-thumbnail item-left>
           <img [src]="stu.student.avatar.image">
         </ion-thumbnail>
@@ -42,6 +44,6 @@
       </ion-item>
     </ion-list>
   </ion-item>
-  <button ion-button full (click)="postPointsToStudents()">{{ 'COMMON.ASSIGN' | translate }}</button>
-
+    <button ion-button full type="submit" [disabled]="!assignPointsForm.form.valid">{{ 'COMMON.ASSIGN' | translate }}</button>
+  </form>
 </ion-content>
