@@ -61,7 +61,9 @@
     "TEXT8": "Total unanswered answers:",
     "TEXT9": "Result:",
     "TEXT10": "Grade out of 10",
-    "TEXT11": "Achieved points"
+    "TEXT11": "Achieved points",
+    "CLOSED": "This questionnaire is closed",
+      "NOTACCESS": "You don't have access to this questionnaire"
     },
   "HOME": {
     "TITLE": "Home",
@@ -120,14 +122,19 @@
   "COLLECTION": {
     "TITLE": "My Collections",
     "COMPLETED": "Collection completed",
-    "TOTAL": "Total cards: "
+    "TOTAL": "Total cards: ",
+    "NOTASSIGNED": "This collection does not have a group assigned yet",
+    "REMOVEDOK": "Collection deleted successfully",
+    "NOTYOU": "This collection has not been created by you",
+    "REMQUEST": "Are you sure that you want to delete it from your collections?"
   },
   "CREATE-COLLECTION": {
     "TITLE": "Create collection",
     "NAME": "Name",
     "NUM": "Number of cards",
     "IMAGE": "Image",
-    "CREATE": "CREATE"
+    "CREATE": "CREATE",
+    "OK": "Collection created successfully"
   },
   "COLLECTION-ASSIGN": {
     "TITLE": "Assign to a group"
@@ -137,10 +144,24 @@
     "NAME": "Name",
     "NUM": "Number of cards",
     "IMAGE": "Image",
-    "EDIT": "EDIT"
+    "EDIT": "EDIT",
+    "OK": "Collection saved successfully",
+    "CANT": "You can't edit this collection as it has not been created by you"
   },
   "COLLECTIONS-ASSIGNED": {
-    "TITLE": "Assigned groups"
+    "TITLE": "Assigned groups",
+    "OK": "Collection assigned to group successfuly",
+    "CANCEL": "Cancel the assignation",
+    "SURE": "If you accept, you are going to cancel the assignation to this grup, are you sure?",
+    "DELETEOK": "Assignation deleted",
+    "GES": "Manage assigned groups"
+  },
+  "CARDS": {
+    "TITLE": "cards",
+    "ADD": "Add a card",
+    "DELETEOK": "Card deleted successfuly",
+    "CANT": "You can't delete this card as it has not been created by you",
+    "DELQUEST":  "If you delete it, it is going to be deleted completely, ara you sure?"
   },
   "CREATE-CARD": {
     "TITLE": "Create Card",
@@ -148,7 +169,9 @@
     "RATIO": "Ratio de aparición de la carta",
     "RANK": "Calidad de la carta (rareza)",
     "IMAGE": "Image",
-    "CREATE": "CRETE"
+    "CREATE": "CRETE",
+    "CANT": "You can't create cards as this collection is not yours",
+    "YOU": "This card has been created by you"
   },
   "EDIT-CARD": {
     "TITLE": "Edit card",
@@ -156,10 +179,20 @@
     "RATIO": "Ratio de aparición de la carta",
     "RANK": "Calidad de la carta (rareza)",
     "IMAGE": "Image",
-    "EDIT": "EDIT"
+    "EDIT": "EDIT",
+    "OK": "Card saved correctly",
+    "CANT": "You can't edit this card as it has not been created by you"
   },
   "CARD-ASSIGN": {
-    "TITLE": "Select a group"
+    "TITLE": "Select a group",
+    "RANDOM": "To a random student",
+    "OK": "Card assigned successfuly",
+    "ASS1": "Assign 1 random card",
+    "ASS3": "Assign 3 random cards",
+    "ASS5": "Assign 4 random cards",
+    "ASSX": "Assign X cards to some students",
+    "ASS": "Assign a card to a student",
+    "RANDOK": "Card assigned to random student successfully ("
   },
   "CARD-ASSIGN-STUDENT": {
     "TITLE": "Assign card to a student"
@@ -180,7 +213,8 @@
     "OBTAINED": "Points earned",
     "DESCOP": "Sum of points earned per the point's value",
     "SINGULAR": "Point",
-    "CORASSIGN": "Points assigned"
+    "CORASSIGN": "Points assigned",
+    "NOTDELETE": "The point 'Qüestionari' cannot be deleted"
   },
   "BADGES": {
     "TITLE": "Badges",
@@ -192,7 +226,8 @@
     "TOTAL": "Total badges",
     "ASSIGN": "Assign badges",
     "SINGULAR": "Badge",
-    "CORASSIGN": "Badge assigned"
+    "CORASSIGN": "Badge assigned",
+    "OBTAINED":"Badge earned"
   },
   "COMMON": {
     "CREATE": "Create",
@@ -207,7 +242,12 @@
     "COMPLETED": "Completed",
     "DATE": "Date",
     "CREATEDBY": "Created by",
-    "QTY": "Quantity"
+    "QTY": "Quantity",
+    "LEVEL": "Nivell",
+    "UNKNOWN": "Unknown",
+    "CANCEL": "Cancel",
+    "ACCEPT": "Accept",
+    "ACTION": "Select the action"
   },
 
   "IMAGE": {
@@ -219,6 +259,28 @@
     "STUDENTSELECTED": "Any student has been selected",
     "QTY": "The number of cards has not been selected",
     "POINT": "The point has not been selected",
-    "BADGE": "The badge has not been selected"
+    "BADGE": "The badge has not been selected",
+    "COMPL": "You cannot assign this collection because is not finished"
+  },
+  "LEVEL": {
+    "HIGH": "High",
+    "MED": "Medium",
+    "LOW": "Low",
+    "STR": "Strange",
+    "BRO": "Bronze",
+    "SIL": "Silver",
+    "GOL": "Gold",
+    "DIA": "Diamond"
+  },
+  "RANK": {
+    "910": "From 9 to 10:",
+    "7899": "From 7 to 8.99:",
+    "5699": "From 5 to 6.99:",
+    "0499": "From 0 to 4.99:",
+    "5599": "From 5 to 5.99:",
+    "6699": "From 6 to 6.99:",
+    "7799": "From 7 to 7.99:",
+    "8899": "From 8 to 8.99:",
+    "AWO": "Possible awards: "
   }
 }

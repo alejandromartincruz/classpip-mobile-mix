@@ -24,6 +24,8 @@ import { BadgesPage } from '../../badges/badges';
 
 import { Badge } from '../../../model/badge';
 import { BadgeRelation } from '../../../model/badgeRelation';
+import {PointsAndBadgesPage} from "../pointsAndBadges";
+import {MenuPage} from "../../menu/menu";
 
 @Component({
   selector: 'page-badge',
@@ -82,7 +84,10 @@ export class BadgePage {
     });
     this.badgeService.deleteBadge(this.badge.id).subscribe(
     response => {
-      this.isDisabled = true
+      this.isDisabled = true;
+      this.navController.setRoot(MenuPage).then(() => {
+        this.navController.push(PointsAndBadgesPage);
+      });
     },
     error => {
       this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);

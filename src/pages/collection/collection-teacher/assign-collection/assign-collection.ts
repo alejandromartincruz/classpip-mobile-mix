@@ -61,7 +61,7 @@ export class CollectionAssign {
 
             })
           });
-          this.utilsService.presentToast('Collection assigned to group successfuly');
+          this.utilsService.presentToast(this.translateService.instant('COLLECTIONS-ASSIGNED.OK'));
         });
         this.navController.setRoot(MenuPage).then(()=>{
           this.navController.push(CollectionTpage);

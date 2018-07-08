@@ -81,8 +81,8 @@ export class CollectionSpage {
         let assignedCardsIds = Array();
         let finalCards = Array<Card>();
         let unknownCard = new Card();
-        unknownCard.name="Desconocida";
-        unknownCard.rank="Desconocido";
+        unknownCard.name=this.translateService.instant('COMMON.UNKNOWN');
+        unknownCard.rank=this.translateService.instant('COMMON.UNKNOWN');
         unknownCard.image="https://image.flaticon.com/icons/png/512/37/37232.png";
         this.collectionService.getAssignedCards().subscribe((assignedCards: Array<Card>)=> {
           assignedCards.forEach((assignedCard) => {

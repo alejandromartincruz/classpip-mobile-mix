@@ -56,7 +56,7 @@ export class ResultQuestionnairePage {
   public numAnswerNoCorrect: number = 0;
   public finalNote: number = 0;
   public mark: number = 0;
-  public num: number = 100006;
+  public num: number = 100001;
   public pointsWon: number;
   public badgeWon: string;
   public hayPuntos: Boolean;
@@ -215,23 +215,33 @@ export class ResultQuestionnairePage {
         this.badgeWon = "null";
         break;
     }
-    if (typeof this.myQuestionnaire.badges != 'undefined' && this.badgeWon != "null") {
+    if (typeof this.myQuestionnaire.badges != 'undefined' && +this.badgeWon >=1) {
       this.hayBadges = true;
       this.badgeService.getBadge(+this.badgeWon).subscribe(
         ((value2: Badge) => {
           this.badgeItem = value2;
+          this.badgeRelationService.postBadgeRelation(this.badgeWon, this.student.id, this.student.schoolId.toString(), this.myQuestionnaire.groupid, 1).subscribe(
+            response => {
+
+            },
+            error => {
+              // TODO: Pillar el get i que no ensenyi lo de baix
+              this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error.stat);
+            });
         }),
         error => {
-          this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
+          this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error)
+          this.hayBadges = false;
+          //if(error.toString())
         });
 
-      this.badgeRelationService.postBadgeRelation(this.badgeWon, this.student.id, this.student.schoolId.toString(), this.myQuestionnaire.groupid, 1).subscribe(
+      /*this.badgeRelationService.postBadgeRelation(this.badgeWon, this.student.id, this.student.schoolId.toString(), this.myQuestionnaire.groupid, 1).subscribe(
         response => {
 
         },
         error => {
           this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
-        });
+        });*/
     }
 
 
@@ -251,14 +261,16 @@ export class ResultQuestionnairePage {
           this.numCartas = 0;
           break;
       }
-      this.collectionService.getCollectionDetails(this.myQuestionnaire.packCards[0]).subscribe(
-        ((value: Array<Card>) => {
-          //this.navController.push(CollectionTeacherDetail, { cards: value, collectionCard: collectionCard })
-          this.goToAssignRandomCard(this.numCartas, value);
-        }),
-        error => {
-          this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
-        });
+      if(this.numCartas >= 0) {
+        this.collectionService.getCollectionDetails(this.myQuestionnaire.packCards[0]).subscribe(
+          ((value: Array<Card>) => {
+            //this.navController.push(CollectionTeacherDetail, { cards: value, collectionCard: collectionCard })
+            this.goToAssignRandomCard(this.numCartas, value);
+          }),
+          error => {
+            this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
+          });
+      }
     }
   }
 

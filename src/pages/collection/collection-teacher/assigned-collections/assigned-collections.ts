@@ -52,21 +52,21 @@ export class CollectionsAssigned {
 
   public unassignGroup(collectionId, groupId) {
     let confirm = this.alertCtrl.create({
-      title: 'Cancelar la asignación',
-      message: 'Si aceptas cancelas la asignación de la colección a este grupo, estás de acuerdo?',
+      title: this.translateService.instant('COLLECTIONS-ASSIGNED.CANCEL'),
+      message: this.translateService.instant('COLLECTIONS-ASSIGNED.SURE'),
       buttons: [
         {
-          text: 'Cancelar',
+          text: this.translateService.instant('COMMON.CANCEL'),
           handler: () => {
 
           }
         },
         {
-          text: 'Aceptar',
+          text: this.translateService.instant('COMMON.ACCEPT'),
           handler: () => {
             this.collectionService.deleteAssignedGroup(collectionId, groupId).subscribe(
               response => {
-                this.utilsService.presentToast('Delete assigned group successfuly');
+                this.utilsService.presentToast(this.translateService.instant('COLLECTIONS-ASSIGNED.DELETEOK'));
                 this.navController.setRoot(MenuPage).then(()=>{
                   this.navController.push(CollectionTpage);
                 });

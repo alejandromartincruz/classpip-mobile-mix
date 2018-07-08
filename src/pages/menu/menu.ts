@@ -137,16 +137,7 @@ export class MenuPage {
    */
   public goToPointsAndBadges(): void {
 
-    //this.ionicService.showLoading(this.translateService.instant('APP.WAIT'));
-
-    /*this.schoolService.getMySchool().subscribe(
-      ((value: School) => this.navController.push(SchoolPage, { school: value })),
-      error => {
-        this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
-        this.ionicService.removeLoading();
-      });*/
-
-      this.ionicService.showLoading(this.translateService.instant('APP.WAIT'));
+    this.ionicService.showLoading(this.translateService.instant('APP.WAIT'));
 
     this.schoolService.getMySchoolPoints().subscribe(
       ((value1: Array<Point>) => {
@@ -158,22 +149,11 @@ export class MenuPage {
           this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
           this.ionicService.removeLoading();
         });
-       // this.navController.push(PointsPage, { points: value})
       }),
       error => {
         this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
         this.ionicService.removeLoading();
       });
-
-
-      /*this.ionicService.showLoading(this.translateService.instant('APP.WAIT'));
-
-    this.schoolService.getMySchoolBadges().subscribe(
-      ((value: Array<Badge>) => this.navController.push(BadgesPage, { badges: value})),
-      error => {
-        this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
-        this.ionicService.removeLoading();
-      });*/
 
   }
 }

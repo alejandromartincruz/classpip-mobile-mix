@@ -61,7 +61,9 @@
     "TEXT8": "Total respostes incorrectes:",
     "TEXT9": "Resultat:",
     "TEXT10": "Nota sobre 10",
-    "TEXT11": "Punts aconseguits"
+    "TEXT11": "Punts aconseguits",
+      "CLOSED": "Aquest qüestionari està tancat",
+      "NOTACCESS": "No tens accés a aquest qüestionari"
   },
   "HOME": {
     "TITLE": "Inici",
@@ -120,14 +122,20 @@
   "COLLECTION": {
     "TITLE": "Les meves Coleccions",
     "COMPLETED": "Colecció completada",
-    "TOTAL": "Cromo totals: "
+    "TOTAL": "Cromos totals: ",
+    "NOTASSIGNED": "Aquesta colecció no té ningun grup assignat encara",
+    "REMOVEDOK": "Col·lecció borrada correctament",
+    "NOTYOU": "Aquesta col·lecció NO l'has creada tu",
+    "REMQUEST": "Estàs segura de que vols borrar-la de les teves col·leccions?"
   },
   "CREATE-COLLECTION": {
     "TITLE": "Crear colecció",
     "NAME": "Nom de la nova colecció",
     "NUM": "Número de cartes de la nova colecció",
     "IMAGE": "Imatge de portada per la colecció",
-    "CREATE": "CREAR"
+    "CREATE": "CREAR",
+    "OK": "Col·lecció creada correctament",
+    "YOU": "Aquesta col·lecció l'has creada tu"
   },
   "COLLECTION-ASSIGN": {
     "TITLE": "Asignar a un grup"
@@ -137,32 +145,60 @@
     "NAME": "Nom de la nova colecció",
     "NUM": "Número de cartes de la nova colecció",
     "IMAGE": "Imatge de portada per la colecció",
-    "EDIT": "EDITAR"
+    "EDIT": "EDITAR",
+    "OK": "Col·leció guardada correctament",
+    "CANT": "No pots editar aquest col·lecció perquè no l'has creada tu"
   },
   "COLLECTIONS-ASSIGNED": {
-    "TITLE": "Grups asignats"
+    "TITLE": "Grups asignats",
+    "OK": "Colecció assignada correctament",
+    "CANCEL": "Cancelar l'assignació",
+    "SURE": "Si acceptes, cancel·les l'assignació de la col·lecció a aquest grupo, estas d'acord?",
+    "DELETEOK": "Assignació eliminada",
+    "GES": "Gestionar grups assignats"
+  },
+  "CARDS": {
+    "TITLE": "cromos",
+    "ADD": "Afegir cromo",
+    "DELETEOK": "Cromo eliminat correctament",
+    "CANT": "No pots borrar cromos en aquesta col·lecció perquè no és teva",
+    "DELQUEST":  "Si ho borres s'eliminara completament, estas d'acord?"
   },
   "CREATE-CARD": {
-    "TITLE": "Crear Carta",
-    "NAME": "Nom de la nova carta",
-    "RATIO": "Ratio d'aparició de la carta",
-    "RANK": "Calitat de la carta (rareza)",
-    "IMAGE": "Imatge de la carta",
-    "CREATE": "CREAR"
+    "TITLE": "Crear cromo",
+    "NAME": "Nom del nou cromo",
+    "RATIO": "Ratio d'aparició del cromo",
+    "RANK": "Qualitat del cromo (rareza)",
+    "IMAGE": "Imatge del cromo",
+    "CREATE": "CREAR",
+    "CANT": "No pots crear cromos en aquesta col·lecció perquè no és teva",
+    "YOU": "Aquest cromo l'has creat tu"
   },
   "EDIT-CARD": {
-    "TITLE": "Editar carta",
-    "NAME": "Nom de la carta",
-    "RATIO": "Ratio d'aparició de la carta",
-    "RANK": "Calitat de la carta (rareza)",
-    "IMAGE": "Imatge de la carta",
-    "EDIT": "EDITAR"
+    "TITLE": "Editar cromo",
+    "NAME": "Nom del cromo",
+    "RATIO": "Ratio d'aparició del cromo",
+    "RANK": "Qualitat del cromo (rareza)",
+    "IMAGE": "Imatge del cromo",
+    "EDIT": "EDITAR",
+    "OK": "Cromo guardat correctament",
+    "CANT": "No pots editar el cromo ja que no l'has creat tu"
   },
   "CARD-ASSIGN": {
-    "TITLE": "Selecciona un grup"
+    "TITLE": "Selecciona un grup",
+    "RANDOM": "A un estudiant a l'atzar",
+    "OK": "Cromo asignat correctament",
+    "ASS1": "Assignar 1 cromo aleatori",
+    "ASS3": "Assignar 3 cromos aleatoris",
+    "ASS5": "Assignar 5 cromos aleatoris",
+    "ASSX": "Assignar X cromos a diversos estudiants",
+    "ASS": "Assignar un cromo a un estudiant",
+    "RANDOK": "Cromo assignat a un estudiant al atzar ("
   },
   "CARD-ASSIGN-STUDENT": {
-    "TITLE": "Asignar una carta a un estudiant"
+    "TITLE": "Asignar un cromo a un estudiant",
+    "RANDOM": "A un estudiant l'atzar",
+    "OK": "Cromo assignat correctament"
   },
   "POINTSBADGES": {
     "TITLE": "Punts i insígnias",
@@ -180,19 +216,21 @@
     "OBTAINED": "Punts obtinguts",
     "DESCOP": "Sumatori dels punts obtinguts per el valor del punt",
     "SINGULAR": "Punt",
-    "CORASSIGN": "Punts assignats correctament"
+    "CORASSIGN": "Punts assignats correctament",
+    "NOTDELETE": "No es pot eliminar el punt Qüestionari"
   },
   "BADGES": {
     "TITLE": "Insígnies",
     "CREATE": "Crear insígnia",
-    "NAMEOF": "Nombre de l'insígnia",
+    "NAMEOF": "Nom de l'insígnia",
     "IMAGEOF": "Imatge de l'insígnia",
     "VALUEOF": "Valor de l'insígnia",
     "NUM": "Número d'insígnies",
     "TOTAL": "Insígnies totals",
     "ASSIGN": "Assignar insígnies",
     "SINGULAR": "Insígnia",
-    "CORASSIGN": "Insígnies asignades correctament"
+    "CORASSIGN": "Insígnies asignades correctament",
+    "OBTAINED":"Insígnia guanyada"
   },
   "COMMON": {
     "CREATE": "Crear",
@@ -207,7 +245,12 @@
     "COMPLETED": "Completats",
     "DATE": "Data",
     "CREATEDBY": "Creat per",
-    "QTY": "Cuantitat"
+    "QTY": "Quantitat",
+    "LEVEL": "Nivell",
+    "UNKNOWN": "Desconegut",
+    "CANCEL": "Cancelar",
+    "ACCEPT": "Acceptar",
+    "ACTION": "Selecciona l'acció"
   },
   "IMAGE": {
     "LOADFROM": "Carregar de la llibreria",
@@ -218,7 +261,30 @@
     "STUDENTSELECTED": "No s'ha seleccionat ningun estudiant",
     "QTY": "No s'ha indicat la quantitat",
     "POINT": "No s'ha indicat el punt",
-    "BADGE": "No s'ha indicat la insígnia"
+    "BADGE": "No s'ha indicat la insígnia",
+    "COMPL": "No es pot assignar aquesta col·lecció perquè no està finalitzada"
+  },
+  "LEVEL": {
+  "HIGH": "Alt",
+  "MED": "Mig",
+  "LOW": "Baix",
+  "STR": "Extrany",
+  "BRO": "Bronce",
+  "SIL": "Plata",
+  "GOL": "Or",
+  "DIA": "Diamant"
+  },
+  "RANK": {
+    "910": "De 9 a 10:",
+    "7899": "De 7 a 8.99:",
+    "5699": "De 5 a 6.99:",
+    "0499": "De 0 a 4.99:",
+    "5599": "De 5 a 5.99:",
+    "6699": "De 6 a 6.99:",
+    "7799": "De 7 a 7.99:",
+    "8899": "De 8 a 8.99:",
+    "AWO": "Possibles premis: "
   }
+
 
 }

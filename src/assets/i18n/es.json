@@ -62,7 +62,9 @@
     "TEXT8": "Total respuestas no acertadas:",
     "TEXT9": "Resultado:",
       "TEXT10": "Nota sobre 10",
-      "TEXT11": "Puntos conseguidos"
+      "TEXT11": "Puntos conseguidos",
+      "CLOSED": "Este cuestionario está cerrado",
+      "NOTACCESS": "No tienes acceso a este cuestionario"
   },
   "HOME": {
     "TITLE": "Inicio",
@@ -121,14 +123,19 @@
   "COLLECTION": {
     "TITLE": "Mis Colecciones",
     "COMPLETED": "Colección completada",
-    "TOTAL": "Cromos totales: "
+    "TOTAL": "Cromos totales: ",
+    "NOTASSIGNED": "Esta colección no tiene ningún grupo asignado aún",
+    "REMOVEDOK": "Colección borrada correctamente",
+    "NOTYOU": "Esta colección NO ha sido creada por ti",
+    "REMQUEST": "¿Estás segura de que deseas borrarla de tus colecciones?"
   },
   "CREATE-COLLECTION": {
     "TITLE": "Crear colección",
     "NAME": "Nombre de la nueva colección",
     "NUM": "Número de cromos de la nueva colección",
     "IMAGE": "Imagen de portada para la colección",
-    "CREATE": "CREAR"
+    "CREATE": "CREAR",
+    "OK": "Colección creada correctamente"
   },
   "COLLECTION-ASSIGN": {
     "TITLE": "Asignar a grupo"
@@ -138,10 +145,24 @@
     "NAME": "Nombre de la colección",
     "NUM": "Número de cromos de la colección",
     "IMAGE": "Imagen de portada de la colección",
-    "EDIT": "EDITAR"
+    "EDIT": "EDITAR",
+    "OK": "Colección guardada correctamente",
+    "CANT": "No puedes editar esta colección porque no ha sido creada por ti"
   },
   "COLLECTIONS-ASSIGNED": {
-    "TITLE": "Grupos asignados"
+    "TITLE": "Grupos asignados",
+    "OK": "Colección asignada correctamente",
+    "CANCEL": "Cancelar la asignación",
+    "SURE": "Si aceptas cancelas la asignación de la colección a este grupo, estás de acuerdo?",
+    "DELETEOK": "Assignación eliminada",
+    "GES": "Gestionar grupos asignados"
+  },
+  "CARDS": {
+    "TITLE": "cromos",
+    "ADD": "Añadir cromo",
+    "DELETEOK": "Cromo eliminado correctamente",
+    "CANT": "No puedes borrar el cromo ya que no ha sido creado por ti",
+    "DELQUEST":  "Si la borras se eliminará completamente, estás de acuerdo?"
   },
   "CREATE-CARD": {
     "TITLE": "Crear cromo",
@@ -149,7 +170,9 @@
     "RATIO": "Ratio de aparición del cromo",
     "RANK": "Calidad del cromo (rareza)",
     "IMAGE": "Imagen del cromo",
-    "CREATE": "CREAR"
+    "CREATE": "CREAR",
+    "CANT": "No puedes crear cartas en esta colección porque no es tuya",
+    "YOU": "Esta carta ha sido creada por ti"
   },
   "EDIT-CARD": {
     "TITLE": "Editar cromo",
@@ -157,10 +180,20 @@
     "RATIO": "Ratio de aparición del cromo",
     "RANK": "Calidad del cromo (rareza)",
     "IMAGE": "Imagen del cromo",
-    "EDIT": "EDITAR"
+    "EDIT": "EDITAR",
+    "OK": "Cromo guardado correctamente",
+    "CANT": "No puedes editar el cromo ya que no ha sido creado por ti"
   },
   "CARD-ASSIGN": {
-    "TITLE": "Selecciona un grupo"
+    "TITLE": "Selecciona un grupo",
+    "RANDOM": "A estudiante al azar",
+    "OK": "Cromo assignado correctamente",
+    "ASS1": "Asignar 1 cromo aleatoria",
+    "ASS3": "Asignar 3 cromo aleatorias",
+    "ASS5": "Asignar 5 cromo aleatorias",
+    "ASSX": "Asignar X cromos a varios estudiantes",
+    "ASS": "Asignar un cromo a un estudiante",
+    "RANDOK": "Cromo asignada a un estudante al azar ("
   },
   "CARD-ASSIGN-STUDENT": {
     "TITLE": "Asignar cromo a estudiante"
@@ -181,7 +214,8 @@
     "OBTAINED": "Puntos obtenidos",
     "DESCOP": "Sumatorio de los puntos obtenidor por el valor del punto",
     "SINGULAR": "Punto",
-    "CORASSIGN": "Puntos asignados correctamente"
+    "CORASSIGN": "Puntos asignados correctamente",
+    "NOTDELETE": "No se puede eliminar el punto cuestionario"
   },
   "BADGES": {
     "TITLE": "Insignias",
@@ -193,7 +227,8 @@
     "TOTAL": "Insignias totales",
     "ASSIGN": "Asignar insignias",
     "SINGULAR": "Insignia",
-    "CORASSIGN": "Insignias asignadas correctamente"
+    "CORASSIGN": "Insignias asignadas correctamente",
+    "OBTAINED":"Insignia ganada"
   },
   "COMMON": {
     "CREATE": "Crear",
@@ -208,7 +243,12 @@
     "COMPLETED": "Completados",
     "DATE": "Fecha",
     "CREATEDBY": "Creado por",
-    "QTY": "Cantidad"
+    "QTY": "Cantidad",
+    "LEVEL": "Nivell",
+    "UNKNOWN": "Desconocida",
+    "CANCEL": "Cancelar",
+    "ACCEPT": "Aceptar",
+    "ACTION": "Selecciona la acción"
   },
     "IMAGE": {
       "LOADFROM": "Cargar de librería",
@@ -219,6 +259,28 @@
     "STUDENTSELECTED": "No se ha seleccionado ningún estudiante",
     "QTY": "No se ha indicado la cantidad",
     "POINT": "No se ha indicado el punto",
-    "BADGE": "No se ha indicado la insignia"
+    "BADGE": "No se ha indicado la insignia",
+    "COMPL": "No se puede asignar esta colección porque no está finalizada"
+  },
+  "LEVEL": {
+    "HIGH": "Alto",
+    "MED": "Medio",
+    "LOW": "Bajo",
+    "STR": "Raro",
+    "BRO": "Bronce",
+    "SIL": "Plata",
+    "GOL": "Oro",
+    "DIA": "Diamante"
+  },
+  "RANK": {
+    "910": "De 9 a 10:",
+    "7899": "De 7 a 8.99:",
+    "5699": "De 5 a 6.99:",
+    "0499": "De 0 a 4.99:",
+    "5599": "De 5 a 5.99:",
+    "6699": "De 6 a 6.99:",
+    "7799": "De 7 a 7.99:",
+    "8899": "De 8 a 8.99:",
+    "AWO": "Possibles premios: "
   }
 }

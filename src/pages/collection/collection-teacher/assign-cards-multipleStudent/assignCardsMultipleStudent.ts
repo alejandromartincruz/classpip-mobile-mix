@@ -78,10 +78,11 @@ export class AssignCardsMultipleStudent{
   }
 
   public postCardsToStudents(){
-    if(this.studentsSelectedArray.length != 0) {
+    //this.ionicService.showAlert(this.studentsSelectedArray.length.toString(), "");
+    if(this.studentsSelectedArray.length >= 1) {
       if(+this.numCartas >= 1) {
         this.goToAssignRandomCard(this.numCartas, this.cards);
-        this.utilsService.presentToast('Cards assigned successfully');
+        this.utilsService.presentToast(this.translateService.instant('CARD-ASSIGN.OK'));
         this.navController.setRoot(MenuPage).then(() => {
           this.navController.push(CollectionTpage);
         });

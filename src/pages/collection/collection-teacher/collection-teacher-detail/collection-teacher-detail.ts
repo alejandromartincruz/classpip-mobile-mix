@@ -90,7 +90,7 @@ export class CollectionTeacherDetail {
           this.navController.push(CardCreate, {id: this.collectionCard.id});
         }
         else {
-          this.utilsService.presentToast('No puedes crear carta en esta colección porque no es tuya');
+          this.utilsService.presentToast(this.translateService.instant('CREATE-CARD.CANT'));
         }
       });
   }
@@ -101,7 +101,7 @@ export class CollectionTeacherDetail {
     this.collectionService.deleteCard(cardId).subscribe(
       response => {
         this.ionicService.removeLoading();
-        this.utilsService.presentToast('Card deleted successfuly');
+        this.utilsService.presentToast(this.translateService.instant('CARDS.DELETEOK'));
         this.getCollectionDetail();
       }, error => {
         this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
@@ -118,7 +118,7 @@ export class CollectionTeacherDetail {
     let groupArray = Array<Group>();
     this.collectionService.getAssignedGroups(this.collectionCard.id).finally(()=>{
       if (assignedGroups.length == 0) {
-        this.utilsService.presentToast("Esta colección no tiene ningún grupo asignado aún");
+        this.utilsService.presentToast(this.translateService.instant('COLLECTION.NOTASSIGNED'));
       }
       else {
         //now get all parameters inside group
@@ -150,10 +150,10 @@ export class CollectionTeacherDetail {
 
   public press(card){
     let actionSheet = this.actionSheetCtrl.create({
-      title: 'Selecciona la acción',
+      title: this.translateService.instant('COMMON.ACTION'),
       buttons: [
         {
-          text: 'Borrar',
+          text: this.translateService.instant('COMMON.DELETE'),
           role: 'destructive',
           handler: () => {
             this.userService.getMyProfile().subscribe(
@@ -161,17 +161,17 @@ export class CollectionTeacherDetail {
                 this.profile = value;
                 if (this.collectionCard.createdBy === this.profile.username) {
                   let confirm = this.alertCtrl.create({
-                    title: 'Esta carta ha sido creada por ti',
-                    message: 'Si la borras se eliminará completamente, estás de acuerdo?',
+                    title: this.translateService.instant('CREATE-CARD.YOU'),
+                    message: this.translateService.instant('CARDS.DELQUEST'),
                     buttons: [
                       {
-                        text: 'Cancelar',
+                        text: this.translateService.instant('COMMON.CANCEL'),
                         handler: () => {
 
                         }
                       },
                       {
-                        text: 'Aceptar',
+                        text: this.translateService.instant('COMMON.ACCEPT'),
                         handler: () => {
                           this.deleteCard(card.id);
                         }
@@ -181,20 +181,20 @@ export class CollectionTeacherDetail {
                   confirm.present();
                 }
                 else {
-                  this.utilsService.presentToast('No puedes borrar esta carta porque no ha sido creada por ti')
+                  this.utilsService.presentToast(this.translateService.instant('CARDS.CANT'))
                 }
               });
           }
         },
         {
-          text: 'Editar',
+          text: this.translateService.instant('COMMON.EDIT'),
           handler: () => {
             this.userService.getMyProfile().finally(()=>{
               if(this.collectionCard.createdBy===this.profile.username){
                 this.goToEditCard(card);
               }
               else {
-                this.utilsService.presentToast('No puedes editar esta carta porque no ha sido creada por ti')
+                this.utilsService.presentToast(this.translateService.instant('EDIT-CARD.CANT'))
               }
             }).subscribe(
               ((value: Profile) => this.profile = value),
@@ -202,7 +202,7 @@ export class CollectionTeacherDetail {
           }
         },
         {
-          text: 'Asignar a 1 estudiante',
+          text: this.translateService.instant('CARD-ASSIGN.ASS'),
           handler: () => {
             let selectedCard = Array<Card>();
             selectedCard.push(card);
@@ -210,7 +210,7 @@ export class CollectionTeacherDetail {
           }
         },
         {
-          text: 'Cancelar',
+          text: this.translateService.instant('COMMON.CANCEL'),
           role: 'cancel'
         }
       ]
@@ -267,33 +267,41 @@ export class CollectionTeacherDetail {
   public presentActions(event: UIEvent): void {
 
     let actionSheet = this.actionSheetCtrl.create({
-      title: 'Selecciona la acción',
+      title: this.translateService.instant('COMMON.ACTION'),
       buttons: [
         {
-          text: 'Asignar 1 carta aleatoria',
+          text: this.translateService.instant('CARD-ASSIGN.ASS1'),
           handler: () => {
             this.goToAssignRandomCard(1);
           }
         },
         {
-          text: 'Asignar 3 cartas aleatorias',
+          text: this.translateService.instant('CARD-ASSIGN.ASS3'),
           handler: () => {
             this.goToAssignRandomCard(3);
           }
         },
         {
-          text: 'Asignar 5 carta aleatorias',
+          text: this.translateService.instant('CARD-ASSIGN.ASS5'),
           handler: () => {
             this.goToAssignRandomCard(5);
           }
         },
         {
-          text: 'Asignar X cartas a varios estudiantes',
+          text: this.translateService.instant('CARD-ASSIGN.ASSX'),
           handler: () => {
             this.collectionService.getAssignedGroups(this.collectionCard.id).finally(()=>{
             }).subscribe(
               ((value: Array<Group>) => {
-                this.navController.push(AssignCardsMultipleStudent, { cards: this.cards, collectionCard: this.collectionCard, groups: value });
+                if (value.length == 0) {
+                  this.utilsService.presentToast(this.translateService.instant('COLLECTION.NOTASSIGNED'));
+                } else {
+                  this.navController.push(AssignCardsMultipleStudent, {
+                    cards: this.cards,
+                    collectionCard: this.collectionCard,
+                    groups: value
+                  });
+                }
               }),
               error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error)
             );
@@ -301,7 +309,7 @@ export class CollectionTeacherDetail {
           }
         },
         {
-          text: 'Cancelar',
+          text: this.translateService.instant('COMMON.CANCEL'),
           role: 'cancel'
         }
       ]

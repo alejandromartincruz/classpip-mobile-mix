@@ -23,6 +23,8 @@ import { GroupPage } from '../../group/group';
 import { PointsPage } from '../../points/points';
 
 import { Point } from '../../../model/point';
+import {PointsAndBadgesPage} from "../pointsAndBadges";
+import {MenuPage} from "../../menu/menu";
 
 @Component({
   selector: 'page-point',
@@ -73,19 +75,26 @@ export class PointPage {
 
 
   public deletePoint(point: Point): void {
-    this.pointRelationService.deletePointRelations(this.point.id).subscribe(
-      response => {
-      },
-      error => {
-        this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
-      });
-    this.pointService.deletePoint(this.point.id).subscribe(
-      response => {
-       this.isDisabled = true
-      },
-      error => {
-        this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
-      });
+    if(+point.id != 100001) { // Id de questionario: 100001
+      this.pointRelationService.deletePointRelations(this.point.id).subscribe(
+        response => {
+        },
+        error => {
+          this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
+        });
+      this.pointService.deletePoint(this.point.id).subscribe(
+        response => {
+          this.isDisabled = true;
+          this.navController.setRoot(MenuPage).then(() => {
+            this.navController.push(PointsAndBadgesPage);
+          });
+        },
+        error => {
+          this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
+        });
+    } else {
+      this.ionicService.showAlert("", this.translateService.instant('POINTS.NOTDELETE'))
+    }
   }
   public editPoint(point: Point): void {
     this.isDisabled=true

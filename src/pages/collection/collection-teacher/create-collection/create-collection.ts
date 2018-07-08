@@ -95,17 +95,17 @@ export class CollectionCreate {
    */
   public presentActionSheet() {
       let actionSheet = this.actionSheetCtrl.create({
-        title: 'Select Image Source',
+        title: this.translateService.instant('IMAGE.IMGSOURCE'),
         buttons: [
           {
-            text: 'Load from Library',
+            text: this.translateService.instant('IMAGE.LOADFROM'),
             handler: () => {
               this.collectionCard.image=this.uploadImageService.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
               this.esUrl = false;
             }
           },
           {
-            text: 'Use Camera',
+            text: this.translateService.instant('IMAGE.CAMERA'),
             handler: () => {
               this.collectionCard.image=this.uploadImageService.takePicture(this.camera.PictureSourceType.CAMERA);
               this.esUrl = false;
@@ -119,7 +119,7 @@ export class CollectionCreate {
             }
           },
           {
-            text: 'Cancel',
+            text: this.translateService.instant('COMMON.CANCEL'),
             role: 'cancel'
           }
         ]
@@ -144,7 +144,7 @@ export class CollectionCreate {
       this.collectionToPost.createdBy = this.profile.username;
       this.collectionService.postCollection(this.collectionToPost).subscribe(
         response => {
-          this.utilsService.presentToast('Collection created successfully');
+          this.utilsService.presentToast(this.translateService.instant('CREATE-COLLECTION.OK'));
           this.navController.setRoot(MenuPage).then(()=>{
             this.navController.push(CollectionTpage);
           });

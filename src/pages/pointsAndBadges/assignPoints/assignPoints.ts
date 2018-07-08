@@ -146,14 +146,16 @@ export class AssignPointsPage{
   }
 
   public postPointsToStudents(): void {
-    let corr: Boolean = true;
+    let corr: Boolean = false;
     if(+this.pointSelected >= 1){
       if (this.valueRel >= 1) {
-        if (this.studentsSelectedArray.length > 0) {
+        if (this.studentsSelectedArray.length >= 1) {
           for (let st of this.studentsSelectedArray) {
             if (st.selected) {
+              corr = true;
               this.pointRelationService.postPointRelation(this.pointSelected, st.student.id, st.student.schoolId.toString(), this.groupSelected, this.valueRel).subscribe(
                 response => {
+                  corr = true;
                 },
                 error => {
                   this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
@@ -166,6 +168,8 @@ export class AssignPointsPage{
             this.navController.setRoot(MenuPage).then(() => {
               this.navController.push(PointsAndBadgesPage);
             });
+          } else {
+            this.ionicService.showAlert("", this.translateService.instant('VALIDATION.STUDENTSELECTED'));
           }
         } else {
           this.ionicService.showAlert("", this.translateService.instant('VALIDATION.STUDENTSELECTED'));

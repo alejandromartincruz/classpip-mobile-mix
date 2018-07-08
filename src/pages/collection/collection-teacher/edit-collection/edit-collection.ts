@@ -110,7 +110,7 @@ export class CollectionEdit {
    */
   public presentActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
-      title: 'Select Image Source',
+      title: this.translateService.instant('IMAGE.IMGSOURCE'),
       buttons: [
         {
           text: 'Load from Library',
@@ -148,7 +148,7 @@ export class CollectionEdit {
       this.collectionToPost.createdBy = this.profile.username;
       this.collectionService.editCollection(this.collectionToPost).subscribe(
         response => {
-          this.utilsService.presentToast('Collection edited successfully');
+          this.utilsService.presentToast(this.translateService.instant('EDIT-COLLECTION.OK'));
           this.navController.setRoot(MenuPage).then(()=>{
             this.navController.push(CollectionTpage);
           });        },

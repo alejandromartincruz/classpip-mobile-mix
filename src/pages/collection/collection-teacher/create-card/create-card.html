@@ -18,19 +18,19 @@
       <ion-item>
         <ion-label stacked>{{ 'CREATE-CARD.RATIO' | translate }}</ion-label>
         <ion-select [(ngModel)]="card.ratio" name="ratio" placeholder="{{ 'CREATE-CARD.RATIO' | translate }}" required>
-          <ion-option value="alto">Alto</ion-option>
-          <ion-option value="medio">Medio</ion-option>
-          <ion-option value="bajo">Bajo</ion-option>
-          <ion-option value="raro">Raro</ion-option>
+          <ion-option value="alto">{{ 'LEVEL.HIGH' | translate }}</ion-option>
+          <ion-option value="medio">{{ 'LEVEL.MED' | translate }}</ion-option>
+          <ion-option value="bajo">{{ 'LEVEL.LOW' | translate }}</ion-option>
+          <ion-option value="raro">{{ 'LEVEL.STR' | translate }}</ion-option>
         </ion-select>
       </ion-item>
       <ion-item>
         <ion-label stacked>{{ 'CREATE-CARD.RANK' | translate }}</ion-label>
         <ion-select [(ngModel)]="card.rank" name="rank" placeholder="{{ 'CREATE-CARD.RANK' | translate }}" required>
-          <ion-option value="bronce">Bronce</ion-option>
-          <ion-option value="plata">Plata</ion-option>
-          <ion-option value="oro">Oro</ion-option>
-          <ion-option value="diamante">Diamante</ion-option>
+          <ion-option value="bronce">{{ 'LEVEL.BRO' | translate }}</ion-option>
+          <ion-option value="plata">{{ 'LEVEL.SIL' | translate }}</ion-option>
+          <ion-option value="oro">{{ 'LEVEL.GOL' | translate }}</ion-option>
+          <ion-option value="diamante">{{ 'LEVEL.DIA' | translate }}</ion-option>
         </ion-select>
       </ion-item>
       <ion-item>

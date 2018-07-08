@@ -177,7 +177,7 @@ export class GetQuestionnairePage {
         else
         {
           active = false;
-          this.ionicService.showAlert("", "Aquest qüestionari està tancat")
+          this.ionicService.showAlert("", this.translateService.instant('QUESTIONNAIRE.CLOSED'))
         }
         if (this.found) {
           this.questionnaireService.getMyQuestionnaireQuestions(this.credentials).subscribe(
@@ -227,7 +227,7 @@ export class GetQuestionnairePage {
         }
         else{
           if(active) {
-            this.ionicService.showAlert("", "No tens accés a aquest qüestionari");
+            this.ionicService.showAlert("", this.translateService.instant('QUESTIONNAIRE.NOTACCESS'));
           }
         }
 

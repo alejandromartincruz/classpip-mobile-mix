@@ -72,15 +72,6 @@ export class AssignBadgesPage{
     this.ionicService.removeLoading();
   }
 
-  public pointsSend(text: string) {
-
-    let toast = this.toastCtrl.create({
-      message: text,
-      duration: 2000
-    });
-    toast.present();
-  }
-
   public newRelation(): void {
     this.groupsArraySelected = new Array<Group>();
     //this.badgeArraySelected = new Array<Badge>();
@@ -139,12 +130,13 @@ export class AssignBadgesPage{
   }
 
   public postBadgesToStudents(): void {
-    let corr: Boolean = true;
+    let corr: Boolean = false;
     if(+this.badgeSelected>= 1){
       if (this.valueRel >= 1) {
         if (this.studentsSelectedArray.length > 0) {
           for (let st of this.studentsSelectedArray) {
             if (st.selected) {
+              corr = true;
               this.badgeRelationService.postBadgeRelation(this.badgeSelected, st.student.id, st.student.schoolId.toString(), this.groupSelected, this.valueRel).subscribe(
                 response => {
                 },
@@ -159,6 +151,8 @@ export class AssignBadgesPage{
             this.navController.setRoot(MenuPage).then(() => {
               this.navController.push(PointsAndBadgesPage);
             });
+          } else {
+            this.ionicService.showAlert("", this.translateService.instant('VALIDATION.STUDENTSELECTED'));
           }
         } else {
           this.ionicService.showAlert("", this.translateService.instant('VALIDATION.STUDENTSELECTED'));

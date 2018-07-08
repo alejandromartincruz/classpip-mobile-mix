@@ -74,7 +74,7 @@
 <ion-card>
   <ion-list>
     <ion-item *ngIf="hayBadges == true && badgeItem">
-      <ion-note stacked>Insignia ganada:</ion-note>
+      <ion-note stacked>{{ 'BADGES.OBTAINED' | translate}}:</ion-note>
       <ion-thumbnail item-left>
         <img [src]="badgeItem.image">
       </ion-thumbnail>
@@ -82,7 +82,7 @@
       <ion-note>{{ 'COMMON.VALUE' | translate}}: {{ badgeItem.value }}</ion-note>
     </ion-item>
     <ion-item *ngIf="hayPuntos == true && pointItem.image">
-      <ion-note stacked>Punto ganado:</ion-note>
+      <ion-note stacked>{{ 'POINTS.OBTAINED' | translate}}:</ion-note>
       <ion-thumbnail item-left>
         <img [src]="pointItem.image">
       </ion-thumbnail>

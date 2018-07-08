@@ -98,18 +98,7 @@ export class listStudentTotalsPage {
 
   private getPointsStudent(student: Student): void {
     this.pointRelationTotal = 0;
-    /*this.pointRelationService.getMyStudentPoints2(this.group.id, student.id).finally(() => { }).subscribe(
-      ((value: Array<PointRelation>) => {
-        this.pointRelations = value;
-        value.forEach(pointRelation=> {
-          this.pointRelationTotal = this.pointRelationTotal+(pointRelation.value*pointRelation.point.value)
-        });
-         this.studentWithPointsArray.push(new StudentWithPoints(student, this.pointRelationTotal));
 
-      }),
-      error => {
-        this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
-      });*/
       let studentWpoint: StudentWithPoints = new StudentWithPoints();
       studentWpoint.student = student;
       studentWpoint.totalPoints = 0;
@@ -119,11 +108,8 @@ export class listStudentTotalsPage {
             this.pointService.getPoint(rel.pointId).subscribe(
               ((valuep: Point) => {
                 studentWpoint.totalPoints += valuep.value * rel.value;
-                //this.pointRelationTotal += valuep.value * rel.value;
-                //this.ionicService.showAlert("", this.pointRelationTotal.toString());
               }))
           }
-          //this.ionicService.showAlert("", this.pointRelationTotal.toString());
           this.studentWithPointsArray.push(studentWpoint);
         }),
         error => {

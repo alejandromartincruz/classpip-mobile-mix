@@ -143,13 +143,6 @@ export class HomePage {
 
     } else if (this.myRole === Role.STUDENT) {
 
-      /*this.schoolService.getMySchool().finally(() => {
-        refresher ? refresher.complete() : null;
-        this.ionicService.removeLoading();
-      }).subscribe(
-        ((value: School) => this.school = value),
-        error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));*/
-
       this.schoolService.getMySchool().finally(() => {
         refresher ? refresher.complete() : null;
         this.ionicService.removeLoading();

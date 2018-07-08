@@ -51,7 +51,7 @@ export class CardAssignStudent {
   public assignCardToStudents(studentId) {
     for (let i=0 ; i<this.cards.length ; i++){
       this.collectionService.assignCardToStudent(studentId,this.cards[i].id).subscribe(response => {
-          this.utilsService.presentToast('Card assigned to student successfuly');
+          this.utilsService.presentToast(this.translateService.instant('CARD-ASSIGN.OK'));
         },
         error => {
           this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
@@ -72,7 +72,7 @@ export class CardAssignStudent {
     });
     for (let i=0 ; i<this.cards.length ; i++) {
       this.collectionService.assignCardToStudent(this.students[studentPosition].id, this.cards[i].id).subscribe(response => {
-          this.utilsService.presentToast('Card assigned to random student successfuly (' + studentName + ')');
+          this.utilsService.presentToast(this.translateService.instant('CARD-ASSIGN.RANDOK') + studentName + ')');
           },
           error => {
         this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);

@@ -152,7 +152,7 @@ export class CollectionTpage {
                 error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error)
               );
             } else {
-              this.ionicService.showAlert("", "Esta coleccion no esta acabada");
+              this.ionicService.showAlert("", this.translateService.instant('VALIDATION.COMPL'));
             }
 
           }), error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error)
@@ -195,17 +195,17 @@ export class CollectionTpage {
         this.profile = value;
         if(collectionCard.createdBy===this.profile.username){
           let confirm = this.alertCtrl.create({
-            title: 'Esta colección ha sido creada por ti',
-            message: 'Si la borras se eliminará completamente, estás de acuerdo?',
+            title: this.translateService.instant('CREATE-COLLECTION.YOU'),
+            message: this.translateService.instant('CARDS.DELQUEST'),
             buttons: [
               {
-                text: 'Cancelar',
+                text: this.translateService.instant('COMMON.CANCEL'),
                 handler: () => {
 
                 }
               },
               {
-                text: 'Aceptar',
+                text: this.translateService.instant('COMMON.ACCEPT'),
                 handler: () => {
                   this.boolean=true;
                   this.deleteCollection(collectionCard.id);
@@ -217,17 +217,17 @@ export class CollectionTpage {
         }
         else {
           let confirm = this.alertCtrl.create({
-            title: 'Esta colección NO ha sido creada por ti',
-            message: 'Estás seguro que deseas borrarla de tus colecciones?',
+            title: this.translateService.instant('COLLECTION.NOTYOU'),
+            message: this.translateService.instant('COLLECTION.REMQUEST'),
             buttons: [
               {
-                text: 'Cancelar',
+                text: this.translateService.instant('COMMON.CANCEL'),
                 handler: () => {
 
                 }
               },
               {
-                text: 'Aceptar',
+                text: this.translateService.instant('COMMON.ACCEPT'),
                 handler: () => {
                   this.boolean=false;
                   this.deleteCollection(collectionCard.id);
@@ -247,7 +247,7 @@ export class CollectionTpage {
       this.collectionService.deleteCollection(collectionId).subscribe(
         response => {
           this.ionicService.removeLoading();
-          this.utilsService.presentToast('Collection deleted successfuly');
+          this.utilsService.presentToast(this.translateService.instant('COLLECTIONS.REMOVEDOK'));
           this.getCollections();
         }, error => {
           this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
@@ -259,7 +259,7 @@ export class CollectionTpage {
       this.collectionService.deleteCollectionRelation(collectionId).subscribe(
         response => {
           this.ionicService.removeLoading();
-          this.utilsService.presentToast('Collection successfuly removed from your list');
+          this.utilsService.presentToast(this.translateService.instant('COLLECTIONS.REMOVEDOK'));
           this.getCollections();
         }, error => {
           this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
@@ -274,36 +274,36 @@ export class CollectionTpage {
 
   public onHold(collectionCard){
     let actionSheet = this.actionSheetCtrl.create({
-      title: 'Selecciona la acción',
+      title: this.translateService.instant('COMMON.ACTION'),
       buttons: [
         {
-          text: 'Borrar',
+          text: this.translateService.instant('COMMON.DELETE'),
           role: 'destructive',
           handler: () => {
             this.selectDelete(collectionCard);
           }
         },
         {
-          text: 'Asignar a un grupo',
+          text: this.translateService.instant('COLLECTION-ASSIGN.TITLE'),
           handler: () => {
             this.goToAssignCollection(collectionCard.id);
           }
         },
         {
-          text: 'Gestionar grupos asignados',
+          text: this.translateService.instant('COLLECTIONS-ASSIGNED.GES'),
           handler: () => {
             this.goToAssignedCollections(collectionCard.id);
           }
         },
         {
-          text: 'Editar',
+          text: this.translateService.instant('COMMON.EDIT'),
           handler: () => {
             this.userService.getMyProfile().finally(()=>{
               if(collectionCard.createdBy===this.profile.username){
                 this.goToEditCollection(collectionCard);
               }
               else {
-                this.utilsService.presentToast('No puedes editar esta colección porque no ha sido creada por ti')
+                this.utilsService.presentToast(this.translateService.instant('EDIT-COLLECTION.CANT'));
               }
             }).subscribe(
               ((value: Profile) => this.profile = value),
@@ -311,7 +311,7 @@ export class CollectionTpage {
           }
         },
         {
-          text: 'Cancelar',
+          text: this.translateService.instant('COMMON.CANCEL'),
           role: 'cancel'
         }
       ]

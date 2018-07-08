@@ -78,22 +78,22 @@ export class CardEdit {
    */
   public presentActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
-      title: 'Select Image Source',
+      title: this.translateService.instant('IMAGE.IMGSOURCE'),
       buttons: [
         {
-          text: 'Load from Library',
+          text: this.translateService.instant('IMAGE.LOADFROM'),
           handler: () => {
             this.card.image=this.uploadImageService.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
           }
         },
         {
-          text: 'Use Camera',
+          text: this.translateService.instant('IMAGE.CAMERA'),
           handler: () => {
             this.card.image=this.uploadImageService.takePicture(this.camera.PictureSourceType.CAMERA);
           }
         },
         {
-          text: 'Cancel',
+          text: this.translateService.instant('COMMON.CANCEL'),
           role: 'cancel'
         }
       ]
@@ -114,7 +114,7 @@ export class CardEdit {
     this.cardToPost.id=this.card.id;
     this.collectionService.editCard(this.cardToPost).subscribe(
       response => {
-        this.utilsService.presentToast('Card edited successfully');
+        this.utilsService.presentToast(this.translateService.instant('CREATE-COLLECTION.OK'));
         this.navController.setRoot(MenuPage).then(()=>{
           this.navController.push(CollectionTpage);
         });        },
