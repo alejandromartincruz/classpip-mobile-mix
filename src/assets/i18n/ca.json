@@ -112,7 +112,7 @@
   "STUDENT": {
     "NAME": "Nom",
     "USERNAME": "Nom d'Usuari",
-    "EMAIL": "Correo Electrònic"
+    "EMAIL": "Correu Electrònic"
   },
   "ERROR": {
     "LOGIN_FAILED": "El nom d'usuari i / o contrasenya invàlides.",
@@ -120,19 +120,20 @@
     "INTERNAL_ERROR": "Hi ha hagut un error intern al servidor. Si us plau contacta amb el teu administrador."
   },
   "COLLECTION": {
-    "TITLE": "Les meves Coleccions",
-    "COMPLETED": "Colecció completada",
+    "TITLE": "Les meves Col·leccions",
+    "COMPLETED": "Col·lecció completada",
     "TOTAL": "Cromos totals: ",
-    "NOTASSIGNED": "Aquesta colecció no té ningun grup assignat encara",
+    "NOTASSIGNED": "Aquesta col·lecció no té ningun grup assignat encara",
     "REMOVEDOK": "Col·lecció borrada correctament",
-    "NOTYOU": "Aquesta col·lecció NO l'has creada tu",
-    "REMQUEST": "Estàs segura de que vols borrar-la de les teves col·leccions?"
+    "NOTYOU": "No es pot eliminar una col·lecció que no has creat tu",
+    "REMQUEST": "Estàs segura de que vols borrar-la de les teves col·leccions?",
+    "AWORD": "Premi per acabar la col·lecció"
   },
   "CREATE-COLLECTION": {
-    "TITLE": "Crear colecció",
+    "TITLE": "Crear col·lecció",
     "NAME": "Nom de la nova colecció",
-    "NUM": "Número de cartes de la nova colecció",
-    "IMAGE": "Imatge de portada per la colecció",
+    "NUM": "Número de cromos de la nova col·lecció",
+    "IMAGE": "Imatge de portada per la col·lecció",
     "CREATE": "CREAR",
     "OK": "Col·lecció creada correctament",
     "YOU": "Aquesta col·lecció l'has creada tu"
@@ -198,7 +199,8 @@
   "CARD-ASSIGN-STUDENT": {
     "TITLE": "Asignar un cromo a un estudiant",
     "RANDOM": "A un estudiant l'atzar",
-    "OK": "Cromo assignat correctament"
+    "OK": "Cromo assignat correctament",
+    "MULT": "Assignar cromos"
   },
   "POINTSBADGES": {
     "TITLE": "Punts i insígnias",
@@ -250,7 +252,8 @@
     "UNKNOWN": "Desconegut",
     "CANCEL": "Cancelar",
     "ACCEPT": "Acceptar",
-    "ACTION": "Selecciona l'acció"
+    "ACTION": "Selecciona l'acció",
+    "RANDOM": "A l'atzar"
   },
   "IMAGE": {
     "LOADFROM": "Carregar de la llibreria",

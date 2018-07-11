@@ -126,8 +126,9 @@
     "TOTAL": "Cromos totales: ",
     "NOTASSIGNED": "Esta colección no tiene ningún grupo asignado aún",
     "REMOVEDOK": "Colección borrada correctamente",
-    "NOTYOU": "Esta colección NO ha sido creada por ti",
-    "REMQUEST": "¿Estás segura de que deseas borrarla de tus colecciones?"
+    "NOTYOU": "No se puede eliminar una colección que no ha sido creada por ti",
+    "REMQUEST": "¿Estás segura de que deseas borrarla de tus colecciones?",
+    "AWORD": "Premio por acabar la colección"
   },
   "CREATE-COLLECTION": {
     "TITLE": "Crear colección",
@@ -189,14 +190,17 @@
     "RANDOM": "A estudiante al azar",
     "OK": "Cromo assignado correctamente",
     "ASS1": "Asignar 1 cromo aleatoria",
-    "ASS3": "Asignar 3 cromo aleatorias",
-    "ASS5": "Asignar 5 cromo aleatorias",
+    "ASS3": "Asignar 3 cromos aleatorias",
+    "ASS5": "Asignar 5 cromos aleatorias",
     "ASSX": "Asignar X cromos a varios estudiantes",
     "ASS": "Asignar un cromo a un estudiante",
     "RANDOK": "Cromo asignada a un estudante al azar ("
   },
   "CARD-ASSIGN-STUDENT": {
-    "TITLE": "Asignar cromo a estudiante"
+    "TITLE": "Asignar cromo a estudiante",
+    "RANDOM": "A un estudiante al azar",
+    "OK": "Cromo asignado correctamente",
+    "MULT": "Asignar cromos"
   },
   "POINTSBADGES": {
     "TITLE": "Puntos e insignias",
@@ -248,7 +252,8 @@
     "UNKNOWN": "Desconocida",
     "CANCEL": "Cancelar",
     "ACCEPT": "Aceptar",
-    "ACTION": "Selecciona la acción"
+    "ACTION": "Selecciona la acción",
+    "RANDOM": "Al azar"
   },
     "IMAGE": {
       "LOADFROM": "Cargar de librería",

@@ -216,7 +216,8 @@ export class CollectionTpage {
           confirm.present();
         }
         else {
-          let confirm = this.alertCtrl.create({
+          this.ionicService.showAlert("", this.translateService.instant('COLLECTION.NOTYOU'));
+          /*let confirm = this.alertCtrl.create({
             title: this.translateService.instant('COLLECTION.NOTYOU'),
             message: this.translateService.instant('COLLECTION.REMQUEST'),
             buttons: [
@@ -235,7 +236,8 @@ export class CollectionTpage {
               }
             ]
           });
-          confirm.present();
+          confirm.present();*/
+
         }
       })
     );
@@ -247,7 +249,7 @@ export class CollectionTpage {
       this.collectionService.deleteCollection(collectionId).subscribe(
         response => {
           this.ionicService.removeLoading();
-          this.utilsService.presentToast(this.translateService.instant('COLLECTIONS.REMOVEDOK'));
+          this.utilsService.presentToast(this.translateService.instant('COLLECTION.REMOVEDOK'));
           this.getCollections();
         }, error => {
           this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
@@ -259,7 +261,7 @@ export class CollectionTpage {
       this.collectionService.deleteCollectionRelation(collectionId).subscribe(
         response => {
           this.ionicService.removeLoading();
-          this.utilsService.presentToast(this.translateService.instant('COLLECTIONS.REMOVEDOK'));
+          this.utilsService.presentToast(this.translateService.instant('COLLECTION.REMOVEDOK'));
           this.getCollections();
         }, error => {
           this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);

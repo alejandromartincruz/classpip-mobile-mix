@@ -8,6 +8,8 @@ import {CollectionCreate} from "./create-collection/create-collection";
 import {IonicService} from "../../../../providers/ionic.service";
 import {Card} from "../../../../model/card";
 import {CollectionCard} from "../../../../model/collectionCard";
+import {Badge} from "../../../../model/badge";
+import {BadgeService} from "../../../../providers/badge.service";
 
 
 declare var google;
@@ -27,13 +29,16 @@ export class CollectionStudentDetail {
   public id: string;
   public numCardsBlack: number = 0;
   public numCards: number = 0;
+  public hayBadges: Boolean;
+  public badgeItem: Badge = new Badge();
 
   constructor(
     public navParams: NavParams,
     public translateService: TranslateService,
     public collectionService: CollectionService,
     public ionicService: IonicService,
-    public navController: NavController) {
+    public navController: NavController,
+    public badgeService: BadgeService) {
 
     this.cards = this.navParams.data.cards;
     this.collectionCard = this.navParams.data.collectionCard;
@@ -47,8 +52,11 @@ export class CollectionStudentDetail {
    * Used to get all the data needed in page
    */
   public ionViewDidEnter(): void {
-
+    if(this.collectionCard.badgeId != "" && typeof this.collectionCard.badgeId != 'undefined') {
+      this.getBadge();
+    }
     this.prepareGrid();
+
     this.ionicService.removeLoading();
   }
 
@@ -67,5 +75,20 @@ export class CollectionStudentDetail {
       }
       rowNum++;
     }
+  }
+
+  /**
+   * This method gets the badge assosiated to the collection
+   */
+  public getBadge(): void {
+    this.badgeService.getBadge(+this.collectionCard.badgeId).subscribe(
+      ((value2: Badge) => {
+        this.badgeItem = value2;
+        this.hayBadges = true;
+      }),
+      error => {
+        //this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
+        this.hayBadges = false;
+      });
   }
 }

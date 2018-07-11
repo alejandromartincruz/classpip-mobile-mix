@@ -124,9 +124,10 @@
     "COMPLETED": "Collection completed",
     "TOTAL": "Total cards: ",
     "NOTASSIGNED": "This collection does not have a group assigned yet",
-    "REMOVEDOK": "Collection deleted successfully",
+    "REMOVEDOK": "You cannot delete a collection that has not been created by you",
     "NOTYOU": "This collection has not been created by you",
-    "REMQUEST": "Are you sure that you want to delete it from your collections?"
+    "REMQUEST": "Are you sure that you want to delete it from your collections?",
+    "AWORD": "Reward for completing the collection"
   },
   "CREATE-COLLECTION": {
     "TITLE": "Create collection",
@@ -195,7 +196,10 @@
     "RANDOK": "Card assigned to random student successfully ("
   },
   "CARD-ASSIGN-STUDENT": {
-    "TITLE": "Assign card to a student"
+    "TITLE": "Assign card to a student",
+    "RANDOM": "To a random student",
+    "OK": "Card assigned successfuly",
+    "MULT": "Assign cards"
   },
   "POINTSBADGES": {
     "TITLE": "Points and badges",
@@ -247,7 +251,8 @@
     "UNKNOWN": "Unknown",
     "CANCEL": "Cancel",
     "ACCEPT": "Accept",
-    "ACTION": "Select the action"
+    "ACTION": "Select the action",
+    "RANDOM": "Random"
   },
 
   "IMAGE": {

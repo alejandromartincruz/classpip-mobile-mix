@@ -30,7 +30,7 @@ export class AssignCardsMultipleStudent{
   public groups: Array<Group>;
   public instruction:Boolean = true;
   public studentsSelectedArray: Array<StudentsSelected> = new Array<StudentsSelected>();
-  public groupSelected: string;
+  public groupSelected: string = "";
   public studentsArray: Array<Student> = new Array<Student>();
   public numCartas: number;
 
@@ -52,9 +52,10 @@ export class AssignCardsMultipleStudent{
     this.groups = this.navParams.data.groups;
   }
 
-  public showselected(groupsSelected: string, refresher: Refresher): void {
-    this.groupSelected = groupsSelected;
-    this.groupService.getMyGroupStudents(groupsSelected).finally(() => {
+  public showselected( refresher: Refresher): void {
+    //this.groupSelected = groupsSelected;
+    //this.ionicService.showAlert("", this.groupSelected);
+    this.groupService.getMyGroupStudents(this.groupSelected).finally(() => {
       refresher ? refresher.complete() : null;
       this.ionicService.removeLoading();
     }).subscribe(
@@ -68,20 +69,20 @@ export class AssignCardsMultipleStudent{
     //this.showStudents = true;
 
   }
-  public refresh(groupsSelected: string, refresher: Refresher){
-    if(groupsSelected != "" || typeof groupsSelected == 'undefined'){
+  public refresh( refresher: Refresher){
+    if(this.groupSelected != "" && typeof this.groupSelected != 'undefined'){
       this.instruction = false;
-      this.showselected(groupsSelected, refresher);
+      this.showselected(refresher);
     }
     refresher ? refresher.complete() : null;
     this.ionicService.removeLoading();
   }
 
-  public postCardsToStudents(){
+  public postCardsToStudents(type){
     //this.ionicService.showAlert(this.studentsSelectedArray.length.toString(), "");
     if(this.studentsSelectedArray.length >= 1) {
       if(+this.numCartas >= 1) {
-        this.goToAssignRandomCard(this.numCartas, this.cards);
+        this.goToAssignRandomCard(this.numCartas, this.cards, type);
         this.utilsService.presentToast(this.translateService.instant('CARD-ASSIGN.OK'));
         this.navController.setRoot(MenuPage).then(() => {
           this.navController.push(CollectionTpage);
@@ -99,7 +100,7 @@ export class AssignCardsMultipleStudent{
   }
 
 
-  public goToAssignRandomCard(num: number, cards: Array<Card>) {
+  public goToAssignRandomCard(num: number, cards: Array<Card>, type: number) {
     let randomCards = Array<Card>();
     let altoArray = Array<Card>();
     let medioArray = Array<Card>();
@@ -139,27 +140,59 @@ export class AssignCardsMultipleStudent{
         randomCards.push(raroArray[cardPosition]);
       }
     }
-    this.goToAssignCard(randomCards);
+    type == 0 ? this.goToAssignCard(randomCards) : this.goToRandomAssignCard(randomCards);
+
   };
 
   public goToAssignCard(cards){
 
     for (let i=0 ; i<cards.length ; i++){
       for(let stu of this.studentsSelectedArray) {
-        this.collectionService.assignCardToStudent(stu.student.id, cards[i].id).subscribe(response => {
-          },
-          error => {
-            this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
-          });
+        if(stu.selected) {
+          this.collectionService.assignCardToStudent(stu.student.id, cards[i].id).subscribe(response => {
+            },
+            error => {
+              this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
+            });
+        }
       }
     }
     /*this.navController.setRoot(MenuPage).then(()=>{
       this.navController.push(CollectionTpage);
     });*/
+  }
 
+  public goToRandomAssignCard(cards) {
+    let randomArray: Array<Student> = new Array<Student>();
+    for (let stu of this.studentsSelectedArray) {
+      if (stu.selected) {
+        randomArray.push(stu.student);
+      }
+    }
+    let studentPosition = this.randomNumber(0, randomArray.length);
+    let studentName;
+    randomArray.forEach(student => {
+      if (student.id == randomArray[studentPosition].id) {
+        studentName = student.name
+      }
+    });
+    for (let i = 0; i < cards.length; i++) {
+       this.collectionService.assignCardToStudent(randomArray[studentPosition].id, cards[i].id).subscribe(response => {
+            //this.utilsService.presentToast(this.translateService.instant('CARD-ASSIGN.RANDOK') + studentName + ')');
+          },
+          error => {
+            this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
+          });
+    }
+    //this.utilsService.presentToast(this.translateService.instant('CARD-ASSIGN.RANDOK') + studentName + ')');
+
+    /*this.navController.setRoot(MenuPage).then(()=>{
+      this.navController.push(CollectionTpage);
+    });*/
   }
 
   public randomNumber(min, max) {
     return Math.round(Math.random() * (max - min) + min);
   }
+
 }

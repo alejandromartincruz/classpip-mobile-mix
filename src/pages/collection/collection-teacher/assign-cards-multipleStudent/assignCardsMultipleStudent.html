@@ -3,11 +3,11 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>{{"CARD-ASSIGN-STUDENT.TITLE" | translate}}</ion-title>
+    <ion-title>{{"CARD-ASSIGN-STUDENT.MULT" | translate}}</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-  <ion-refresher (ionRefresh)="refresh(groupsArraySelected,$event)">
+  <ion-refresher (ionRefresh)="refresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ion-item>
@@ -16,8 +16,8 @@
   </ion-item>
   <ion-item>
     <ion-label>{{ 'GROUP.TITLE' | translate }}</ion-label>
-    <ion-select [(ngModel)]="groupsArraySelected" multiple="false">
-      <ion-option *ngFor="let g of groups | orderByIdPipe" value="{{g.id}}" selected="false" (ionChange)="showselected(groupsArraySelected, $event)">
+    <ion-select [(ngModel)]="groupSelected" multiple="false">
+      <ion-option *ngFor="let g of groups | orderByIdPipe" value="{{g.id}}" selected="false" (ionChange)="showselected(groupSelected, $event)">
         {{g.name}}
       </ion-option>
     </ion-select>
@@ -34,5 +34,8 @@
       </ion-item>
     </ion-list>
   </ion-item>
-  <button ion-button full (click)="postCardsToStudents()">{{ 'COMMON.ASSIGN' | translate }}</button>
+  <div text-center="">
+  <button ion-button  (click)="postCardsToStudents(0)">{{ 'COMMON.ASSIGN' | translate }}</button>
+  <button ion-button  (click)="postCardsToStudents(1)">{{ 'COMMON.RANDOM' | translate }}</button>
+  </div>
 </ion-content>

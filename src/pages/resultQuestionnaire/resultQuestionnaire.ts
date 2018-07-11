@@ -94,8 +94,6 @@ export class ResultQuestionnairePage {
     this.finalNote = this.navParams.data.finalNote;
     this.dataAnswers = this.navParams.data.dataAnswers;
 
-    //this.dataAnswers;
-    //this.myAnswers = this.navParams.data.dataAnswers.split(",");
     this.getCorrectionQuestionnaire();
 
 
@@ -225,23 +223,14 @@ export class ResultQuestionnairePage {
 
             },
             error => {
-              // TODO: Pillar el get i que no ensenyi lo de baix
               this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error.stat);
             });
         }),
         error => {
-          this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error)
+          //this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
           this.hayBadges = false;
-          //if(error.toString())
         });
 
-      /*this.badgeRelationService.postBadgeRelation(this.badgeWon, this.student.id, this.student.schoolId.toString(), this.myQuestionnaire.groupid, 1).subscribe(
-        response => {
-
-        },
-        error => {
-          this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
-        });*/
     }
 
 

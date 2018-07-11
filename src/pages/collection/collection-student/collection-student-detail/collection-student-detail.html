@@ -7,6 +7,15 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
+
+  <ion-item *ngIf="hayBadges == true && badgeItem">
+    <ion-note stacked>{{ 'COLLECTION.AWORD' | translate}}:</ion-note>
+    <ion-avatar item-left>
+      <img [src]="badgeItem.image">
+    </ion-avatar>
+    <h2>{{ badgeItem.name }}</h2>
+  </ion-item>
+
   <ion-item *ngIf="numCardsBlack == 0">
     <ion-icon item-left name="ribbon"></ion-icon>
     <h2>{{ 'COLLECTION.COMPLETED' | translate }}</h2>
