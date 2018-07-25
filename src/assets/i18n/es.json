@@ -29,13 +29,13 @@
     "REGISTER": "Necesito crear una nueva cuenta"
   },
     "GETQUESTIONNAIRE": {
-    "TITLE": "Mis Cuestionarios",
+      "TITLE": "Mis Cuestionarios",
       "SHORTTITLE": "Cuestionarios",
-    "USERNAME": "Nombre de Usuario",
-    "CODE": "Código del Cuestionario",
-    "LOGIN": "ACCEDER",
+      "USERNAME": "Nombre de Usuario",
+      "CODE": "Código del Cuestionario",
+      "LOGIN": "ACCEDER",
       "MAKE": "Hacer cuestionario",
-      "WONCARDS": "Cartas ganadas:"
+      "WONCARDS": "Cromos ganados:"
 
   },
     "QUESTIONNAIRES": {

@@ -35,7 +35,7 @@
     "CODE": "Codi del Qüestionari",
     "LOGIN": "ACCEDIR",
       "MAKE": "Fer qüestionari",
-      "WONCARDS": "Cartas ganadas:"
+      "WONCARDS": "Cromos guanyats:"
   },
     "QUESTIONNAIRES": {
     "TITLE": "Els meus Qüestionaris",
@@ -203,7 +203,7 @@
     "MULT": "Assignar cromos"
   },
   "POINTSBADGES": {
-    "TITLE": "Punts i insígnias",
+    "TITLE": "Punts i insígnies",
     "TOTAL": "Totals"
   },
   "POINTS": {
