@@ -34,7 +34,8 @@ import { Point } from '../../../model/point';
 
 export class GroupPointPage {
 
-  
+  // TODO: No utilizada, la dejamos por si os va bien
+
   public group: Group;
   public school: School;
   public profile: Profile;
@@ -50,8 +51,8 @@ export class GroupPointPage {
   public pointRelations: Array<PointRelation>;
   public pointRelationsPoint: Array<PointRelation>;
   public pointRelationTotal: number;
-  
-  
+
+
   public isDisabledStudent = false;
   public isDisabledPoint = false;
   public studentsPoint = false;
@@ -65,7 +66,7 @@ export class GroupPointPage {
 
   public myRole: Role;
   public role = Role;
-  
+
   constructor(
     public ionicService: IonicService,
     public userService: UserService,
@@ -84,10 +85,10 @@ export class GroupPointPage {
     this.students = this.navParams.data.students;
     this.group = this.navParams.data.group;
     this.myRole = this.utilsService.role;
-    
-  }    
-  
-  
+
+  }
+
+
   public ionViewDidEnter(): void {
     this.getEnter();
     this.getPoints();
@@ -99,22 +100,22 @@ export class GroupPointPage {
   private getEnter(): void {
     this.schoolService.getMySchool().finally(() => {}).subscribe(
 		((value: School) => {
-		  this.school = value            
-    }))    
-  }  
-  
+		  this.school = value
+    }))
+  }
+
   private getStudents(): void {
     this.groupService.getMyGroupStudents(this.group.id).finally(() => {}).subscribe(
       ((value: Array<Student>) => this.students = value),
-      error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));    
+      error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
       this.isDisabledPoint=true
       this.isDisabledStudent=false
   }
-  
-  private getPoints(): void {	  
+
+  private getPoints(): void {
     this.schoolService.getMySchoolPoints().finally(() => { }).subscribe(
         ((value: Array<Point>) => this.points = value),
-        error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));    
+        error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
     this.isDisabledStudent=true
     this.isDisabledPoint=false
   }
@@ -124,19 +125,19 @@ export class GroupPointPage {
     this.student = student
     this.pointRelationTotal = 0
     this.Intro = false
-    this.studentsPointIntro=true 
+    this.studentsPointIntro=true
     this.pointsPointIntro=false
     this.studentsPoint=true
     this.pointRelations =  [];
-    this.pointsPoint=false 
+    this.pointsPoint=false
     this.pointRelationService.getMyStudentPoints2(this.group.id, student.id).finally(() => { }).subscribe(
       ((value: Array<PointRelation>) => {this.pointRelations = value
         value.forEach(pointRelation=> {
           this.pointRelationTotal = this.pointRelationTotal+(pointRelation.value*pointRelation.point.value)
-        });               
+        });
         this.studentsPoint=true
-        
-      }),            
+
+      }),
       error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
   }
 
@@ -149,13 +150,13 @@ export class GroupPointPage {
     this.Intro = false
     this.pointRelationsPoint =  [];
     this.studentsPoint=false
-    this.pointsPoint=true 
+    this.pointsPoint=true
     this.pointRelationService.getMyPointPoints2(this.group.id, point.id).finally(() => { }).subscribe(
       ((value: Array<PointRelation>) => {
-        this.pointRelationsPoint = value                  
-      }),            
+        this.pointRelationsPoint = value
+      }),
       error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
   }
 
-  
+
 }

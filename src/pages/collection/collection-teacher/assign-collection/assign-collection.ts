@@ -51,6 +51,9 @@ export class CollectionAssign {
     this.groups = this.navParams.data.groups;
   }
 
+  /**
+   * This method assign a group to the collection
+   */
   public assignGroup(collectionId, groupId) {
     this.collectionService.assignCollection(collectionId, groupId).subscribe(
       response => {

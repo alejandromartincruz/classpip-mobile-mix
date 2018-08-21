@@ -189,6 +189,10 @@ export class CollectionTpage {
     );
   }
 
+  /**
+   * if it is pressed delete, it apears a message to confirm
+   * the elimination of the card
+   */
   public selectDelete(collectionCard): void {
     this.userService.getMyProfile().subscribe(
       ((value: Profile) => {
@@ -242,6 +246,10 @@ export class CollectionTpage {
       })
     );
   }
+
+  /**
+   * This method deletes the collection and all the relations created
+   */
   public deleteCollection(collectionId) {
     if (this.boolean==true){
       this.ionicService.showLoading(this.translateService.instant('APP.WAIT'));

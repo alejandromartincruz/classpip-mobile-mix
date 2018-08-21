@@ -52,6 +52,9 @@ export class AssignCardsMultipleStudent{
     this.groups = this.navParams.data.groups;
   }
 
+  /**
+   * This method get the students of the selected group
+   */
   public showselected( refresher: Refresher): void {
     //this.groupSelected = groupsSelected;
     //this.ionicService.showAlert("", this.groupSelected);
@@ -69,6 +72,11 @@ export class AssignCardsMultipleStudent{
     //this.showStudents = true;
 
   }
+
+  /**
+   * This method calls the method to get the group's students
+   * if the group is specified and hides the instruction
+   */
   public refresh( refresher: Refresher){
     if(this.groupSelected != "" && typeof this.groupSelected != 'undefined'){
       this.instruction = false;
@@ -78,6 +86,10 @@ export class AssignCardsMultipleStudent{
     this.ionicService.removeLoading();
   }
 
+  /**
+   * This method validates that the entried numbers are greater than 0
+   * and calls the method to assign the cards to the selected students
+   */
   public postCardsToStudents(type){
     //this.ionicService.showAlert(this.studentsSelectedArray.length.toString(), "");
     if(this.studentsSelectedArray.length >= 1) {
@@ -95,11 +107,14 @@ export class AssignCardsMultipleStudent{
     }
 
   }
+
   public getSelectedStudents(stuArray: Array<StudentsSelected>){
     this.studentsSelectedArray = stuArray;
   }
 
-
+  /**
+   * This method choose the cards to assign depending on the ratio
+   */
   public goToAssignRandomCard(num: number, cards: Array<Card>, type: number) {
     let randomCards = Array<Card>();
     let altoArray = Array<Card>();
@@ -144,6 +159,10 @@ export class AssignCardsMultipleStudent{
 
   };
 
+  /**
+   * This method loop between the students and if the student is selected
+   * call the method to assign cards
+   */
   public goToAssignCard(cards){
 
     for (let i=0 ; i<cards.length ; i++){
@@ -162,6 +181,9 @@ export class AssignCardsMultipleStudent{
     });*/
   }
 
+  /**
+   * This method assign random cards to the students selected
+   */
   public goToRandomAssignCard(cards) {
     let randomArray: Array<Student> = new Array<Student>();
     for (let stu of this.studentsSelectedArray) {
@@ -191,6 +213,12 @@ export class AssignCardsMultipleStudent{
     });*/
   }
 
+  /**
+   * This method returns a random number
+   * between the two values  passsed as parameters
+   * @param1 min
+   * @param2 max
+   */
   public randomNumber(min, max) {
     return Math.round(Math.random() * (max - min) + min);
   }

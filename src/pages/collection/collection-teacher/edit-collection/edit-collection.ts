@@ -69,6 +69,9 @@ export class CollectionEdit {
 
   }
 
+  /**
+   * This method modifie the image in case of change
+   */
   public editCollection(): void {
     if(this.oldImage===this.collectionCard.image){
       let dbpath = this.oldImage;
@@ -88,6 +91,10 @@ export class CollectionEdit {
     }
   }
 
+  /**
+   * This method opens the camera or the library aplication of the mobile
+   * depending on the selected type of image
+   */
   public imageTypeSelected(type: string): void {
     if (type == 'camara'){
       this.collectionCard.image=this.uploadImageService.takePicture(this.camera.PictureSourceType.CAMERA);

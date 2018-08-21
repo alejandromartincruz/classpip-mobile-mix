@@ -50,6 +50,9 @@ export class CollectionsAssigned {
     this.groups = this.navParams.data.groups;
   }
 
+  /**
+   * This method unassign a group to the collection
+   */
   public unassignGroup(collectionId, groupId) {
     let confirm = this.alertCtrl.create({
       title: this.translateService.instant('COLLECTIONS-ASSIGNED.CANCEL'),

@@ -34,7 +34,8 @@ import { Point } from '../../../model/point';
 
 export class GroupPointCreatePage {
 
-  
+  // TODO: No utilizada, la dejamos por si os va bien
+
   public group: Group;
   public school: School;
   public profile: Profile;
@@ -51,8 +52,8 @@ export class GroupPointCreatePage {
   public pointRelationsPoint: Array<PointRelation>;
   public pointRelationTotal: number;
   public pointRel: PointRelation
-  
-  
+
+
   public pointCompleted = false;
   public studentCreate = false;
   public isDisabledStudent = true;
@@ -66,7 +67,7 @@ export class GroupPointCreatePage {
   public createGroupId = '0';
   public createPointId = '0';
   public createValue;
-  
+
   constructor(
     public ionicService: IonicService,
     public userService: UserService,
@@ -85,10 +86,10 @@ export class GroupPointCreatePage {
     this.students = this.navParams.data.students;
     this.group = this.navParams.data.group;
     this.myRole = this.utilsService.role;
-    
-  }    
-  
-  
+
+  }
+
+
   public ionViewDidEnter(): void {
     this.getEnter();
     this.getPoints();
@@ -101,30 +102,30 @@ export class GroupPointCreatePage {
   private getEnter(): void {
     this.schoolService.getMySchool().finally(() => {}).subscribe(
 		((value: School) => {
-		  this.school = value      
+		  this.school = value
       this.createSchoolId = this.school.id;
-      this.createGroupId = this.navParams.data.group.id; 
-    }))    
-  }  
-  
+      this.createGroupId = this.navParams.data.group.id;
+    }))
+  }
+
   private getStudents(): void {
     this.groupService.getMyGroupStudents(this.group.id).finally(() => {}).subscribe(
       ((value: Array<Student>) => this.students = value),
       error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
   }
-  
-  private getPoints(): void {	  
+
+  private getPoints(): void {
     this.schoolService.getMySchoolPoints().finally(() => { }).subscribe(
         ((value: Array<Point>) => this.points = value),
         error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
   }
 
-  private getStudent(student: Student): void {    
-    this.student = student 
+  private getStudent(student: Student): void {
+    this.student = student
     this.studentCreate = true
-    this.isDisabledStudent = true;    
+    this.isDisabledStudent = true;
     this.pointCompleted=true;
-    this.createStudentId = this.student.id;   
+    this.createStudentId = this.student.id;
   }
 
   private getPoint(point: Point): void {
@@ -133,17 +134,17 @@ export class GroupPointCreatePage {
     this.isDisabledStudent = false;
     this.isDisabledPoint = true;
     this.createPointId = this.point.id;
-    this.createValue = 1;     
+    this.createValue = 1;
   }
   private createPoint(): void {
-    this.createValue = 1; 
+    this.createValue = 1;
     this.pointRelationService.postPointRelation(this.createPointId, this.createStudentId, this.createSchoolId, this.createGroupId, this.createValue).subscribe(
       response => {
         this.isDisabledStudent = true;
         this.isDisabledPoint = false;
         this.pointCompleted=false;
       },
-      error => {        
+      error => {
         this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
       });
   }

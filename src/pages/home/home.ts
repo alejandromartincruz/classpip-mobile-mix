@@ -58,6 +58,7 @@ export class HomePage {
     public menuController: MenuController,
     public navController: NavController) {
 
+    // Definició dels idiomes disponibles
       this.idioms = [
       {
         value: 'ca',
@@ -125,7 +126,7 @@ export class HomePage {
         error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
 
     } else if (this.myRole === Role.TEACHER) {
-
+      // Carrego els grups associats al TEACHER
 
       this.schoolService.getMySchool().finally(() => {
         refresher ? refresher.complete() : null;
@@ -142,6 +143,7 @@ export class HomePage {
         error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
 
     } else if (this.myRole === Role.STUDENT) {
+    // Carrego els grups associats al STUDENT
 
       this.schoolService.getMySchool().finally(() => {
         refresher ? refresher.complete() : null;
@@ -190,37 +192,6 @@ export class HomePage {
         this.ionicService.removeLoading();
       });
   }
-  /**
-   * Method called from the home page to open the list of the
-   * points of the school of the current user
-   */
-  /*public goToPoints(): void {
-
-    this.ionicService.showLoading(this.translateService.instant('APP.WAIT'));
-
-    this.schoolService.getMySchoolPoints().subscribe(
-      ((value: Array<Point>) => this.navController.push(PointsPage, { points: value})),
-      error => {
-        this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
-        this.ionicService.removeLoading();
-      });
-  }*/
-
-  /**
-   * Method called from the home page to open the list of the
-   * points of the school of the current user
-   */
- /* public goToBadges(): void {
-
-    this.ionicService.showLoading(this.translateService.instant('APP.WAIT'));
-
-    this.schoolService.getMySchoolBadges().subscribe(
-      ((value: Array<Badge>) => this.navController.push(BadgesPage, { badges: value})),
-      error => {
-        this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
-        this.ionicService.removeLoading();
-      });
-  }*/
 
   /**
   * Method called from the home page to open the list of the

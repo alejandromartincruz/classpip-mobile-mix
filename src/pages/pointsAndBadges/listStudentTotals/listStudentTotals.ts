@@ -76,7 +76,10 @@ export class listStudentTotalsPage {
 
   }
 
-
+  /**
+   * Fires when the page appears on the screen.
+   * Used to get all the data needed in page
+   */
   public ionViewDidEnter(): void {
     this.getPoints();
     for(let stu of this.students){
@@ -96,6 +99,9 @@ export class listStudentTotalsPage {
     this.isDisabledPoint=false
   }
 
+  /**
+   * Calculate the total poins of the student specified
+   */
   private getPointsStudent(student: Student): void {
     this.pointRelationTotal = 0;
 

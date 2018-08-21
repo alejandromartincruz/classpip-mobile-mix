@@ -86,14 +86,7 @@ export class PointsAndBadgesPage {
     public pointService: PointService,
     public groupService: GroupService) {
 
-    //this.badges = this.navParams.data.badges;
-    //this.points = this.navParams.data.point;
     this.myRole = this.utilsService.role;
-
-    //this.pointPage = new Page(PointPage, this.translateService.instant('POINTS.TITLE'));
-    //this.badgPage = new Page(BadgePage, this.translateService.instant('BADGES.TITLE'));
-
-
   }
 
   /**

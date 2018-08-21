@@ -53,6 +53,11 @@ export class CardCreate {
 
     this.id = this.navParams.data.id;
   }
+
+  /**
+   * This method create the card and upload the image in case of using
+   * the camera or the library of the mobile
+   */
   public createCard(): void {
     if(!this.esUrl) {
       this.uploadImageService.uploadImage(this.card.image);
@@ -60,6 +65,10 @@ export class CardCreate {
     this.postNewCard(AppConfig.SERVER_URL+/public/+this.card.image);
   }
 
+  /**
+   * This method opens the camera or the library aplication of the mobile
+   * depending on the selected type of image
+   */
   public imageTypeSelected(type: string): void {
     if (type == 'camara'){
       this.card.image=this.uploadImageService.takePicture(this.camera.PictureSourceType.CAMERA);

@@ -95,6 +95,9 @@ export class CollectionTeacherDetail {
       });
   }
 
+  /**
+   * This method deletes the card passed as parameter
+   */
   public deleteCard(cardId) {
 
     this.ionicService.showLoading(this.translateService.instant('APP.WAIT'));
@@ -148,6 +151,16 @@ export class CollectionTeacherDetail {
     error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error))
   }
 
+  /**
+   * This method opens a menu at the bottom of the page with the options:
+   * Delete a card
+   * Edit a card
+   * Assign a card
+   * Cancel
+   *
+   * if it is pressed delete, it apears a message to confirm
+   * the elimination of the card
+   */
   public press(card){
     let actionSheet = this.actionSheetCtrl.create({
       title: this.translateService.instant('COMMON.ACTION'),
@@ -217,6 +230,10 @@ export class CollectionTeacherDetail {
     });
     actionSheet.present();
   }
+
+  /**
+   * This method choose the cards to assign depending on the ratio
+   */
   public goToAssignRandomCard(num) {
     let randomCards = Array<Card>();
     let altoArray = Array<Card>();
@@ -264,6 +281,10 @@ export class CollectionTeacherDetail {
     return Math.round(Math.random() * (max - min) + min);
   }
 
+  /**
+   * This method opens a menu at the bottom of the page to choose
+   * how many of card want to assign the teacher
+   */
   public presentActions(event: UIEvent): void {
 
     let actionSheet = this.actionSheetCtrl.create({

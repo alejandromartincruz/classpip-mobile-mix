@@ -77,6 +77,9 @@ export class ResultQuestionnaireOpenPage {
     }
   }
 
+  /**
+   * It is checked if there are points to assign
+   */
   public hayPuntos(): Boolean {
     let cont = 0;
     for (let q of this.myQuestionnaire.points) {
@@ -96,6 +99,9 @@ export class ResultQuestionnaireOpenPage {
       error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
   }
 
+  /**
+   * It is checked if there are badges to assign
+   */
   public hayBadges(): Boolean{
     return typeof this.myQuestionnaire.badges != 'undefined';// && this.badgeWon != "null"
   }
@@ -120,6 +126,9 @@ export class ResultQuestionnaireOpenPage {
       error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
   }
 
+  /**
+   * It is checked if there are cards to assign
+   */
   public hayCollections(): Boolean{
     return typeof this.myQuestionnaire.packCards != 'undefined';
   }

@@ -102,18 +102,10 @@ export class GetQuestionnairePage {
 */
     this.questionnaireService.getQuestionnaires().subscribe(
       ((quest: Array<Questionnaire>) => {
-        /*this.questionnaireService.getResultQuestionnaires().subscribe(
-          ((resultQuest: Array<ResultQuestionnaire>) => {*/
             for (let questi of quest) {
               for (let gro of this.groups) {
                 if (questi.groupid == gro.id) {
                   this.questionnairesArrayDone.push(questi);
-                  /*for(let res of resultQuest) {
-                    this.result = res;
-                    this.pointsSend( "ggg" + this.result);
-                    this.pointsSend( "quest" + this.result.questionnaireId);
-                  }*/
-
                 }
               }
             }
@@ -132,19 +124,14 @@ export class GetQuestionnairePage {
   public ionViewDidEnter(): void {
     this.menuController.enable(true);
   }
-  public pointsSend(text: string) {
-
-    let toast = this.toastCtrl.create({
-      message: text,
-      duration: 2000
-    });
-    toast.present();
-  }
 
   private getEnableGetQuest(): void{
     this.enableGetQuest? this.enableGetQuest = false: this.enableGetQuest = true;
   }
 
+  /**
+   * Enable and disable the header of the questionaire
+   */
   private changeActive(quest: Questionnaire): void{
     quest.active? quest.active = false: quest.active = true;
     //this.ionicService.showAlert("", "HOLA");

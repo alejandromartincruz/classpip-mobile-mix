@@ -54,6 +54,9 @@ export class CardEdit {
     this.oldImage = this.card.image;
   }
 
+  /**
+   * This method modifie the image in case of change
+   */
   public editCard(): void {
     if(this.oldImage===this.card.image){
       let dbpath = this.oldImage;

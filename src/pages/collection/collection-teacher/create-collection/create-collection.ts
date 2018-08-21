@@ -60,7 +60,11 @@ export class CollectionCreate {
       ((value: Array<Badge>) => this.badgeArray = value),
       error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
   }
-
+  
+  /**
+   * This method create the collection and upload the image in case of using
+   * the camera or the library of the mobile
+   */
   public createCollection(): void {
     if (+this.collectionCard.num >= 1) {
       if (!this.esUrl) {
@@ -72,6 +76,10 @@ export class CollectionCreate {
     }
   }
 
+  /**
+   * This method opens the camera or the library aplication of the mobile
+   * depending on the selected type of image
+   */
   public imageTypeSelected(type: string): void {
     if (type == 'camara'){
       this.collectionCard.image=this.uploadImageService.takePicture(this.camera.PictureSourceType.CAMERA);

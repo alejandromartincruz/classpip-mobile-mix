@@ -48,6 +48,11 @@ export class CardAssignStudent {
     this.cards = this.navParams.data.cards;
   }
 
+  /**
+   * This method assign the cards passed from the other form
+   * to the studentId passed as parameter
+   * @param {int} studentId
+   */
   public assignCardToStudents(studentId) {
     for (let i=0 ; i<this.cards.length ; i++){
       this.collectionService.assignCardToStudent(studentId,this.cards[i].id).subscribe(response => {
@@ -62,6 +67,10 @@ export class CardAssignStudent {
     });
   }
 
+  /**
+   * This method assign the cards passed from the other form
+   * to a random student from the list of the students selecteds
+   */
   public assignToRandomStudent(){
     let studentPosition = this.randomNumber(0,this.students.length);
     let studentName;
@@ -83,6 +92,12 @@ export class CardAssignStudent {
     });
   }
 
+  /**
+   * This method returns a random number
+   * between the two values  passsed as parameters
+   * @param1 min
+   * @param2 max
+   */
   public randomNumber(min, max) {
     return Math.round(Math.random() * (max - min) + min);
   }

@@ -52,14 +52,7 @@ export class AssignBadgesPage{
     public translateService: TranslateService,
     public toastCtrl: ToastController) {
 
-    //this.badges = this.navParams.data.badges;
-    //this.points = this.navParams.data.point;
     this.myRole = this.utilsService.role;
-    //this.groupsArray = this.navParams.data.groupsArray;
-    //this.pointPage = new Page(PointPage, this.translateService.instant('POINTS.TITLE'));
-    //this.badgPage = new Page(BadgePage, this.translateService.instant('BADGES.TITLE'));
-
-
   }
 
   /**
@@ -72,16 +65,20 @@ export class AssignBadgesPage{
     this.ionicService.removeLoading();
   }
 
+  /**
+   * Resets all the fields
+   */
   public newRelation(): void {
     this.groupsArraySelected = new Array<Group>();
-    //this.badgeArraySelected = new Array<Badge>();
     this.studentsArray = new Array<Student>();
     this.badgeArray = new Array<Badge>();
     this.groupSelected = "";
-    //this.badgeSelected = "";
     this.instruction = true;
   }
 
+  /**
+   * Method that gets all the grups of the teacher and all the badges to assign
+   */
   public getInfo(): void {
     this.groupService.getMyGroups().subscribe(
       ((value: Array<Group>) => this.groupsArray = value),
@@ -92,6 +89,9 @@ export class AssignBadgesPage{
       error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
   }
 
+  /**
+   * Gets the students of the group selected
+   */
   public showselected(groupsSelected: string, refresher: Refresher): void {
     this.groupSelected = groupsSelected;
     this.groupService.getMyGroupStudents(groupsSelected).finally(() => {
@@ -109,6 +109,9 @@ export class AssignBadgesPage{
 
   }
 
+  /**
+   * Method that fires when the screen refreshes
+   */
   public refresh(groupsSelected: string, badge: string, refresher: Refresher){
     if(groupsSelected != ""){
       this.instruction = false;

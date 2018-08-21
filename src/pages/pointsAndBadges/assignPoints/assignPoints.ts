@@ -55,14 +55,7 @@ export class AssignPointsPage{
     public pointService: PointService,
     public toastCtrl: ToastController) {
 
-    //this.badges = this.navParams.data.badges;
-    //this.points = this.navParams.data.point;
     this.myRole = this.utilsService.role;
-    //this.groupsArray = this.navParams.data.groups;
-    //this.pointPage = new Page(PointPage, this.translateService.instant('POINTS.TITLE'));
-    //this.badgPage = new Page(BadgePage, this.translateService.instant('BADGES.TITLE'));
-
-
   }
 
   /**
@@ -75,15 +68,9 @@ export class AssignPointsPage{
     this.ionicService.removeLoading();
   }
 
-  public pointsSend(text: string) {
-
-    let toast = this.toastCtrl.create({
-      message: text,
-      duration: 2000
-    });
-    toast.present();
-  }
-
+  /**
+   * Resets all the fields
+   */
   public newRelation(): void {
     this.groupsArraySelected = new Array<Group>();
     //this.pointArraySelected = new Array<Point>();
@@ -95,6 +82,9 @@ export class AssignPointsPage{
     this.instruction = true;
   }
 
+  /**
+   * Method that gets all the grups of the teacher and all the points to assign
+   */
   public getInfo(): void {
     this.groupService.getMyGroups().subscribe(
       ((value: Array<Group>) => this.groupsArray = value),
@@ -105,6 +95,9 @@ export class AssignPointsPage{
       error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
   }
 
+  /**
+   * Gets the students of the group selected
+   */
   public showselected(groupsSelected: string, refresher: Refresher): void {
     this.groupSelected = groupsSelected;
     this.groupService.getMyGroupStudents(groupsSelected).finally(() => {
@@ -124,6 +117,9 @@ export class AssignPointsPage{
 
   }
 
+  /**
+   * Method that fires when the screen refreshes
+   */
   public refresh(groupsSelected: string, point: string, refresher: Refresher){
     this.groupSelected = groupsSelected;
     if(groupsSelected != ""){

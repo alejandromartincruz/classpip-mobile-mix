@@ -33,7 +33,8 @@ import { Badge } from '../../../model/badge';
 
 export class GroupBadgeCreatePage {
 
-  
+  // TODO: No utilizada, la dejamos por si os va bien
+
   public group: Group;
   public school: School;
   public profile: Profile;
@@ -50,8 +51,8 @@ export class GroupBadgeCreatePage {
   public badgeRelationsBadge: Array<BadgeRelation>;
   public badgeRelationTotal: number;
   public badgeRel: BadgeRelation
-  
-  
+
+
   public badgeCompleted = false;
   public studentCreate = false;
   public isDisabledStudent = true;
@@ -65,7 +66,7 @@ export class GroupBadgeCreatePage {
   public createGroupId = '0';
   public createBadgeId = '0';
   public createValue;
-  
+
   constructor(
     public ionicService: IonicService,
     public userService: UserService,
@@ -84,10 +85,13 @@ export class GroupBadgeCreatePage {
     this.students = this.navParams.data.students;
     this.group = this.navParams.data.group;
     this.myRole = this.utilsService.role;
-    
-  }    
-  
-  
+
+  }
+
+  /**
+   * Fires when the page appears on the screen.
+   * Used to get all the data needed in page
+   */
   public ionViewDidEnter(): void {
     this.getEnter();
     this.getBadges();
@@ -100,30 +104,36 @@ export class GroupBadgeCreatePage {
   private getEnter(): void {
     this.schoolService.getMySchool().finally(() => {}).subscribe(
 		((value: School) => {
-		  this.school = value      
+		  this.school = value
       this.createSchoolId = this.school.id;
-      this.createGroupId = this.navParams.data.group.id; 
-    }))    
-  }  
-  
+      this.createGroupId = this.navParams.data.group.id;
+    }))
+  }
+
+  /**
+   * Get the students of the current group
+   */
   private getStudents(): void {
     this.groupService.getMyGroupStudents(this.group.id).finally(() => {}).subscribe(
       ((value: Array<Student>) => this.students = value),
       error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
   }
-  
-  private getBadges(): void {	  
+
+  /**
+   * Get the badges of the current school
+   */
+  private getBadges(): void {
     this.schoolService.getMySchoolBadges().finally(() => { }).subscribe(
         ((value: Array<Badge>) => this.badges = value),
         error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
   }
 
-  private getStudent(student: Student): void {    
-    this.student = student 
+  private getStudent(student: Student): void {
+    this.student = student
     this.studentCreate = true
-    this.isDisabledStudent = true;    
+    this.isDisabledStudent = true;
     this.badgeCompleted=true;
-    this.createStudentId = this.student.id;   
+    this.createStudentId = this.student.id;
   }
 
   private getBadge(badge: Badge): void {
@@ -132,17 +142,21 @@ export class GroupBadgeCreatePage {
     this.isDisabledStudent = false;
     this.isDisabledBadge = true;
     this.createBadgeId = this.badge.id;
-    this.createValue = 1;     
+    this.createValue = 1;
   }
+
+  /**
+   * sed to get all the data needed in page
+   */
   private createBadge(): void {
-    this.createValue = 1; 
+    this.createValue = 1;
     this.badgeRelationService.postBadgeRelation(this.createBadgeId, this.createStudentId, this.createSchoolId, this.createGroupId, this.createValue).subscribe(
       response => {
         this.isDisabledStudent = true;
         this.isDisabledBadge = false;
         this.badgeCompleted=false;
       },
-      error => {        
+      error => {
         this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error);
       });
   }

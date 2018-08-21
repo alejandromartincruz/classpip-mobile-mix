@@ -135,6 +135,7 @@ export class ResultQuestionnairePage {
       }
     }
 
+    // Agafo el punt guanyat seons la puntuació obtinguda al questionari
     this.mark = this.numAnswerCorrect * 10 / this.numTotalQuestions;
     switch (Math.floor(this.mark)) {
       case 10:
@@ -167,7 +168,7 @@ export class ResultQuestionnairePage {
       error =>
         this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
 
-    this.pointService.getPoint(this.num).subscribe(
+    this.pointService.getPoint(this.num).subscribe( 
       ((value: Point) => this.points = value),
       error =>
         this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
@@ -178,12 +179,12 @@ export class ResultQuestionnairePage {
         this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
 
     this.hayPuntos = false;
-    for (let q of this.myQuestionnaire.points) {
+    for (let q of this.myQuestionnaire.points) { // comprobo que hi hagin punts informats
       if (q != 0) {
         this.hayPuntos = true;
       }
     }
-    if (this.hayPuntos && this.pointsWon != 0) {
+    if (this.hayPuntos && this.pointsWon != 0) { // Si hi han i he guanyat més de 0 punts, assigno un punt
       this.pointService.getPoint(this.num).subscribe(
         ((value2: Point) => {
           this.pointItem = value2;
@@ -199,7 +200,7 @@ export class ResultQuestionnairePage {
         });
     }
     let x = this.mark;
-    switch (true) {
+    switch (true) { // Agago el badge guanyat segons la puntuació del questionari
       case (x > 9):
         this.badgeWon = this.myQuestionnaire.badges[0];
         break;
@@ -213,7 +214,7 @@ export class ResultQuestionnairePage {
         this.badgeWon = "null";
         break;
     }
-    if (typeof this.myQuestionnaire.badges != 'undefined' && +this.badgeWon >=1) {
+    if (typeof this.myQuestionnaire.badges != 'undefined' && +this.badgeWon >=1) { // Si em pertoca un badge, l'assigno
       this.hayBadges = true;
       this.badgeService.getBadge(+this.badgeWon).subscribe(
         ((value2: Badge) => {
@@ -234,7 +235,7 @@ export class ResultQuestionnairePage {
     }
 
 
-    if (typeof this.myQuestionnaire.packCards != 'undefined') {
+    if (typeof this.myQuestionnaire.packCards != 'undefined') { // Agafo les cartes que pertoquen segons la puntuació en el quest
       let x = this.mark;
       switch (true) {
         case (x > 9):
@@ -250,7 +251,7 @@ export class ResultQuestionnairePage {
           this.numCartas = 0;
           break;
       }
-      if(this.numCartas >= 0) {
+      if(this.numCartas >= 0) { // Si pertoquen cartes, les assigno
         this.collectionService.getCollectionDetails(this.myQuestionnaire.packCards[0]).subscribe(
           ((value: Array<Card>) => {
             //this.navController.push(CollectionTeacherDetail, { cards: value, collectionCard: collectionCard })
@@ -263,7 +264,9 @@ export class ResultQuestionnairePage {
     }
   }
 
-
+  /**
+   * This method choose the cards to assign depending on the ratio
+   */
   public goToAssignRandomCard(num: number, cards: Array<Card>) {
     let randomCards = Array<Card>();
     let altoArray = Array<Card>();
@@ -307,6 +310,9 @@ export class ResultQuestionnairePage {
     this.goToAssignCard(randomCards);
   };
 
+  /**
+   * This method assign cards to the student
+   */
   public goToAssignCard(cards){
 
     for (let i=0 ; i<cards.length ; i++){

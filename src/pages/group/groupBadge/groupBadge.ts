@@ -34,7 +34,8 @@ import { Badge } from '../../../model/badge';
 
 export class GroupBadgePage {
 
-  
+  // TODO: No utilizada, la dejamos por si os va bien
+
   public group: Group;
   public school: School;
   public profile: Profile;
@@ -50,8 +51,8 @@ export class GroupBadgePage {
   public badgeRelations: Array<BadgeRelation>;
   public badgeRelationsBadge: Array<BadgeRelation>;
   public badgeRelationTotal: number;
-  
-  
+
+
   public isDisabledStudent = false;
   public isDisabledBadge = false;
   public studentsBadge = false;
@@ -65,7 +66,7 @@ export class GroupBadgePage {
 
   public myRole: Role;
   public role = Role;
-  
+
   constructor(
     public ionicService: IonicService,
     public userService: UserService,
@@ -84,10 +85,13 @@ export class GroupBadgePage {
     this.students = this.navParams.data.students;
     this.group = this.navParams.data.group;
     this.myRole = this.utilsService.role;
-    
-  }    
-  
-  
+
+  }
+
+  /**
+   * Fires when the page appears on the screen.
+   * Used to get all the data needed in page
+   */
   public ionViewDidEnter(): void {
     this.getEnter();
     this.getBadges();
@@ -96,47 +100,57 @@ export class GroupBadgePage {
     this.myRole = this.utilsService.role;
   }
 
+
   private getEnter(): void {
     this.schoolService.getMySchool().finally(() => {}).subscribe(
 		((value: School) => {
-		  this.school = value            
-    }))    
-  }  
-  
+		  this.school = value
+    }))
+  }
+
+  /**
+   * Get the students of the group selected
+   */
   private getStudents(): void {
     this.groupService.getMyGroupStudents(this.group.id).finally(() => {}).subscribe(
       ((value: Array<Student>) => this.students = value),
-      error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));    
+      error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
       this.isDisabledBadge=true
       this.isDisabledStudent=false
   }
-  
-  private getBadges(): void {	  
+
+  /**
+   * Get all the badges created of the current school
+   */
+  private getBadges(): void {
     this.schoolService.getMySchoolBadges().finally(() => { }).subscribe(
         ((value: Array<Badge>) => this.badges = value),
-        error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));    
+        error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
     this.isDisabledStudent=true
     this.isDisabledBadge=false
   }
 
+  /**
+   * Get the badgeRelations of the selected student
+   */
   private getBadgesStudent(student: Student): void {
     this.studentsBadge=false
     this.student = student
     this.badgeRelationTotal = 0
     this.Intro = false
-    this.studentsBadgeIntro=true 
+    this.studentsBadgeIntro=true
     this.badgesBadgeIntro=false
     this.studentsBadge=true
     this.badgeRelations =  [];
-    this.badgesBadge=false 
+    this.badgesBadge=false
     this.badgeRelationService.getMyStudentBadges2(this.group.id, student.id).finally(() => { }).subscribe(
       ((value: Array<BadgeRelation>) => {this.badgeRelations = value
         value.forEach(badgeRelation=> {
           this.badgeRelationTotal = this.badgeRelationTotal+(badgeRelation.value*badgeRelation.badge.value)
-        });               
+        });
         this.studentsBadge=true
-        
-      }),            
+
+      }),
       error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
   }
 
@@ -149,13 +163,13 @@ export class GroupBadgePage {
     this.Intro = false
     this.badgeRelationsBadge =  [];
     this.studentsBadge=false
-    this.badgesBadge=true 
+    this.badgesBadge=true
     this.badgeRelationService.getMyBadgeBadges2(this.group.id, badge.id).finally(() => { }).subscribe(
       ((value: Array<BadgeRelation>) => {
-        this.badgeRelationsBadge = value                  
-      }),            
+        this.badgeRelationsBadge = value
+      }),
       error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error));
   }
 
-  
+
 }

@@ -53,9 +53,14 @@ export class CardAssign {
     this.cards = this.navParams.data.cards;
   }
 
+  /**
+   * This method get the group students and
+   * opends the form to assign cards to student
+   */
   public selectGroup(groupId) {
     this.groupService.getMyGroupStudents(groupId).subscribe(
-      ((value: Array<Student>) => this.navController.push(CardAssignStudent, { students: value, collectionId: this.collectionCard.id, cards: this.cards })
+      ((value: Array<Student>) => this.navController.push(CardAssignStudent,
+          { students: value, collectionId: this.collectionCard.id, cards: this.cards })
       ),
       error => this.ionicService.showAlert(this.translateService.instant('APP.ERROR'), error))
   }
